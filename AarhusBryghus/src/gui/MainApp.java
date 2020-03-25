@@ -24,7 +24,7 @@ public class MainApp extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		stage.setTitle("Aarhus Bryghus bogføring");
+		stage.setTitle("Aarhus Bryghus Bogføring");
 		BorderPane pane = new BorderPane();
 		this.initContent(pane);
 
@@ -53,9 +53,9 @@ public class MainApp extends Application {
 		VisProduktPane visProduktPane = new VisProduktPane();
 		tabVis.setContent(visProduktPane);
 
+		tabPane.getTabs().add(tabVis);
 		tabPane.getTabs().add(tabOpretProduktGruppe);
 		tabPane.getTabs().add(tabOpretProdukt);
-		tabPane.getTabs().add(tabVis);
 
 //		tabVis.setOnSelectionChanged(event -> visProduktPane.updateControls());
 	}
