@@ -39,12 +39,33 @@ public class CreateProduktPane extends GridPane {
 		this.add(btnCreate, 1, 3);
 
 		btnGruppe.setOnAction(event -> actionOpenCreateGruppe());
+		btnCreate.setOnAction(event -> actionCreateProdukt());
 
 	}
 
+//	public ListView<ProduktGruppe> getProduktGruppeList() {
+//		return produktGruppeList;
+//	}
+
 	public void actionOpenCreateGruppe() {
 		CreateProduktGruppeDialog di = new CreateProduktGruppeDialog();
-
+		di.setOnHidden(event -> this.updateGruppeList());
 		di.showAndWait();
+	}
+
+	public void actionCreateProdukt() {
+		if (controller.parseTextField(txtNavn) && controller.parseTextField(txtNr)) {
+			if (txtNr.getText().matches(".*\\d.*")) {
+				controller.createProdukt(txtNavn.getText(), txtNr.getText(),
+						produktGruppeList.getSelectionModel().getSelectedItem());
+			} else
+				throw new IllegalArgumentException("Der skal angives et gyldigt tal");
+		} else
+			throw new IllegalArgumentException("Der skal angives et navn og et nr");
+	}
+
+	public void updateGruppeList() {
+		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
+		produktGruppeList.getSelectionModel().selectFirst();
 	}
 }

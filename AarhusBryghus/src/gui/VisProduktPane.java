@@ -23,21 +23,28 @@ public class VisProduktPane extends GridPane {
 
 		this.add(new Label("Vælg produktgruppe"), 0, 0);
 		this.add(produktGruppeList, 0, 1);
-		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
-		produktGruppeList.getSelectionModel().selectedIndexProperty().addListener(observable -> {
-			produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
-		});
-		produktGruppeList.getSelectionModel().selectFirst();
 
 		this.add(new Label("Produkter"), 1, 0);
 		this.add(produktList, 1, 1);
-//		produktList.getSelectionModel().selectedItemProperty().addListener(observable -> {
-//			updateDetails();
-//		});
+
+		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
+		produktGruppeList.getSelectionModel().selectFirst();
+		produktGruppeList.getSelectionModel().selectedIndexProperty().addListener(observable -> updateProduktList());
+		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
 	}
 
-	public void updateDetails() {
-//		Produkt produkt = produktList.getSelectionModel().getSelectedItem();
-		// TODO hvis nødvendig
+	public void updateGruppeList() {
+		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
+		produktGruppeList.getSelectionModel().selectFirst();
 	}
+
+	public void updateProduktList() {
+		int selected = 0;
+		if (produktGruppeList.getSelectionModel().getSelectedItem() != null) {
+			selected = produktGruppeList.getSelectionModel().getSelectedIndex();
+		}
+		produktGruppeList.getSelectionModel().select(selected);
+		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
+	}
+
 }

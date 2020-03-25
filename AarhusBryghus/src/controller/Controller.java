@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import javafx.scene.control.TextField;
 import model.Produkt;
 import model.ProduktGruppe;
 import storage.Storage;
@@ -60,5 +61,14 @@ public class Controller {
 	public void createSomeObjects() {
 		this.createProduktGruppe("Øl", "Det øl");
 		this.createProdukt("Klosterbryg", "1", storage.getAllProduktGrupper().get(0));
+	}
+
+	@SuppressWarnings("unused")
+	public boolean parseTextField(TextField textField) {
+		if (textField.getText().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

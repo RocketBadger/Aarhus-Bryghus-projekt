@@ -12,11 +12,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class CreateProduktGruppeDialog extends Stage {
-	@SuppressWarnings("unused")
 	private Controller controller;
 	private TextField txtType = new TextField();
 	private TextField txtBeskrivelse = new TextField();
 	private Button btnCreate = new Button("Opret produktgruppe");
+	private Button btnNvm = new Button("Fortryd");
 
 	public CreateProduktGruppeDialog() {
 		this.controller = Controller.getController();
@@ -43,11 +43,17 @@ public class CreateProduktGruppeDialog extends Stage {
 		pane.add(new Label("Indtast beskrivelse:"), 0, 1);
 		pane.add(txtBeskrivelse, 1, 1);
 
+		pane.add(btnNvm, 0, 2);
+		btnNvm.setOnAction(event -> this.hide());
 		pane.add(btnCreate, 1, 2);
 		btnCreate.setOnAction(event -> opretAction());
 	}
 
 	private void opretAction() {
-
+		if (controller.parseTextField(txtType) && controller.parseTextField(txtBeskrivelse)) {
+			controller.createProduktGruppe(txtType.getText(), txtBeskrivelse.getText());
+			this.hide();
+		} else
+			throw new IllegalArgumentException("Der skal angives en type og beskrivelse");
 	}
 }
