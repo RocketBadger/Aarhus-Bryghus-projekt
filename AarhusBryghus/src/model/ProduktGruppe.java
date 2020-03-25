@@ -35,4 +35,9 @@ public class ProduktGruppe {
 	public ArrayList<Produkt> getProdukter() {
 		return new ArrayList<>(produkter);
 	}
+
+	@Override
+	public String toString() {
+		return type + ", " + beskrivelse;
+	}
 }

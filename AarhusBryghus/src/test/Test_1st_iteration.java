@@ -10,7 +10,7 @@ import controller.Controller;
 import model.Produkt;
 import model.ProduktGruppe;
 
-public class ControllerTest_1st_iteration {
+public class Test_1st_iteration {
 	private Controller controller;
 	private Produkt produkt;
 	private ProduktGruppe produktGruppe;
@@ -22,16 +22,27 @@ public class ControllerTest_1st_iteration {
 		this.produkt = controller.createProdukt("Klosterbryg", "1", produktGruppe);
 	}
 
+	// Test af ProduktGruppe oprettelse og forbindelse ved controller
 	@Test
-	public void test() {
-		// Test ProduktGruppe oprettelse og forbindelse
+	public void testCreateProduktGruppe() {
 		assertEquals("Øl", produktGruppe.getType());
 		assertEquals("Det øl", produktGruppe.getBeskrivelse());
 		assertTrue(produktGruppe.getProdukter().contains(produkt));
-		// Test Produkt oprettelse og forbindelse
+
+	}
+
+	// Test af Produkt oprettelse og forbindelse ved controller
+	@Test
+	public void testCreateProdukt() {
 		assertEquals("Klosterbryg", produkt.getNavn());
 		assertEquals("1", produkt.getNr());
 		assertTrue(produkt.getProduktGruppe() == produktGruppe);
+	}
+
+	@Test
+	public void testStorage() {
+		assertTrue(controller.getAllProdukter().contains(produkt));
+		assertTrue(controller.getAllProduktGrupper().contains(produktGruppe));
 	}
 
 }

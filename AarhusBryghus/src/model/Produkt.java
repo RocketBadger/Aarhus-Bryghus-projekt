@@ -22,4 +22,9 @@ public class Produkt {
 	public ProduktGruppe getProduktGruppe() {
 		return produktGruppe;
 	}
+
+	@Override
+	public String toString() {
+		return navn + ", " + nr + ", " + produktGruppe;
+	}
 }

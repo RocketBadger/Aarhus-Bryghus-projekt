@@ -1,7 +1,62 @@
 package gui;
 
-public class MainApp {
-	public static void main(String[] args) {
+import controller.Controller;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+public class MainApp extends Application {
+	private Controller controller;
+
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+
+	@Override
+	public void init() {
+		controller = Controller.getController();
+		controller.createSomeObjects();
+	}
+
+	@Override
+	public void start(Stage stage) {
+		stage.setTitle("Aarhus Bryghus bogføring");
+		BorderPane pane = new BorderPane();
+		this.initContent(pane);
+
+		Scene scene = new Scene(pane);
+		stage.setScene(scene);
+		stage.setHeight(500);
+		stage.setWidth(600);
+		stage.show();
+	}
+
+	private void initContent(BorderPane pane) {
+		TabPane tabPane = new TabPane();
+		this.initTabPane(tabPane);
+		pane.setCenter(tabPane);
+	}
+
+	private void initTabPane(TabPane tabPane) {
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+
+		Tab tabOpretProduktGruppe = new Tab("Opret produktgruppe");
+		Tab tabOpretProdukt = new Tab("Opret produkt");
+		Tab tabVis = new Tab("Vis Produkter/produktgrupper");
+
+		tabOpretProduktGruppe.setContent(new CreateProduktGruppePane());
+		tabOpretProdukt.setContent(new CreateProduktPane());
+		VisProduktPane visProduktPane = new VisProduktPane();
+		tabVis.setContent(visProduktPane);
+
+		tabPane.getTabs().add(tabOpretProduktGruppe);
+		tabPane.getTabs().add(tabOpretProdukt);
+		tabPane.getTabs().add(tabVis);
+
+//		tabVis.setOnSelectionChanged(event -> visProduktPane.updateControls());
 	}
 }
