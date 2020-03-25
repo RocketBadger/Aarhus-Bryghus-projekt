@@ -54,7 +54,7 @@ public class MainApp extends Application {
 		tabVis.setContent(visProduktPane);
 
 		tabPane.getTabs().add(tabVis);
-		tabPane.getTabs().add(tabOpretProduktGruppe);
+//		tabPane.getTabs().add(tabOpretProduktGruppe);
 		tabPane.getTabs().add(tabOpretProdukt);
 
 //		tabVis.setOnSelectionChanged(event -> visProduktPane.updateControls());
