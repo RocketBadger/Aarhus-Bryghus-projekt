@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import model.ProduktGruppe;
 
 public class CreateProduktPane extends GridPane {
@@ -16,6 +17,7 @@ public class CreateProduktPane extends GridPane {
 	private ListView<ProduktGruppe> produktGruppeList = new ListView<>();
 	private Button btnGruppe = new Button("Opret ny produktgruppe (Åbner nyt vindue)");
 	private Button btnCreate = new Button("Opret nyt produkt");
+	private Label lblError = new Label();
 
 	public CreateProduktPane() {
 		controller = Controller.getController();
@@ -41,11 +43,10 @@ public class CreateProduktPane extends GridPane {
 		btnGruppe.setOnAction(event -> actionOpenCreateGruppe());
 		btnCreate.setOnAction(event -> actionCreateProdukt());
 
-	}
+		lblError.setTextFill(Color.RED);
+		this.add(lblError, 1, 2);
 
-//	public ListView<ProduktGruppe> getProduktGruppeList() {
-//		return produktGruppeList;
-//	}
+	}
 
 	public void actionOpenCreateGruppe() {
 		CreateProduktGruppeDialog di = new CreateProduktGruppeDialog();
@@ -59,9 +60,11 @@ public class CreateProduktPane extends GridPane {
 				controller.createProdukt(txtNavn.getText(), txtNr.getText(),
 						produktGruppeList.getSelectionModel().getSelectedItem());
 			} else
-				throw new IllegalArgumentException("Der skal angives et gyldigt tal");
+//				throw new IllegalArgumentException("Der skal angives et gyldigt tal");
+				lblError.setText("Der skal angives et gyldigt tal");
 		} else
-			throw new IllegalArgumentException("Der skal angives et navn og et nr");
+//			throw new IllegalArgumentException("Der skal angives et navn og et nr");
+			lblError.setText("Der skal angives et navn og nr");
 	}
 
 	public void updateGruppeList() {

@@ -59,11 +59,12 @@ public class Controller {
 	}
 
 	public void createSomeObjects() {
-		this.createProduktGruppe("Øl", "Det øl");
+		this.createProduktGruppe("Drikkevarer", "Øl, whisky osv");
 		this.createProdukt("Klosterbryg", "1", storage.getAllProduktGrupper().get(0));
+		this.createProduktGruppe("Merchandise", "Hatte, t-shirts");
+		this.createProdukt("Hat med logo", "2", storage.getAllProduktGrupper().get(1));
 	}
 
-	@SuppressWarnings("unused")
 	public boolean parseTextField(TextField textField) {
 		if (textField.getText().isEmpty()) {
 			return false;

@@ -38,6 +38,6 @@ public class ProduktGruppe {
 
 	@Override
 	public String toString() {
-		return type + ", " + beskrivelse;
+		return type + ": " + beskrivelse;
 	}
 }
