@@ -59,6 +59,8 @@ public class CreateProduktPane extends GridPane {
 			if (txtNr.getText().matches(".*\\d.*")) {
 				controller.createProdukt(txtNavn.getText(), txtNr.getText(),
 						produktGruppeList.getSelectionModel().getSelectedItem());
+				txtNavn.clear();
+				txtNr.clear();
 			} else
 //				throw new IllegalArgumentException("Der skal angives et gyldigt tal");
 				lblError.setText("Der skal angives et gyldigt tal");
