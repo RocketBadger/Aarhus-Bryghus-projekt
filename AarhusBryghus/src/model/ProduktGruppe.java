@@ -3,22 +3,18 @@ package model;
 import java.util.ArrayList;
 
 public class ProduktGruppe {
-	private String type;
-	private String beskrivelse;
+	private String navn;
 	private ArrayList<Produkt> produkter = new ArrayList<>();
 
-	public ProduktGruppe(String type, String beskrivelse) {
-		this.type = type;
-		this.beskrivelse = beskrivelse;
+	public ProduktGruppe(String navn) {
+		this.navn = navn;
+		
 	}
 
-	public String getType() {
-		return type;
+	public String getNavn() {
+		return navn;
 	}
 
-	public String getBeskrivelse() {
-		return beskrivelse;
-	}
 
 	public void addProdukt(Produkt produkt) {
 		if (!produkter.contains(produkt)) {
@@ -38,6 +34,6 @@ public class ProduktGruppe {
 
 	@Override
 	public String toString() {
-		return type + ": " + beskrivelse;
+		return navn;
 	}
 }

@@ -14,12 +14,10 @@ import javafx.stage.StageStyle;
 
 public class CreateProduktGruppeDialog extends Stage {
 	private Controller controller;
-	private TextField txtType = new TextField();
-	private TextField txtBeskrivelse = new TextField();
+	private TextField txtNavn = new TextField();
 	private Button btnCreate = new Button("Opret produktgruppe");
 	private Button btnNvm = new Button("Fortryd");
-	private Label lblType = new Label("Indast type");
-	private Label lblBeskrivelse = new Label("Indtast beskrivelse");
+	private Label lblNavn = new Label("Indtast navn på produktgruppe");
 
 	public CreateProduktGruppeDialog() {
 		this.controller = Controller.getController();
@@ -41,10 +39,8 @@ public class CreateProduktGruppeDialog extends Stage {
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
 
-		pane.add(lblType, 0, 0);
-		pane.add(txtType, 1, 0);
-		pane.add(lblBeskrivelse, 0, 1);
-		pane.add(txtBeskrivelse, 1, 1);
+		pane.add(lblNavn, 0, 0);
+		pane.add(txtNavn, 1, 0);
 
 		pane.add(btnNvm, 0, 2);
 		btnNvm.setOnAction(event -> this.hide());
@@ -53,16 +49,11 @@ public class CreateProduktGruppeDialog extends Stage {
 	}
 
 	private void opretAction() {
-		if (controller.parseTextField(txtType) && controller.parseTextField(txtBeskrivelse)) {
-			controller.createProduktGruppe(txtType.getText(), txtBeskrivelse.getText());
+		if (controller.parseTextField(txtNavn)) {
+			controller.createProduktGruppe(txtNavn.getText());
 			this.hide();
-		} else if (!controller.parseTextField(txtType) && !controller.parseTextField(txtBeskrivelse)) {
-			lblType.setTextFill(Color.RED);
-			lblBeskrivelse.setTextFill(Color.RED);
-		} else if (!controller.parseTextField(txtType)) {
-			lblType.setTextFill(Color.RED);
-		} else if (!controller.parseTextField(txtBeskrivelse)) {
-			lblBeskrivelse.setTextFill(Color.RED);
-		}
+		} else if (!controller.parseTextField(txtNavn)) {
+			lblNavn.setTextFill(Color.RED);
 	}
+}
 }

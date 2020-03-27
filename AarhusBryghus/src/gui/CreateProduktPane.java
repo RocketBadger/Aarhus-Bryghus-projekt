@@ -13,7 +13,6 @@ import model.ProduktGruppe;
 public class CreateProduktPane extends GridPane {
 	private Controller controller;
 	private TextField txtNavn = new TextField();
-	private TextField txtNr = new TextField();
 	private ListView<ProduktGruppe> produktGruppeList = new ListView<>();
 	private Button btnGruppe = new Button("Opret ny produktgruppe (Åbner nyt vindue)");
 	private Button btnCreate = new Button("Opret nyt produkt");
@@ -29,8 +28,6 @@ public class CreateProduktPane extends GridPane {
 
 		this.add(new Label("Indtast produktnavn:"), 0, 0);
 		this.add(txtNavn, 0, 1);
-		this.add(txtNr, 1, 1);
-		this.add(new Label("Indtast produktnummer:"), 1, 0);
 		this.add(new Label("Vælg produktgruppe"), 0, 2);
 
 		this.add(produktGruppeList, 0, 3);
@@ -55,20 +52,16 @@ public class CreateProduktPane extends GridPane {
 	}
 
 	public void actionCreateProdukt() {
-		if (controller.parseTextField(txtNavn) && controller.parseTextField(txtNr)) {
-			if (txtNr.getText().matches(".*\\d.*")) {
-				controller.createProdukt(txtNavn.getText(), txtNr.getText(),
+		if (controller.parseTextField(txtNavn)) {
+
+				controller.createProdukt(txtNavn.getText(),
 						produktGruppeList.getSelectionModel().getSelectedItem());
 				txtNavn.clear();
-				txtNr.clear();
 			} else
 //				throw new IllegalArgumentException("Der skal angives et gyldigt tal");
 				lblError.setText("Der skal angives et gyldigt tal");
-		} else
-//			throw new IllegalArgumentException("Der skal angives et navn og et nr");
-			lblError.setText("Der skal angives et navn og nr");
 	}
-
+	
 	public void updateGruppeList() {
 		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
 		produktGruppeList.getSelectionModel().selectFirst();
