@@ -40,4 +40,9 @@ public class Test_2nd_iteration {
 		assertEquals(prisliste, pris.getPrisListe());
 		assertEquals(10, pris.getPris(), 0.1);
 	}
+
+	@Test
+	public void testStorage() {
+		assertTrue(controller.getAllPrisLister().contains(prisliste));
+	}
 }
