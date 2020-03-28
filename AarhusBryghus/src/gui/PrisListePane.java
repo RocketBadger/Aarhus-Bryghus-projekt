@@ -2,6 +2,7 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
@@ -12,6 +13,8 @@ public class PrisListePane extends GridPane {
 	private Controller controller;
 	private ListView<PrisListe> plView = new ListView<>();
 	private ListView<Pris> prisView = new ListView<>();
+	private Button btnCreatePrisListe = new Button("Opret ny prisliste");
+	private Button btnCreatePris = new Button("Opret pris");
 
 	public PrisListePane() {
 		controller = Controller.getController();
@@ -27,11 +30,23 @@ public class PrisListePane extends GridPane {
 		this.add(new Label("Produkter og priser"), 1, 0);
 		this.add(prisView, 1, 1);
 
+		this.add(btnCreatePrisListe, 0, 2);
+		this.add(btnCreatePris, 1, 2);
+
+		btnCreatePrisListe.setOnAction(event -> actionOpenCreatePrisliste());
+		btnCreatePris.setOnAction(event -> actionOpenCreatePris());
+
 		plView.getItems().setAll(controller.getAllPrisLister());
 		plView.getSelectionModel().selectFirst();
 		plView.getSelectionModel().selectedIndexProperty().addListener(observable -> updatePrisView());
 		prisView.getItems().setAll(plView.getSelectionModel().getSelectedItem().getAllPriser());
 
+	}
+
+	public void actionOpenCreatePrisliste() {
+		CreatePrislisteDialog di = new CreatePrislisteDialog();
+//		di.setOnHidden(event);
+		di.showAndWait();
 	}
 
 	public void updatePlView() {
