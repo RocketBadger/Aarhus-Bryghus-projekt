@@ -1,6 +1,5 @@
 package gui;
 
-
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -14,7 +13,6 @@ public class PrisListePane extends GridPane {
 	private ListView<PrisListe> plView = new ListView<>();
 	private ListView<Pris> prisView = new ListView<>();
 
-	
 	public PrisListePane() {
 		controller = Controller.getController();
 
@@ -22,14 +20,31 @@ public class PrisListePane extends GridPane {
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
-		
+
 		this.add(new Label("Prislister"), 0, 0);
 		this.add(plView, 0, 1);
-		plView.getItems().setAll(controller.getAllPrisLister());
-		
+
 		this.add(new Label("Produkter og priser"), 1, 0);
 		this.add(prisView, 1, 1);
-		
-		
+
+		plView.getItems().setAll(controller.getAllPrisLister());
+		plView.getSelectionModel().selectFirst();
+		plView.getSelectionModel().selectedIndexProperty().addListener(observable -> updatePrisView());
+		prisView.getItems().setAll(plView.getSelectionModel().getSelectedItem().getAllPriser());
+
+	}
+
+	public void updatePlView() {
+		plView.getItems().setAll(controller.getAllPrisLister());
+		plView.getSelectionModel().selectFirst();
+	}
+
+	public void updatePrisView() {
+		int selected = 0;
+		if (plView.getSelectionModel().getSelectedItem() != null) {
+			selected = plView.getSelectionModel().getSelectedIndex();
+		}
+		plView.getSelectionModel().select(selected);
+		prisView.getItems().setAll(plView.getSelectionModel().getSelectedItem().getAllPriser());
 	}
 }

@@ -21,7 +21,7 @@ public class VisProduktPane extends GridPane {
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		this.add(new Label("Vælg produktgruppe"), 0, 0);
+		this.add(new Label("Vælg produktgruppe:"), 0, 0);
 		this.add(produktGruppeList, 0, 1);
 
 		this.add(new Label("Produkter"), 1, 0);

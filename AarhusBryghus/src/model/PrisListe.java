@@ -6,26 +6,32 @@ public class PrisListe {
 
 	private ArrayList<Pris> prislister = new ArrayList<>();
 	private String navn;
-	
+
 	public PrisListe(String navn) {
 		this.navn = navn;
 	}
-	
+
 	public String getNavn() {
 		return navn;
 	}
+
 	public void addPris(Pris pris) {
-		prislister.add(pris);
+		if (!prislister.contains(pris)) {
+			prislister.add(pris);
+		}
 	}
+
 	public void removePris(Pris pris) {
-		prislister.remove(pris);
+		if (prislister.contains(pris)) {
+			prislister.remove(pris);
+		}
 	}
-	
+
 	public ArrayList<Pris> getAllPriser() {
 		return new ArrayList<>(prislister);
 	}
-	
-	@Override 
+
+	@Override
 	public String toString() {
 		return navn;
 	}

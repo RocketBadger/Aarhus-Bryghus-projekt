@@ -2,6 +2,7 @@ package storage;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
@@ -17,40 +18,46 @@ public class Storage {
 		produktGrupper = new ArrayList<ProduktGruppe>();
 		prislister = new ArrayList<PrisListe>();
 	}
-	
+
 // Produkt metoder ----------------------------------------------
 	public void addProdukt(Produkt produkt) {
 		if (!produkter.contains(produkt)) {
 			produkter.add(produkt);
 		}
 	}
+
 	public List<Produkt> getAllProdukter() {
 		return new ArrayList<>(produkter);
 	}
-	
-	
+
 // ProduktGruppe metoder -----------------------------------------
 	public void addProduktGruppe(ProduktGruppe produktGruppe) {
 		if (!produktGrupper.contains(produktGruppe)) {
 			produktGrupper.add(produktGruppe);
 		}
 	}
+
 	public List<ProduktGruppe> getAllProduktGrupper() {
 		return new ArrayList<>(produktGrupper);
 	}
-	
-	
+
 // PrisListe metoder ---------------------------------------------
 	public ArrayList<PrisListe> getAllPrisLister() {
 		return new ArrayList<>(prislister);
 	}
+
 	public void addPrisListe(PrisListe prisliste) {
-		prislister.add(prisliste);
+		if (!prislister.contains(prisliste)) {
+			prislister.add(prisliste);
+		}
 	}
+
 	public void removePrisListe(PrisListe prisliste) {
-		prislister.remove(prisliste);
+		if (prislister.contains(prisliste)) {
+			prislister.remove(prisliste);
+		}
 	}
-	
+
 // Pris metoder ---------------------------------------------------------------
 
 	public static ArrayList<Pris> getAllPriser() {
@@ -60,7 +67,6 @@ public class Storage {
 				priser.add(p);
 			}
 		}
-
 		return priser;
 	}
 }

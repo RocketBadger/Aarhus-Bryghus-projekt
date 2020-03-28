@@ -35,7 +35,7 @@ public class Controller {
 	public List<ProduktGruppe> getAllProduktGrupper() {
 		return storage.getAllProduktGrupper();
 	}
-	
+
 	public List<PrisListe> getAllPrisLister() {
 		return storage.getAllPrisLister();
 	}
@@ -63,7 +63,7 @@ public class Controller {
 			return null;
 		}
 	}
-	
+
 	public PrisListe createPrisListe(String navn) {
 		try {
 			PrisListe pl = new PrisListe(navn);
@@ -74,39 +74,44 @@ public class Controller {
 			return null;
 		}
 	}
-	
+
 	public Pris createPris(Produkt produkt, PrisListe prisliste, int pris) {
-		Pris samletpris = new Pris(produkt, prisliste, pris);
-		prisliste.addPris(samletpris);
-		return samletpris;
+		try {
+			Pris samletpris = new Pris(produkt, prisliste, pris);
+			prisliste.addPris(samletpris);
+			return samletpris;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+
 	}
-	
 
 	public void createSomeObjects() {
-		//Produktgrupper oprettes
+		// Produktgrupper oprettes
 		this.createProduktGruppe("Flaskeøl");
 		this.createProduktGruppe("Fadøl");
 		this.createProduktGruppe("Øl på fustage");
 		this.createProduktGruppe("Spiritus");
 		this.createProduktGruppe("Merchandise");
-		
-		//Produkter oprettes
+
+		// Produkter oprettes
 		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(0));
 		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(1));
 		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(2));
 		this.createProdukt("Whisky", storage.getAllProduktGrupper().get(3));
 		this.createProdukt("Hat med logo", storage.getAllProduktGrupper().get(4));
-		
-		//Prislister oprettes
+
+		// Prislister oprettes
 		this.createPrisListe("Fredagsbar");
 		this.createPrisListe("Butikssalg");
 		this.createPrisListe("Julefrokost");
-		
-		//Priser oprettes
+
+		// Priser oprettes
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(0), 15);
 		this.createPris(storage.getAllProdukter().get(1), storage.getAllPrisLister().get(0), 40);
 		this.createPris(storage.getAllProdukter().get(3), storage.getAllPrisLister().get(0), 300);
-		
+
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 10);
 		this.createPris(storage.getAllProdukter().get(2), storage.getAllPrisLister().get(1), 150);
 	}
