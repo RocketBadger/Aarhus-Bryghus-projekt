@@ -45,7 +45,13 @@ public class PrisListePane extends GridPane {
 
 	public void actionOpenCreatePrisliste() {
 		CreatePrislisteDialog di = new CreatePrislisteDialog();
-//		di.setOnHidden(event);
+		di.setOnHidden(event -> this.updatePlView());
+		di.showAndWait();
+	}
+
+	public void actionOpenCreatePris() {
+		CreatePrisDialog di = new CreatePrisDialog();
+		di.setOnHidden(event -> this.updatePrisView());
 		di.showAndWait();
 	}
 

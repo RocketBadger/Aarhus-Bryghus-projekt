@@ -13,13 +13,12 @@ public class Produkt {
 		return navn;
 	}
 
-
 	public ProduktGruppe getProduktGruppe() {
 		return produktGruppe;
 	}
 
 	@Override
 	public String toString() {
-		return navn + " ";
+		return navn + ", " + produktGruppe;
 	}
 }

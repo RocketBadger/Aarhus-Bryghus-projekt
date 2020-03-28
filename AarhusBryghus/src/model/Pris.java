@@ -26,6 +26,6 @@ public class Pris {
 
 	@Override
 	public String toString() {
-		return produkt.toString() + ", " + produkt.getProduktGruppe() + ": " + pris;
+		return produkt.toString() + ": " + pris;
 	}
 }
