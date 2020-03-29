@@ -1,5 +1,11 @@
 package controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import model.Pris;
@@ -110,8 +116,41 @@ public class Controller {
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(0), 15);
 		this.createPris(storage.getAllProdukter().get(1), storage.getAllPrisLister().get(0), 40);
 		this.createPris(storage.getAllProdukter().get(3), storage.getAllPrisLister().get(0), 300);
-
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 10);
 		this.createPris(storage.getAllProdukter().get(2), storage.getAllPrisLister().get(1), 150);
+
+		File saveFile = new File("src/storage.ser");
+		if (!saveFile.exists()) {
+			this.saveStorage();
+		}
+	}
+
+	public void loadStorage() {
+		try (FileInputStream fileIn = new FileInputStream("src/storage.ser")) {
+			try (ObjectInputStream in = new ObjectInputStream(fileIn);) {
+				storage = (Storage) in.readObject();
+
+				System.out.println("Storage loaded from file storage.ser.");
+			} catch (ClassNotFoundException ex) {
+				System.out.println("Error loading storage object.");
+				throw new RuntimeException(ex);
+			}
+		} catch (IOException ex) {
+			System.out.println("Error loading storage object.");
+			throw new RuntimeException(ex);
+		}
+
+	}
+
+	public void saveStorage() {
+		try (FileOutputStream fileOut = new FileOutputStream("src/storage.ser")) {
+			try (ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+				out.writeObject(storage);
+				System.out.println("Storage saved in file storage.ser.");
+			}
+		} catch (IOException ex) {
+			System.out.println("Error saving storage object.");
+			throw new RuntimeException(ex);
+		}
 	}
 }

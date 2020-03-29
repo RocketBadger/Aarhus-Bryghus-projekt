@@ -48,6 +48,7 @@ public class CreatePrislisteDialog extends Stage {
 	private void opretAction() {
 		if (!txtNvn.getText().isEmpty()) {
 			controller.createPrisListe(txtNvn.getText());
+			controller.saveStorage();
 			this.hide();
 		} else if (txtNvn.getText().isEmpty()) {
 			lblNvn.setTextFill(Color.RED);

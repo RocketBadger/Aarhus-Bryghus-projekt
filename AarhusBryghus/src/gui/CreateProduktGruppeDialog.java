@@ -51,6 +51,7 @@ public class CreateProduktGruppeDialog extends Stage {
 	private void opretAction() {
 		if (!txtNavn.getText().isEmpty()) {
 			controller.createProduktGruppe(txtNavn.getText());
+			controller.saveStorage();
 			this.hide();
 		} else if (txtNavn.getText().isEmpty()) {
 			lblNavn.setTextFill(Color.RED);

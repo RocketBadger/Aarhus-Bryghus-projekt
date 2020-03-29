@@ -64,6 +64,7 @@ public class CreatePrisDialog extends Stage {
 				&& comboProdukt.getSelectionModel().getSelectedItem() != null) {
 			controller.createPris(comboProdukt.getSelectionModel().getSelectedItem(),
 					comboPrisliste.getSelectionModel().getSelectedItem(), Integer.parseInt(txtPris.getText()));
+			controller.saveStorage();
 			this.hide();
 		}
 		if (txtPris.getText().isEmpty()) {

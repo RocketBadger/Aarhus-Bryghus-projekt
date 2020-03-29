@@ -1,20 +1,21 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProduktGruppe {
+public class ProduktGruppe implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String navn;
 	private ArrayList<Produkt> produkter = new ArrayList<>();
 
 	public ProduktGruppe(String navn) {
 		this.navn = navn;
-		
+
 	}
 
 	public String getNavn() {
 		return navn;
 	}
-
 
 	public void addProdukt(Produkt produkt) {
 		if (!produkter.contains(produkt)) {

@@ -56,6 +56,7 @@ public class CreateProduktDialog extends Stage {
 	public void actionCreateProdukt() {
 		if (!txtNavn.getText().isEmpty()) {
 			controller.createProdukt(txtNavn.getText(), produktGruppeCombo.getSelectionModel().getSelectedItem());
+			controller.saveStorage();
 			this.hide();
 		} else
 			lblNavn.setTextFill(Color.RED);

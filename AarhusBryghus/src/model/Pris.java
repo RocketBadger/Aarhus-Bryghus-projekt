@@ -1,7 +1,9 @@
 package model;
 
-public class Pris {
+import java.io.Serializable;
 
+public class Pris implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Produkt produkt;
 	private PrisListe prisliste;
 	private double pris;

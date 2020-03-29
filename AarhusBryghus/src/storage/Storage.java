@@ -1,5 +1,6 @@
 package storage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,19 @@ import model.PrisListe;
 import model.Produkt;
 import model.ProduktGruppe;
 
-public class Storage {
+public class Storage implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private static Storage storage;
 	private List<Produkt> produkter;
 	private List<ProduktGruppe> produktGrupper;
-	private static List<PrisListe> prislister;
+	private List<PrisListe> prislister;
+
+	public static Storage getStorage() {
+		if (storage == null) {
+			storage = new Storage();
+		}
+		return storage;
+	}
 
 	public Storage() {
 		produkter = new ArrayList<Produkt>();
@@ -62,7 +72,7 @@ public class Storage {
 
 	public static ArrayList<Pris> getAllPriser() {
 		ArrayList<Pris> priser = new ArrayList<>();
-		for (PrisListe pl : prislister) {
+		for (PrisListe pl : storage.prislister) {
 			for (Pris p : pl.getAllPriser()) {
 				priser.add(p);
 			}

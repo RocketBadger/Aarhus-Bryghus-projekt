@@ -1,5 +1,7 @@
 package gui;
 
+import java.io.File;
+
 import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -36,6 +38,10 @@ public class MainApp extends Application {
 	}
 
 	private void initContent(BorderPane pane) {
+		File saveFile = new File("src/storage.ser");
+		if (saveFile.exists()) {
+			controller.loadStorage();
+		}
 		TabPane tabPane = new TabPane();
 		this.initTabPane(tabPane);
 		pane.setCenter(tabPane);
@@ -47,13 +53,13 @@ public class MainApp extends Application {
 		Tab tabProdukt = new Tab("Produkter og produktgrupper");
 		Tab tabPriser = new Tab("Prislister og priser");
 
-		ProduktPane visProduktPane = new ProduktPane();
-		tabProdukt.setContent(visProduktPane);
+		ProduktPane ProduktPane = new ProduktPane();
+		tabProdukt.setContent(ProduktPane);
 		tabPriser.setContent(new PrisListePane());
 
 		tabPane.getTabs().add(tabProdukt);
 		tabPane.getTabs().add(tabPriser);
 
-		tabProdukt.setOnSelectionChanged(event -> visProduktPane.updateGruppeList());
+		tabProdukt.setOnSelectionChanged(event -> ProduktPane.updateGruppeList());
 	}
 }
