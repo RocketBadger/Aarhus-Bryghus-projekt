@@ -14,7 +14,9 @@ public class PrisListePane extends GridPane {
 	private ListView<PrisListe> plView = new ListView<>();
 	private ListView<Pris> prisView = new ListView<>();
 	private Button btnCreatePrisListe = new Button("Opret ny prisliste");
-	private Button btnCreatePris = new Button("Opret pris");
+	private Button btnCreatePris = new Button("Opret ny pris");
+	private Button btnDeletePrisliste = new Button("Slet Prisliste");
+	private Button btnDeletePris = new Button("Slet pris");
 
 	public PrisListePane() {
 		controller = Controller.getController();
@@ -32,9 +34,13 @@ public class PrisListePane extends GridPane {
 
 		this.add(btnCreatePrisListe, 0, 2);
 		this.add(btnCreatePris, 1, 2);
+		this.add(btnDeletePrisliste, 0, 3);
+		this.add(btnDeletePris, 1, 3);
 
 		btnCreatePrisListe.setOnAction(event -> actionOpenCreatePrisliste());
 		btnCreatePris.setOnAction(event -> actionOpenCreatePris());
+		btnDeletePrisliste.setOnAction(event -> actionDeletePrisliste());
+		btnDeletePris.setOnAction(event -> actionDeletePris());
 
 		plView.getItems().setAll(controller.getAllPrisLister());
 		plView.getSelectionModel().selectFirst();
@@ -67,5 +73,17 @@ public class PrisListePane extends GridPane {
 		}
 		plView.getSelectionModel().select(selected);
 		prisView.getItems().setAll(plView.getSelectionModel().getSelectedItem().getAllPriser());
+	}
+
+	public void actionDeletePrisliste() {
+		controller.deletePrisListe(plView.getSelectionModel().getSelectedItem());
+		this.updatePlView();
+		controller.saveStorage();
+	}
+
+	public void actionDeletePris() {
+		controller.deletePris(prisView.getSelectionModel().getSelectedItem());
+		this.updatePrisView();
+		controller.saveStorage();
 	}
 }

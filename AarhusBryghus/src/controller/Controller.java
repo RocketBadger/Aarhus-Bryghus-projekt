@@ -58,6 +58,11 @@ public class Controller {
 		}
 	}
 
+	public void deleteProdukt(Produkt produkt) {
+		storage.removeProdukt(produkt);
+		produkt.getProduktGruppe().removeProdukt(produkt);
+	}
+
 	public ProduktGruppe createProduktGruppe(String navn) {
 		try {
 			ProduktGruppe pg = new ProduktGruppe(navn);
@@ -67,6 +72,10 @@ public class Controller {
 			System.out.println("Message: " + i);
 			return null;
 		}
+	}
+
+	public void deleteProduktGruppe(ProduktGruppe pg) {
+		storage.removeProduktGruppe(pg);
 	}
 
 	public PrisListe createPrisListe(String navn) {
@@ -80,6 +89,10 @@ public class Controller {
 		}
 	}
 
+	public void deletePrisListe(PrisListe pl) {
+		storage.removePrisListe(pl);
+	}
+
 	public Pris createPris(Produkt produkt, PrisListe prisliste, int pris) {
 		try {
 			Pris samletpris = new Pris(produkt, prisliste, pris);
@@ -89,7 +102,12 @@ public class Controller {
 			System.out.println("Message: " + i);
 			return null;
 		}
+	}
 
+	public void deletePris(Pris p) {
+		storage.removePris(p);
+		p.getPrisListe().removePris(p);
+		p.setPrisListe(null);
 	}
 
 	public void createSomeObjects() {
@@ -129,7 +147,6 @@ public class Controller {
 		try (FileInputStream fileIn = new FileInputStream("src/storage.ser")) {
 			try (ObjectInputStream in = new ObjectInputStream(fileIn);) {
 				storage = (Storage) in.readObject();
-
 				System.out.println("Storage loaded from file storage.ser.");
 			} catch (ClassNotFoundException ex) {
 				System.out.println("Error loading storage object.");

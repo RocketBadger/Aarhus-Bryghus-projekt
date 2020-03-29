@@ -15,6 +15,8 @@ public class ProduktPane extends GridPane {
 	private ListView<Produkt> produktList = new ListView<>();
 	private Button btnGruppe = new Button("Opret ny produktgruppe");
 	private Button btnProdukt = new Button("Opret nyt produkt");
+	private Button btnDeleteGruppe = new Button("Slet Produktgruppe");
+	private Button btnDeleteProdukt = new Button("Slet Produkt");
 
 	public ProduktPane() {
 		controller = Controller.getController();
@@ -23,8 +25,17 @@ public class ProduktPane extends GridPane {
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
+		initContent();
+	}
 
-		this.add(new Label("Vælg produktgruppe:"), 0, 0);
+	private void initContent() {
+//		ColumnConstraints column1 = new ColumnConstraints();
+//		column1.setMaxWidth(150);
+//		ColumnConstraints column2 = new ColumnConstraints();
+//		column2.setMaxWidth(150);
+//		this.getColumnConstraints().addAll(column1, column2);
+
+		this.add(new Label("Produktgrupper"), 0, 0);
 		this.add(produktGruppeList, 0, 1);
 
 		this.add(new Label("Produkter"), 1, 0);
@@ -37,9 +48,12 @@ public class ProduktPane extends GridPane {
 
 		this.add(btnGruppe, 0, 2);
 		this.add(btnProdukt, 1, 2);
+		this.add(btnDeleteGruppe, 0, 3);
+		this.add(btnDeleteProdukt, 1, 3);
 
 		btnGruppe.setOnAction(event -> actionOpenCreateGruppe());
 		btnProdukt.setOnAction(event -> actionOpenCreateProdukt());
+		btnDeleteGruppe.setOnAction(event -> actionDeleteGruppe());
 	}
 
 	public void updateGruppeList() {
@@ -68,4 +82,15 @@ public class ProduktPane extends GridPane {
 		di.showAndWait();
 	}
 
+	public void actionDeleteGruppe() {
+		controller.deleteProduktGruppe(produktGruppeList.getSelectionModel().getSelectedItem());
+		this.updateGruppeList();
+		controller.saveStorage();
+	}
+
+	public void actionDeleteProdukt() {
+		controller.deleteProdukt(produktList.getSelectionModel().getSelectedItem());
+		this.updateProduktList();
+		controller.saveStorage();
+	}
 }

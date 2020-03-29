@@ -30,4 +30,8 @@ public class Pris implements Serializable {
 	public String toString() {
 		return produkt.toString() + ". Pris: " + pris + " kr";
 	}
+
+	public void setPrisListe(PrisListe pl) {
+		this.prisliste = pl;
+	}
 }

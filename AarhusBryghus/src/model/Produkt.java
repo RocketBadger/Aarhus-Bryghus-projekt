@@ -20,6 +20,10 @@ public class Produkt implements Serializable {
 		return produktGruppe;
 	}
 
+	public void setProduktGruppe(ProduktGruppe pg) {
+		this.produktGruppe = pg;
+	}
+
 	@Override
 	public String toString() {
 		return navn + ", " + produktGruppe;
