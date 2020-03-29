@@ -20,12 +20,14 @@ public class ProduktGruppe implements Serializable {
 	public void addProdukt(Produkt produkt) {
 		if (!produkter.contains(produkt)) {
 			produkter.add(produkt);
+			produkt.setProduktGruppe(this);
 		}
 	}
 
 	public void removeProdukt(Produkt produkt) {
 		if (produkter.contains(produkt)) {
 			produkter.remove(produkt);
+			produkt.removeProduktGruppe();
 		}
 	}
 

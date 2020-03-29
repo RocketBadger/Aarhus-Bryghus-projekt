@@ -19,12 +19,14 @@ public class PrisListe implements Serializable {
 	public void addPris(Pris pris) {
 		if (!priser.contains(pris)) {
 			priser.add(pris);
+			pris.setPrisListe(this);
 		}
 	}
 
 	public void removePris(Pris pris) {
 		if (priser.contains(pris)) {
 			priser.remove(pris);
+			pris.removePrisListe();
 		}
 	}
 

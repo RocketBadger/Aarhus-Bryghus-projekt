@@ -26,12 +26,20 @@ public class Pris implements Serializable {
 		return pris;
 	}
 
+	public void setPrisListe(PrisListe pl) {
+		this.prisliste = pl;
+	}
+
+	public void removePrisListe() {
+		if (this.prisliste != null) {
+			PrisListe pl = this.prisliste;
+			this.prisliste = null;
+			pl.removePris(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return produkt.toString() + ". Pris: " + pris + " kr";
-	}
-
-	public void setPrisListe(PrisListe pl) {
-		this.prisliste = pl;
 	}
 }

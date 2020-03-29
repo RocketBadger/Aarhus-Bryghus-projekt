@@ -15,6 +15,7 @@ public class Storage implements Serializable {
 	private List<Produkt> produkter;
 	private List<ProduktGruppe> produktGrupper;
 	private List<PrisListe> prislister;
+	private List<Pris> priser;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -27,6 +28,7 @@ public class Storage implements Serializable {
 		produkter = new ArrayList<Produkt>();
 		produktGrupper = new ArrayList<ProduktGruppe>();
 		prislister = new ArrayList<PrisListe>();
+		priser = new ArrayList<Pris>();
 	}
 
 // Produkt metoder ----------------------------------------------
@@ -82,21 +84,33 @@ public class Storage implements Serializable {
 
 // Pris metoder ---------------------------------------------------------------
 
-	public ArrayList<Pris> getAllPriser() {
-		ArrayList<Pris> priser = new ArrayList<>();
-		for (PrisListe pl : storage.prislister) {
-			for (Pris p : pl.getAllPriser()) {
-				priser.add(p);
-			}
+	public void addPris(Pris pris) {
+		if (!priser.contains(pris)) {
+			priser.add(pris);
 		}
-		return priser;
 	}
 
-	public void removePris(Pris p) {
-		for (PrisListe pl : storage.getAllPrisLister()) {
-			if (p.getPrisListe() == pl) {
-				pl.removePris(p);
-			}
+	public void removePris(Pris pris) {
+		if (priser.contains(pris)) {
+			priser.remove(pris);
 		}
 	}
+
+//	public ArrayList<Pris> getAllPriser() {
+//		ArrayList<Pris> priser = new ArrayList<>();
+//		for (PrisListe pl : storage.prislister) {
+//			for (Pris p : pl.getAllPriser()) {
+//				priser.add(p);
+//			}
+//		}
+//		return priser;
+//	}
+
+//	public void removePris(Pris p) {
+//		for (PrisListe pl : storage.getAllPrisLister()) {
+//			if (p.getPrisListe() == pl) {
+//				pl.removePris(p);
+//			}
+//		}
+//	}
 }

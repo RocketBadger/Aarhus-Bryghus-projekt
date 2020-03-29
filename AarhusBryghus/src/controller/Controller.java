@@ -60,7 +60,8 @@ public class Controller {
 
 	public void deleteProdukt(Produkt produkt) {
 		storage.removeProdukt(produkt);
-		produkt.getProduktGruppe().removeProdukt(produkt);
+		produkt.removeProduktGruppe();
+		;
 	}
 
 	public ProduktGruppe createProduktGruppe(String navn) {
@@ -97,6 +98,7 @@ public class Controller {
 		try {
 			Pris samletpris = new Pris(produkt, prisliste, pris);
 			prisliste.addPris(samletpris);
+			storage.addPris(samletpris);
 			return samletpris;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);

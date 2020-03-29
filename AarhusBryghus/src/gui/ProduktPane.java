@@ -25,15 +25,6 @@ public class ProduktPane extends GridPane {
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
-		initContent();
-	}
-
-	private void initContent() {
-//		ColumnConstraints column1 = new ColumnConstraints();
-//		column1.setMaxWidth(150);
-//		ColumnConstraints column2 = new ColumnConstraints();
-//		column2.setMaxWidth(150);
-//		this.getColumnConstraints().addAll(column1, column2);
 
 		this.add(new Label("Produktgrupper"), 0, 0);
 		this.add(produktGruppeList, 0, 1);
@@ -54,6 +45,7 @@ public class ProduktPane extends GridPane {
 		btnGruppe.setOnAction(event -> actionOpenCreateGruppe());
 		btnProdukt.setOnAction(event -> actionOpenCreateProdukt());
 		btnDeleteGruppe.setOnAction(event -> actionDeleteGruppe());
+		btnDeleteProdukt.setOnAction(event -> actionDeleteProdukt());
 	}
 
 	public void updateGruppeList() {

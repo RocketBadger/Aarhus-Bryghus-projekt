@@ -24,6 +24,15 @@ public class Produkt implements Serializable {
 		this.produktGruppe = pg;
 	}
 
+	public void removeProduktGruppe() {
+		if (this.produktGruppe != null) {
+			ProduktGruppe pg = this.produktGruppe;
+			this.produktGruppe = null;
+			this.navn = "sletforhelvede";
+			pg.removeProdukt(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return navn + ", " + produktGruppe;
