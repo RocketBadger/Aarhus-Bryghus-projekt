@@ -2,18 +2,21 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import model.Produkt;
 import model.ProduktGruppe;
 
-public class VisProduktPane extends GridPane {
+public class ProduktPane extends GridPane {
 	private Controller controller;
 	private ListView<ProduktGruppe> produktGruppeList = new ListView<>();
 	private ListView<Produkt> produktList = new ListView<>();
+	private Button btnGruppe = new Button("Opret ny produktgruppe");
+	private Button btnProdukt = new Button("Opret nyt produkt");
 
-	public VisProduktPane() {
+	public ProduktPane() {
 		controller = Controller.getController();
 
 		this.setPadding(new Insets(20));
@@ -31,6 +34,12 @@ public class VisProduktPane extends GridPane {
 		produktGruppeList.getSelectionModel().selectFirst();
 		produktGruppeList.getSelectionModel().selectedIndexProperty().addListener(observable -> updateProduktList());
 		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
+
+		this.add(btnGruppe, 0, 2);
+		this.add(btnProdukt, 1, 2);
+
+		btnGruppe.setOnAction(event -> actionOpenCreateGruppe());
+		btnProdukt.setOnAction(event -> actionOpenCreateProdukt());
 	}
 
 	public void updateGruppeList() {
@@ -45,6 +54,18 @@ public class VisProduktPane extends GridPane {
 		}
 		produktGruppeList.getSelectionModel().select(selected);
 		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
+	}
+
+	public void actionOpenCreateGruppe() {
+		CreateProduktGruppeDialog di = new CreateProduktGruppeDialog();
+		di.setOnHidden(event -> this.updateGruppeList());
+		di.showAndWait();
+	}
+
+	public void actionOpenCreateProdukt() {
+		CreateProduktDialog di = new CreateProduktDialog();
+		di.setOnHidden(event -> this.updateProduktList());
+		di.showAndWait();
 	}
 
 }

@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -11,21 +12,22 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.ProduktGruppe;
 
-public class CreateProduktGruppeDialog extends Stage {
+public class CreateProduktDialog extends Stage {
 	private Controller controller;
 	private TextField txtNavn = new TextField();
-	private Button btnCreate = new Button("Opret produktgruppe");
-//	private Button btnNvm = new Button("Fortryd");
-	private Label lblNavn = new Label("Indtast navn på produktgruppe:");
+	private Label lblNavn = new Label("Indtast produktnavn:");
+	private ComboBox<ProduktGruppe> produktGruppeCombo = new ComboBox<>();
+	private Button btnCreate = new Button("Opret Produkt");
 
-	public CreateProduktGruppeDialog() {
+	public CreateProduktDialog() {
 		this.controller = Controller.getController();
 
 		this.initStyle(StageStyle.DECORATED);
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setResizable(false);
-		this.setTitle("Opret Produktgruppe");
+		this.setTitle("Opret Produkt");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
@@ -41,19 +43,21 @@ public class CreateProduktGruppeDialog extends Stage {
 
 		pane.add(lblNavn, 0, 0);
 		pane.add(txtNavn, 0, 1);
+		pane.add(new Label("Vælg produktgruppe:"), 0, 2);
+		pane.add(produktGruppeCombo, 0, 3);
+		pane.add(btnCreate, 0, 4);
 
-//		pane.add(btnNvm, 0, 2);
-//		btnNvm.setOnAction(event -> this.hide());
-		pane.add(btnCreate, 0, 2);
-		btnCreate.setOnAction(event -> opretAction());
+		btnCreate.setOnAction(event -> actionCreateProdukt());
+
+		produktGruppeCombo.getItems().setAll(controller.getAllProduktGrupper());
+		produktGruppeCombo.getSelectionModel().selectFirst();
 	}
 
-	private void opretAction() {
+	public void actionCreateProdukt() {
 		if (!txtNavn.getText().isEmpty()) {
-			controller.createProduktGruppe(txtNavn.getText());
+			controller.createProdukt(txtNavn.getText(), produktGruppeCombo.getSelectionModel().getSelectedItem());
 			this.hide();
-		} else if (txtNavn.getText().isEmpty()) {
+		} else
 			lblNavn.setTextFill(Color.RED);
-		}
 	}
 }

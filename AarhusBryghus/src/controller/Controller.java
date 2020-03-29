@@ -2,7 +2,6 @@ package controller;
 
 import java.util.List;
 
-import javafx.scene.control.TextField;
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
@@ -114,13 +113,5 @@ public class Controller {
 
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 10);
 		this.createPris(storage.getAllProdukter().get(2), storage.getAllPrisLister().get(1), 150);
-	}
-
-	public boolean parseTextField(TextField textField) {
-		if (textField.getText().isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 }

@@ -60,13 +60,13 @@ public class CreatePrisDialog extends Stage {
 	}
 
 	private void opretAction() {
-		if (controller.parseTextField(txtPris) && comboPrisliste.getSelectionModel().getSelectedItem() != null
+		if (!txtPris.getText().isEmpty() && comboPrisliste.getSelectionModel().getSelectedItem() != null
 				&& comboProdukt.getSelectionModel().getSelectedItem() != null) {
 			controller.createPris(comboProdukt.getSelectionModel().getSelectedItem(),
 					comboPrisliste.getSelectionModel().getSelectedItem(), Integer.parseInt(txtPris.getText()));
 			this.hide();
 		}
-		if (!controller.parseTextField(txtPris)) {
+		if (txtPris.getText().isEmpty()) {
 			lblPris.setTextFill(Color.RED);
 		}
 		if (comboPrisliste.getSelectionModel().getSelectedItem() == null) {

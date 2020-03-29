@@ -44,19 +44,16 @@ public class MainApp extends Application {
 	private void initTabPane(TabPane tabPane) {
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
-		Tab tabOpretProdukt = new Tab("Opret produkt/gruppe");
-		Tab tabVis = new Tab("Vis produkter og produktgrupper");
+		Tab tabProdukt = new Tab("Produkter og produktgrupper");
 		Tab tabPriser = new Tab("Prislister og priser");
 
-		tabOpretProdukt.setContent(new CreateProduktPane());
-		VisProduktPane visProduktPane = new VisProduktPane();
-		tabVis.setContent(visProduktPane);
+		ProduktPane visProduktPane = new ProduktPane();
+		tabProdukt.setContent(visProduktPane);
 		tabPriser.setContent(new PrisListePane());
 
-		tabPane.getTabs().add(tabVis);
-		tabPane.getTabs().add(tabOpretProdukt);
+		tabPane.getTabs().add(tabProdukt);
 		tabPane.getTabs().add(tabPriser);
 
-		tabVis.setOnSelectionChanged(event -> visProduktPane.updateGruppeList());
+		tabProdukt.setOnSelectionChanged(event -> visProduktPane.updateGruppeList());
 	}
 }
