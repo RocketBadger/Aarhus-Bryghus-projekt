@@ -26,6 +26,6 @@ public class Pris {
 
 	@Override
 	public String toString() {
-		return produkt.toString() + ": " + pris;
+		return produkt.toString() + ". Pris: " + pris + " kr";
 	}
 }
