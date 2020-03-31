@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Salg {
-//	TODO implement Serializable
+public class Salg implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private List<SalgsLinje> salgsLinjer;
 	private BetalingsFormer betalingsform;
 	private LocalDate dato;
