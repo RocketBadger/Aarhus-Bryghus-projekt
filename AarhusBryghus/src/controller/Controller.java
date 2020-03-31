@@ -6,12 +6,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import model.BetalingsFormer;
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
 import model.ProduktGruppe;
+import model.Salg;
+import model.SalgsLinje;
 import storage.Storage;
 
 public class Controller {
@@ -45,11 +50,16 @@ public class Controller {
 		return storage.getAllPrisLister();
 	}
 
+	public List<Salg> getAllSalg() {
+		return storage.getAllSalg();
+	}
+
+//	Produkt metoder ----------------------------------------------
 	public Produkt createProdukt(String navn, ProduktGruppe produktGruppe) {
 		try {
 			Produkt p = new Produkt(navn, produktGruppe);
 			produktGruppe.addProdukt(p);
-			storage.addProdukt(p);
+			storage.storeProdukt(p);
 			return p;
 		} catch (IllegalArgumentException i) {
 			System.out.println("ProduktGruppe muligvis ikke gyldig");
@@ -64,10 +74,11 @@ public class Controller {
 		;
 	}
 
+//	ProduktGruppe metoder ----------------------------------------------
 	public ProduktGruppe createProduktGruppe(String navn) {
 		try {
 			ProduktGruppe pg = new ProduktGruppe(navn);
-			storage.addProduktGruppe(pg);
+			storage.storeProduktGruppe(pg);
 			return pg;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);
@@ -79,10 +90,11 @@ public class Controller {
 		storage.removeProduktGruppe(pg);
 	}
 
+//	PrisListe metoder ----------------------------------------------
 	public PrisListe createPrisListe(String navn) {
 		try {
 			PrisListe pl = new PrisListe(navn);
-			storage.addPrisListe(pl);
+			storage.storePrisListe(pl);
 			return pl;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);
@@ -94,11 +106,12 @@ public class Controller {
 		storage.removePrisListe(pl);
 	}
 
+//	Pris metoder ----------------------------------------------
 	public Pris createPris(Produkt produkt, PrisListe prisliste, int pris) {
 		try {
 			Pris samletpris = new Pris(produkt, prisliste, pris);
 			prisliste.addPris(samletpris);
-			storage.addPris(samletpris);
+			storage.storePris(samletpris);
 			return samletpris;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);
@@ -110,6 +123,37 @@ public class Controller {
 		storage.removePris(p);
 		p.getPrisListe().removePris(p);
 		p.setPrisListe(null);
+	}
+
+//	SalgsLinje metoder ----------------------------------------------
+	public SalgsLinje createSalgsLinje(int antal, Pris pris) {
+		try {
+			SalgsLinje sl = new SalgsLinje(antal, pris);
+			return sl;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
+
+//	Salg metoder ----------------------------------------------
+	public Salg createSalg(ArrayList<SalgsLinje> salgslinjer, BetalingsFormer betalingsform, LocalDate dato) {
+		try {
+			Salg s = new Salg(salgslinjer, betalingsform, dato);
+//			storage.storeSalg(s);
+			return s;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
+
+	public void storeSalg(Salg s) {
+		try {
+			storage.storeSalg(s);
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+		}
 	}
 
 	public void createSomeObjects() {

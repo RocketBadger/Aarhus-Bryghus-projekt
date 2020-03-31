@@ -26,7 +26,7 @@ public class MainApp extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		stage.setTitle("Aarhus Bryghus Bogføring");
+		stage.setTitle("Aarhus Bryghus Kasseapparat");
 		BorderPane pane = new BorderPane();
 		this.initContent(pane);
 
@@ -52,14 +52,17 @@ public class MainApp extends Application {
 
 		Tab tabProdukt = new Tab("Produkter og produktgrupper");
 		Tab tabPriser = new Tab("Prislister og priser");
+		Tab tabSalg = new Tab("Udfør salg");
 
-		ProduktPane ProduktPane = new ProduktPane();
-		tabProdukt.setContent(ProduktPane);
+		ProduktPane ProduktTab = new ProduktPane();
+		tabProdukt.setContent(ProduktTab);
 		tabPriser.setContent(new PrisListePane());
+		tabSalg.setContent(new SalgPane());
 
+		tabPane.getTabs().add(tabSalg);
 		tabPane.getTabs().add(tabProdukt);
 		tabPane.getTabs().add(tabPriser);
 
-		tabProdukt.setOnSelectionChanged(event -> ProduktPane.updateGruppeList());
+		tabProdukt.setOnSelectionChanged(event -> ProduktTab.updateGruppeList());
 	}
 }

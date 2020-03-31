@@ -8,6 +8,7 @@ import model.Pris;
 import model.PrisListe;
 import model.Produkt;
 import model.ProduktGruppe;
+import model.Salg;
 
 public class Storage implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +17,7 @@ public class Storage implements Serializable {
 	private List<ProduktGruppe> produktGrupper;
 	private List<PrisListe> prislister;
 	private List<Pris> priser;
+	private List<Salg> solgt;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -29,10 +31,11 @@ public class Storage implements Serializable {
 		produktGrupper = new ArrayList<ProduktGruppe>();
 		prislister = new ArrayList<PrisListe>();
 		priser = new ArrayList<Pris>();
+		solgt = new ArrayList<Salg>();
 	}
 
 // Produkt metoder ----------------------------------------------
-	public void addProdukt(Produkt produkt) {
+	public void storeProdukt(Produkt produkt) {
 		if (!produkter.contains(produkt)) {
 			produkter.add(produkt);
 		}
@@ -49,7 +52,7 @@ public class Storage implements Serializable {
 	}
 
 // ProduktGruppe metoder -----------------------------------------
-	public void addProduktGruppe(ProduktGruppe produktGruppe) {
+	public void storeProduktGruppe(ProduktGruppe produktGruppe) {
 		if (!produktGrupper.contains(produktGruppe)) {
 			produktGrupper.add(produktGruppe);
 		}
@@ -66,11 +69,7 @@ public class Storage implements Serializable {
 	}
 
 // PrisListe metoder ---------------------------------------------
-	public ArrayList<PrisListe> getAllPrisLister() {
-		return new ArrayList<>(prislister);
-	}
-
-	public void addPrisListe(PrisListe prisliste) {
+	public void storePrisListe(PrisListe prisliste) {
 		if (!prislister.contains(prisliste)) {
 			prislister.add(prisliste);
 		}
@@ -82,9 +81,13 @@ public class Storage implements Serializable {
 		}
 	}
 
+	public ArrayList<PrisListe> getAllPrisLister() {
+		return new ArrayList<>(prislister);
+	}
+
 // Pris metoder ---------------------------------------------------------------
 
-	public void addPris(Pris pris) {
+	public void storePris(Pris pris) {
 		if (!priser.contains(pris)) {
 			priser.add(pris);
 		}
@@ -94,6 +97,24 @@ public class Storage implements Serializable {
 		if (priser.contains(pris)) {
 			priser.remove(pris);
 		}
+	}
+
+//	Salg metoder ---------------------------------------------------------------
+
+	public void storeSalg(Salg salg) {
+		if (!solgt.contains(salg)) {
+			solgt.add(salg);
+		}
+	}
+
+	public void removeSalg(Salg salg) {
+		if (solgt.contains(salg)) {
+			solgt.remove(salg);
+		}
+	}
+
+	public List<Salg> getAllSalg() {
+		return new ArrayList<>(solgt);
 	}
 
 //	public ArrayList<Pris> getAllPriser() {
