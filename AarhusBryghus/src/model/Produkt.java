@@ -24,11 +24,13 @@ public class Produkt implements Serializable {
 		this.produktGruppe = pg;
 	}
 
+	/**
+	 * Sletter en produktgruppe og dens produkter.
+	 */
 	public void removeProduktGruppe() {
 		if (this.produktGruppe != null) {
 			ProduktGruppe pg = this.produktGruppe;
 			this.produktGruppe = null;
-			this.navn = "sletforhelvede";
 			pg.removeProdukt(this);
 		}
 	}

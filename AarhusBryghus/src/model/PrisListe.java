@@ -16,6 +16,11 @@ public class PrisListe implements Serializable {
 		return navn;
 	}
 
+	/**
+	 * Tilføjer en pris på et produkt til prislisten.
+	 * 
+	 * @param pris - Prisen der skal tilføjes til priser i prislisten.
+	 */
 	public void addPris(Pris pris) {
 		if (!priser.contains(pris)) {
 			priser.add(pris);
@@ -23,6 +28,10 @@ public class PrisListe implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param pris - Prisen som ønskes slettet fra prislisten.
+	 */
 	public void removePris(Pris pris) {
 		if (priser.contains(pris)) {
 			priser.remove(pris);

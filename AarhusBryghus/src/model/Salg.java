@@ -18,6 +18,11 @@ public class Salg implements Serializable {
 		this.dato = dato;
 	}
 
+	/**
+	 * Pre: salgslinjer != null
+	 * 
+	 * @return Retunerer samlet pris for en salgslinje.
+	 */
 	public double beregnSamletListePris() {
 		double i = 0;
 		for (SalgsLinje s : salgsLinjer) {
@@ -27,11 +32,21 @@ public class Salg implements Serializable {
 		return i;
 	}
 
+	/**
+	 * Tilføjer salgslinje s1 til ArrayListen salgslinjer.
+	 * 
+	 * @param sl - Salgslinje
+	 */
 	public void addSalgsLinje(SalgsLinje sl) {
 		if (!salgsLinjer.contains(sl))
 			salgsLinjer.add(sl);
 	}
 
+	/**
+	 * Fjerner salgslinje s1 til ArrayListen salgslinjer.
+	 * 
+	 * @param sl - Salgslinje
+	 */
 	public void removeSalgsLinje(SalgsLinje sl) {
 		if (salgsLinjer.contains(sl)) {
 			salgsLinjer.remove(sl);

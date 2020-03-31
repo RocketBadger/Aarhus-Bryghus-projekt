@@ -150,7 +150,7 @@ public class SalgPane extends GridPane {
 			s.addSalgsLinje(sl);
 		}
 		if (!s.getSalgsLinjer().isEmpty()) {
-			btnCreateSalg.setDisable(false);
+			btnCreateSalg.setDisable(true);
 		}
 		this.updateInfo();
 	}
