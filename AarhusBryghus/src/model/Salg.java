@@ -21,7 +21,7 @@ public class Salg implements Serializable {
 	/**
 	 * Pre: salgslinjer != null
 	 * 
-	 * @return Retunerer samlet pris for en salgslinje.
+	 * @return Returnerer samlet pris for en salgslinje.
 	 */
 	public double beregnSamletListePris() {
 		double i = 0;
@@ -43,7 +43,7 @@ public class Salg implements Serializable {
 	}
 
 	/**
-	 * Fjerner salgslinje s1 til ArrayListen salgslinjer.
+	 * Fjerner salgslinje s1 fra ArrayListen salgslinjer.
 	 * 
 	 * @param sl - Salgslinje
 	 */

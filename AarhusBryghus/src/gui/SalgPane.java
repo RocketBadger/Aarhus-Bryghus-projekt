@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -119,12 +122,21 @@ public class SalgPane extends GridPane {
 		btnCreateSalg.setStyle("-fx-font-weight: bold;");
 		btnCreateSalg.setOnAction(event -> actionFinishSalg());
 
+		btnDeleteSL.setDisable(true);
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
 	}
 
 	private void actionDeleteSL() {
-		s.removeSalgsLinje(linjeView.getSelectionModel().getSelectedItem());
-		this.updateInfo();
+		Alert conf = new Alert(
+				AlertType.CONFIRMATION, "Er du sikker på at du gerne vil fjerne "
+						+ linjeView.getSelectionModel().getSelectedItem() + " fra kurven?",
+				ButtonType.YES, ButtonType.CANCEL);
+		conf.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.YES) {
+				s.removeSalgsLinje(linjeView.getSelectionModel().getSelectedItem());
+				this.updateInfo();
+			}
+		});
 	}
 
 	private void actionOpenCreateSalgslinjeDialog() {
@@ -150,13 +162,18 @@ public class SalgPane extends GridPane {
 			s.addSalgsLinje(sl);
 		}
 		if (!s.getSalgsLinjer().isEmpty()) {
-			btnCreateSalg.setDisable(true);
+			btnCreateSalg.setDisable(false);
+			btnDeleteSL.setDisable(false);
 		}
 		this.updateInfo();
 	}
 
 	private void updateInfo() {
 		linjeView.getItems().setAll(s.getSalgsLinjer());
+		if (s.getSalgsLinjer().isEmpty()) {
+			btnCreateSalg.setDisable(true);
+			btnDeleteSL.setDisable(true);
+		}
 		i = s.beregnSamletListePris();
 		txtTilBetaling.setText(i + kr);
 	}

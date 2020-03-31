@@ -2,7 +2,10 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
@@ -75,14 +78,26 @@ public class ProduktPane extends GridPane {
 	}
 
 	public void actionDeleteGruppe() {
-		controller.deleteProduktGruppe(produktGruppeList.getSelectionModel().getSelectedItem());
-		this.updateGruppeList();
-		controller.saveStorage();
+		Alert conf = new Alert(AlertType.CONFIRMATION, "Slet " + produktGruppeList.getSelectionModel().getSelectedItem()
+				+ "? (Dette sletter også produktgruppens varer)", ButtonType.YES, ButtonType.CANCEL);
+		conf.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.YES) {
+				controller.deleteProduktGruppe(produktGruppeList.getSelectionModel().getSelectedItem());
+				this.updateGruppeList();
+				controller.saveStorage();
+			}
+		});
 	}
 
 	public void actionDeleteProdukt() {
-		controller.deleteProdukt(produktList.getSelectionModel().getSelectedItem());
-		this.updateProduktList();
-		controller.saveStorage();
+		Alert conf = new Alert(AlertType.CONFIRMATION,
+				"Slet " + produktList.getSelectionModel().getSelectedItem() + "?", ButtonType.YES, ButtonType.CANCEL);
+		conf.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.YES) {
+				controller.deleteProdukt(produktList.getSelectionModel().getSelectedItem());
+				this.updateProduktList();
+				controller.saveStorage();
+			}
+		});
 	}
 }

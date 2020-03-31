@@ -2,7 +2,10 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
@@ -76,14 +79,27 @@ public class PrisListePane extends GridPane {
 	}
 
 	public void actionDeletePrisliste() {
-		controller.deletePrisListe(plView.getSelectionModel().getSelectedItem());
-		this.updatePlView();
-		controller.saveStorage();
+		Alert conf = new Alert(AlertType.CONFIRMATION,
+				"Slet " + plView.getSelectionModel().getSelectedItem() + "? (Dette sletter også prislistens priser",
+				ButtonType.YES, ButtonType.CANCEL);
+		conf.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.YES) {
+				controller.deletePrisListe(plView.getSelectionModel().getSelectedItem());
+				this.updatePlView();
+				controller.saveStorage();
+			}
+		});
 	}
 
 	public void actionDeletePris() {
-		controller.deletePris(prisView.getSelectionModel().getSelectedItem());
-		this.updatePrisView();
-		controller.saveStorage();
+		Alert conf = new Alert(AlertType.CONFIRMATION, "Slet " + plView.getSelectionModel().getSelectedItem() + "?",
+				ButtonType.YES, ButtonType.CANCEL);
+		conf.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.YES) {
+				controller.deletePris(prisView.getSelectionModel().getSelectedItem());
+				this.updatePrisView();
+				controller.saveStorage();
+			}
+		});
 	}
 }
