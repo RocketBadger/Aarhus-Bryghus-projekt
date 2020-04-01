@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import controller.Controller;
 import javafx.application.Application;
