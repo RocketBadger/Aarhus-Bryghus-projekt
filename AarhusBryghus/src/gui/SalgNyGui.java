@@ -53,14 +53,13 @@ public class SalgNyGui extends GridPane {
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
-		
 
 		rbKontant.setUserData(BetalingsFormer.KONTANT);
 		rbDan.setUserData(BetalingsFormer.DANKORT);
 		rbRegning.setUserData(BetalingsFormer.REGNING);
 		rbMobile.setUserData(BetalingsFormer.MOBILEPAY);
 		rbKlip.setUserData(BetalingsFormer.KLIPPEKORT);
-		
+
 		lblBetalingsform.setId("text");
 		lblDato.setId("text");
 		lblVarer.setId("text");
@@ -118,28 +117,25 @@ public class SalgNyGui extends GridPane {
 		btmRightPane.setPadding(new Insets(5));
 		btmRightPane.add(btnCreateSalg, 0, 0);
 //		btmRightPane.setStyle("-fx-border-color: grey;");
-		
+
 		GridPane backPane = new GridPane();
 		backPane.setVgap(10);
 		backPane.setPadding(new Insets(5));
 		Button back = new Button("BACK");
 		backPane.add(back, 0, 0);
-		
+
 		back.setOnAction(e -> stage.setScene(scene));
 
 		RowConstraints row1 = new RowConstraints();
 		row1.setValignment(VPos.TOP);
 		getRowConstraints().add(row1);
-		
 
 		this.add(leftPane, 0, 0);
 		this.add(rightPane, 1, 0);
 		this.add(btmLeftPane, 0, 1);
 		this.add(btmRightPane, 1, 1);
 		this.add(backPane, 0, 2);
-		
-		
-		
+
 		btnAddSL.setId("secButton");
 		btnCreateSalg.setId("secButton");
 		btnDeleteSL.setId("secButton");
@@ -152,11 +148,16 @@ public class SalgNyGui extends GridPane {
 		btnCreateSalg.setOnAction(event -> actionFinishSalg());
 
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
+		btnDeleteSL.setDisable(true);
 	}
 
 	private void actionDeleteSL() {
 		s.removeSalgsLinje(linjeView.getSelectionModel().getSelectedItem());
 		this.updateInfo();
+		if (s.getSalgsLinjer().isEmpty()) {
+			btnCreateSalg.setDisable(true);
+			btnDeleteSL.setDisable(true);
+		}
 	}
 
 	private void actionOpenCreateSalgslinjeDialog() {
@@ -182,7 +183,8 @@ public class SalgNyGui extends GridPane {
 			s.addSalgsLinje(sl);
 		}
 		if (!s.getSalgsLinjer().isEmpty()) {
-			btnCreateSalg.setDisable(true);
+			btnCreateSalg.setDisable(false);
+			btnDeleteSL.setDisable(false);
 		}
 		this.updateInfo();
 	}
@@ -199,5 +201,7 @@ public class SalgNyGui extends GridPane {
 		s = null;
 		i = 0;
 		txtTilBetaling.setText(i + kr);
+		btnCreateSalg.setDisable(true);
+		btnDeleteSL.setDisable(true);
 	}
 }
