@@ -5,10 +5,54 @@
     	-fx-background-position: center;
 }
 
+#salgGui {
+	-fx-background-image: url("background2.jpg");
+    	-fx-background-repeat: stretch;   
+    	-fx-background-size: 625 500;
+    	-fx-background-position: center;
+}
+
+#produktGui {
+	-fx-background-image: url("background1.jpg");
+	-fx-background-repeat: stretch;  
+    	-fx-background-size: 625 500;
+    	-fx-background-position: center;
+}
+
+#prisGui {
+	-fx-background-image: url("bgDark.jpg");
+	-fx-background-repeat: stretch;  
+    	-fx-background-size: 625 500;
+    	-fx-background-position: center;
+}
+
 #button {
-	-fx-background-color: white;
 	-fx-font-size: 1.75em;
 	-fx-pref-height: 75;
 	-fx-pref-width: 400;
-	-fx-font-family: "verdana"
+	-fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    	-fx-background-radius: 30;
+    	-fx-background-insets: 0,1,1;
+    	-fx-text-fill: black;
+    	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
+
+#secButton {
+	-fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    	-fx-background-radius: 30;
+    	-fx-background-insets: 0,1,1;
+    	-fx-text-fill: black;
+    	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+#text {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
+

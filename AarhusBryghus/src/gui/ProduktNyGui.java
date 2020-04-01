@@ -28,10 +28,14 @@ public class ProduktNyGui extends GridPane {
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		this.add(new Label("Produktgrupper"), 0, 0);
+		Label lblProduktGrupper = new Label("Produktgrupper");
+		lblProduktGrupper.setId("text");
+		this.add(lblProduktGrupper, 0, 0);
 		this.add(produktGruppeList, 0, 1);
 
-		this.add(new Label("Produkter"), 1, 0);
+		Label lblProdukter = new Label("Produkter");
+		lblProdukter.setId("text");
+		this.add(lblProdukter, 1, 0);
 		this.add(produktList, 1, 1);
 
 		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
@@ -39,11 +43,19 @@ public class ProduktNyGui extends GridPane {
 		produktGruppeList.getSelectionModel().selectedIndexProperty().addListener(observable -> updateProduktList());
 		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
 
+		
 		this.add(btnGruppe, 0, 2);
 		this.add(btnProdukt, 1, 2);
 		this.add(btnDeleteGruppe, 0, 3);
 		this.add(btnDeleteProdukt, 1, 3);
+		
 		Button back = new Button("BACK");
+		btnGruppe.setId("secButton");
+		btnProdukt.setId("secButton");
+		btnDeleteProdukt.setId("secButton");
+		btnDeleteGruppe.setId("secButton");
+		back.setId("secButton");
+		
 		back.setOnAction(e -> stage.setScene(scene));
 		this.add(back, 0, 4);
 

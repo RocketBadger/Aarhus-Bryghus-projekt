@@ -40,6 +40,7 @@ public class SalgNyGui extends GridPane {
 	private Label lblBetalingsform = new Label("Angiv betalingsform");
 	private Label lblDato = new Label("Angiv dato");
 	private Label lblVarer = new Label("Varer i kurven");
+	private Label lblTilBetaling = new Label("Til betaling: ");
 
 	private ArrayList<SalgsLinje> salgsLinjer = new ArrayList<>();
 	private Salg s = null;
@@ -52,12 +53,23 @@ public class SalgNyGui extends GridPane {
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
+		
 
 		rbKontant.setUserData(BetalingsFormer.KONTANT);
 		rbDan.setUserData(BetalingsFormer.DANKORT);
 		rbRegning.setUserData(BetalingsFormer.REGNING);
 		rbMobile.setUserData(BetalingsFormer.MOBILEPAY);
 		rbKlip.setUserData(BetalingsFormer.KLIPPEKORT);
+		
+		lblBetalingsform.setId("text");
+		lblDato.setId("text");
+		lblVarer.setId("text");
+		rbKontant.setId("text");
+		rbDan.setId("text");
+		rbRegning.setId("text");
+		rbMobile.setId("text");
+		rbKlip.setId("text");
+		lblTilBetaling.setId("text");
 
 		toggles.getToggles().addAll(rbKontant, rbDan, rbRegning, rbMobile, rbKlip);
 
@@ -82,7 +94,7 @@ public class SalgNyGui extends GridPane {
 		leftPane.add(rbKlip, 0, 5);
 		leftPane.add(lblDato, 0, 7);
 		leftPane.add(salgsDato, 0, 8);
-		leftPane.add(new Label("Til betaling:"), 0, 11);
+		leftPane.add(lblTilBetaling, 0, 11);
 		leftPane.add(txtTilBetaling, 0, 12);
 //		leftPane.setStyle("-fx-border-color: grey;");
 
@@ -106,18 +118,32 @@ public class SalgNyGui extends GridPane {
 		btmRightPane.setPadding(new Insets(5));
 		btmRightPane.add(btnCreateSalg, 0, 0);
 //		btmRightPane.setStyle("-fx-border-color: grey;");
+		
+		GridPane backPane = new GridPane();
+		backPane.setVgap(10);
+		backPane.setPadding(new Insets(5));
+		Button back = new Button("BACK");
+		backPane.add(back, 0, 0);
+		
+		back.setOnAction(e -> stage.setScene(scene));
 
 		RowConstraints row1 = new RowConstraints();
 		row1.setValignment(VPos.TOP);
 		getRowConstraints().add(row1);
+		
 
 		this.add(leftPane, 0, 0);
 		this.add(rightPane, 1, 0);
 		this.add(btmLeftPane, 0, 1);
 		this.add(btmRightPane, 1, 1);
-		Button back = new Button("BACK");
-		back.setOnAction(e -> stage.setScene(scene));
-		this.add(back, 0, 2);
+		this.add(backPane, 0, 2);
+		
+		
+		
+		btnAddSL.setId("secButton");
+		btnCreateSalg.setId("secButton");
+		btnDeleteSL.setId("secButton");
+		back.setId("secButton");
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 

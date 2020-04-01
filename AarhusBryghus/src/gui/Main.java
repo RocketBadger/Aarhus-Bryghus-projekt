@@ -10,13 +10,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -61,10 +59,10 @@ public class Main extends Application{
 		vbx.setPadding(new Insets(20, 0, 20, 0));
 		vbx.setSpacing(30);
 		
-		Image headerLogo = new Image(new FileInputStream("src/gui/ABLOGO1.png"));
+		Image headerLogo = new Image(new FileInputStream("src/gui/ABLOGO.png"));
 		ImageView imgView = new ImageView(headerLogo);
 		imgView.setFitHeight(150);
-		imgView.setFitWidth(300);
+		imgView.setFitWidth(320);
 		
 		Button btn1 = new Button("Udfør Salg");
 		btn1.setId("button");
@@ -89,7 +87,9 @@ public class Main extends Application{
 		GridPane pane = new GridPane();
 		pane.add(salg, 0, 0);
 		
-		salgScene = new Scene(pane, 600, 500);
+		salgScene = new Scene(pane, 625, 500);
+		pane.setId("salgGui");
+		salgScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		window.setScene(salgScene);
 	}
 	
@@ -100,15 +100,21 @@ public class Main extends Application{
 		pane.add(produkt, 0, 0);
 		
 		produktScene = new Scene(pane, 600, 500);
+		pane.setId("produktGui");
+		produktScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		window.setScene(produktScene);
 		
 	}
 	
 	public void prisGui() {
+		PrisNyGui pris = new PrisNyGui(window, scene);
+		
 		GridPane pane = new GridPane();
-		prisScene = new Scene(pane, 600, 500);
-		Button back = new Button("Back");
-		back.setOnAction(e -> window.setScene(scene));
+		pane.add(pris, 0, 0);
+		
+		prisScene = new Scene(pane, 625, 500);
+		pane.setId("prisGui");
+		prisScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		window.setScene(prisScene);
 		
 	}
