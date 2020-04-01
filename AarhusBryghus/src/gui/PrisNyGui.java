@@ -38,11 +38,21 @@ public class PrisNyGui extends GridPane {
 		this.add(lblProdukterPriser, 1, 0);
 		this.add(prisView, 1, 1);
 
-		this.add(btnCreatePrisListe, 0, 2);
-		this.add(btnCreatePris, 1, 2);
-		this.add(btnDeletePrisliste, 0, 3);
-		this.add(btnDeletePris, 1, 3);
-		
+		GridPane leftPane = new GridPane();
+		leftPane.setHgap(65);
+		leftPane.add(btnCreatePrisListe, 0, 0);
+		leftPane.add(btnDeletePrisliste, 1, 0);
+		btnDeletePrisliste.setStyle("-fx-background-color: crimson");
+
+		GridPane rightPane = new GridPane();
+		rightPane.setHgap(105);
+		rightPane.add(btnCreatePris, 0, 0);
+		rightPane.add(btnDeletePris, 1, 0);
+		btnDeletePris.setStyle("-fx-background-color: crimson");
+
+		this.add(leftPane, 0, 2);
+		this.add(rightPane, 1, 2);
+
 		Button back = new Button("BACK");
 		btnCreatePris.setId("secButton");
 		btnCreatePrisListe.setId("secButton");
@@ -97,8 +107,10 @@ public class PrisNyGui extends GridPane {
 	}
 
 	public void actionDeletePris() {
-		controller.deletePris(prisView.getSelectionModel().getSelectedItem());
-		this.updatePrisView();
-		controller.saveStorage();
+		if (prisView.getSelectionModel().getSelectedItem() != null) {
+			controller.deletePris(prisView.getSelectionModel().getSelectedItem());
+			this.updatePrisView();
+			controller.saveStorage();
+		}
 	}
 }

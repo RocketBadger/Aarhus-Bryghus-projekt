@@ -44,10 +44,20 @@ public class ProduktNyGui extends GridPane {
 		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
 
 		
-		this.add(btnGruppe, 0, 2);
-		this.add(btnProdukt, 1, 2);
-		this.add(btnDeleteGruppe, 0, 3);
-		this.add(btnDeleteProdukt, 1, 3);
+		GridPane leftPane = new GridPane();
+		leftPane.setHgap(10);
+		leftPane.add(btnGruppe, 0, 0);
+		leftPane.add(btnDeleteGruppe, 1, 0);
+		btnDeleteGruppe.setStyle("-fx-background-color: crimson");
+
+		GridPane rightPane = new GridPane();
+		rightPane.setHgap(55);
+		rightPane.add(btnProdukt, 0, 0);
+		rightPane.add(btnDeleteProdukt, 1, 0);
+		btnDeleteProdukt.setStyle("-fx-background-color: crimson");
+
+		this.add(leftPane, 0, 2);
+		this.add(rightPane, 1, 2);
 		
 		Button back = new Button("BACK");
 		btnGruppe.setId("secButton");

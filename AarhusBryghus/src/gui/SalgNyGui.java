@@ -191,17 +191,19 @@ public class SalgNyGui extends GridPane {
 
 	private void updateInfo() {
 		linjeView.getItems().setAll(s.getSalgsLinjer());
+		if (s.getSalgsLinjer().isEmpty()) {
+			btnCreateSalg.setDisable(true);
+			btnDeleteSL.setDisable(true);
+		}
 		i = s.beregnSamletListePris();
 		txtTilBetaling.setText(i + kr);
 	}
 
 	private void actionFinishSalg() {
 		controller.storeSalg(s);
+		controller.saveStorage();
 		linjeView.getItems().clear();
 		s = null;
 		i = 0;
-		txtTilBetaling.setText(i + kr);
-		btnCreateSalg.setDisable(true);
-		btnDeleteSL.setDisable(true);
 	}
 }
