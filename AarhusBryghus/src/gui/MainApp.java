@@ -26,7 +26,7 @@ public class MainApp extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) throws FileNotFoundException {
+	public void start(Stage stage){
 		stage.setTitle("Aarhus Bryghus Kasseapparat");
 		BorderPane pane = new BorderPane();
 		this.initContent(pane);
@@ -38,7 +38,7 @@ public class MainApp extends Application {
 		stage.show();
 	}
 
-	private void initContent(BorderPane pane)  throws FileNotFoundException{
+	private void initContent(BorderPane pane){
 		File saveFile = new File("src/storage.ser");
 		if (saveFile.exists()) {
 			controller.loadStorage();
