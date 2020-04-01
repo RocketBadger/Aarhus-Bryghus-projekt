@@ -40,6 +40,7 @@ public class CreateProduktGruppeDialog extends Stage {
 		pane.setGridLinesVisible(false);
 
 		pane.add(lblNavn, 0, 0);
+		lblNavn.setStyle("-fx-font-weight: bold");
 		pane.add(txtNavn, 0, 1);
 
 //		pane.add(btnNvm, 0, 2);

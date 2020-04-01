@@ -46,7 +46,7 @@ public class MainApp extends Application {
 		TabPane tabPane = new TabPane();
 		this.initTabPane(tabPane);
 		pane.setCenter(tabPane);
-		
+		pane.setStyle("-fx-background-color: linear-gradient(to bottom, white, #fafad2 25%, #ffd700 100%)");
 	}
 
 	private void initTabPane(TabPane tabPane) {

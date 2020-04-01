@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -38,6 +41,7 @@ public class SalgPane extends GridPane {
 	private Label lblBetalingsform = new Label("Angiv betalingsform");
 	private Label lblDato = new Label("Angiv dato");
 	private Label lblVarer = new Label("Varer i kurven");
+	private Label lblPris = new Label("Til betaling");
 
 	private ArrayList<SalgsLinje> salgsLinjer = new ArrayList<>();
 	private Salg s = null;
@@ -68,6 +72,11 @@ public class SalgPane extends GridPane {
 		txtTilBetaling.setEditable(false);
 		txtTilBetaling.setText(i + kr);
 
+		lblBetalingsform.setStyle("-fx-font-weight: bold");
+		lblDato.setStyle("-fx-font-weight: bold");
+		lblVarer.setStyle("-fx-font-weight: bold");
+		lblPris.setStyle("-fx-font-weight: bold");
+
 		GridPane leftPane = new GridPane();
 		leftPane.setVgap(10);
 		leftPane.setPadding(new Insets(5));
@@ -80,7 +89,7 @@ public class SalgPane extends GridPane {
 		leftPane.add(rbKlip, 0, 5);
 		leftPane.add(lblDato, 0, 7);
 		leftPane.add(salgsDato, 0, 8);
-		leftPane.add(new Label("Til betaling:"), 0, 11);
+		leftPane.add(lblPris, 0, 11);
 		leftPane.add(txtTilBetaling, 0, 12);
 //		leftPane.setStyle("-fx-border-color: grey;");
 
@@ -120,12 +129,21 @@ public class SalgPane extends GridPane {
 		btnCreateSalg.setStyle("-fx-font-weight: bold;");
 		btnCreateSalg.setOnAction(event -> actionFinishSalg());
 
+		btnDeleteSL.setDisable(true);
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
 	}
 
 	private void actionDeleteSL() {
-		s.removeSalgsLinje(linjeView.getSelectionModel().getSelectedItem());
-		this.updateInfo();
+		Alert conf = new Alert(
+				AlertType.CONFIRMATION, "Er du sikker på at du gerne vil fjerne "
+						+ linjeView.getSelectionModel().getSelectedItem() + " fra kurven?",
+				ButtonType.YES, ButtonType.CANCEL);
+		conf.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.YES) {
+				s.removeSalgsLinje(linjeView.getSelectionModel().getSelectedItem());
+				this.updateInfo();
+			}
+		});
 	}
 
 	private void actionOpenCreateSalgslinjeDialog() {
@@ -151,13 +169,18 @@ public class SalgPane extends GridPane {
 			s.addSalgsLinje(sl);
 		}
 		if (!s.getSalgsLinjer().isEmpty()) {
-			btnCreateSalg.setDisable(true);
+			btnCreateSalg.setDisable(false);
+			btnDeleteSL.setDisable(false);
 		}
 		this.updateInfo();
 	}
 
 	private void updateInfo() {
 		linjeView.getItems().setAll(s.getSalgsLinjer());
+		if (s.getSalgsLinjer().isEmpty()) {
+			btnCreateSalg.setDisable(true);
+			btnDeleteSL.setDisable(true);
+		}
 		i = s.beregnSamletListePris();
 		txtTilBetaling.setText(i + kr);
 	}
@@ -168,5 +191,6 @@ public class SalgPane extends GridPane {
 		s = null;
 		i = 0;
 		txtTilBetaling.setText(i + kr);
+		controller.saveStorage();
 	}
 }

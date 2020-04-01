@@ -68,10 +68,13 @@ public class CreateSalgslinjeDialog extends Stage {
 		btnNoMore.setOnAction(event -> this.hide());
 
 		pane.add(lblLCombo, 0, 0);
+		lblLCombo.setStyle("-fx-font-weight: bold");
 		pane.add(comboPrisListe, 0, 1);
 		pane.add(lblPCombo, 0, 2);
+		lblPCombo.setStyle("-fx-font-weight: bold");
 		pane.add(comboPris, 0, 3);
 		pane.add(lblAntal, 0, 4);
+		lblAntal.setStyle("-fx-font-weight: bold");
 		pane.add(txtAntal, 0, 5);
 
 		pane.add(btnAnother, 0, 7);
