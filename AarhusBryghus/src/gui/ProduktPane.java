@@ -20,6 +20,8 @@ public class ProduktPane extends GridPane {
 	private Button btnProdukt = new Button("Opret nyt produkt");
 	private Button btnDeleteGruppe = new Button("Slet Produktgruppe");
 	private Button btnDeleteProdukt = new Button("Slet Produkt");
+	private Label lblGruppe = new Label("Produktgrupper");
+	private Label lblProdukt = new Label("Produkter");
 
 	public ProduktPane() {
 		controller = Controller.getController();
@@ -29,10 +31,12 @@ public class ProduktPane extends GridPane {
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		this.add(new Label("Produktgrupper"), 0, 0);
+		lblGruppe.setStyle("-fx-font-weight: bold");
+		this.add(lblGruppe, 0, 0);
 		this.add(produktGruppeList, 0, 1);
 
-		this.add(new Label("Produkter"), 1, 0);
+		lblProdukt.setStyle("-fx-font-weight: bold");
+		this.add(lblProdukt, 1, 0);
 		this.add(produktList, 1, 1);
 
 		produktGruppeList.getItems().setAll(controller.getAllProduktGrupper());
@@ -40,10 +44,20 @@ public class ProduktPane extends GridPane {
 		produktGruppeList.getSelectionModel().selectedIndexProperty().addListener(observable -> updateProduktList());
 		produktList.getItems().setAll(produktGruppeList.getSelectionModel().getSelectedItem().getProdukter());
 
-		this.add(btnGruppe, 0, 2);
-		this.add(btnProdukt, 1, 2);
-		this.add(btnDeleteGruppe, 0, 3);
-		this.add(btnDeleteProdukt, 1, 3);
+		GridPane leftPane = new GridPane();
+		leftPane.setHgap(10);
+		leftPane.add(btnGruppe, 0, 0);
+		leftPane.add(btnDeleteGruppe, 1, 0);
+		btnDeleteGruppe.setStyle("-fx-background-color: crimson");
+
+		GridPane rightPane = new GridPane();
+		rightPane.setHgap(55);
+		rightPane.add(btnProdukt, 0, 0);
+		rightPane.add(btnDeleteProdukt, 1, 0);
+		btnDeleteProdukt.setStyle("-fx-background-color: crimson");
+
+		this.add(leftPane, 0, 2);
+		this.add(rightPane, 1, 2);
 
 		btnGruppe.setOnAction(event -> actionOpenCreateGruppe());
 		btnProdukt.setOnAction(event -> actionOpenCreateProdukt());

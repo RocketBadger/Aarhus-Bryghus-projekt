@@ -39,6 +39,7 @@ public class CreatePrislisteDialog extends Stage {
 		pane.setGridLinesVisible(false);
 
 		pane.add(lblNvn, 0, 0);
+		lblNvn.setStyle("-fx-font-weight: bold");
 		pane.add(txtNvn, 0, 1);
 		pane.add(btnCreate, 0, 2);
 

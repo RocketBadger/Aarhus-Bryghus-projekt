@@ -46,13 +46,18 @@ public class CreatePrisDialog extends Stage {
 		pane.setGridLinesVisible(false);
 
 		pane.add(lblProdukt, 0, 0);
+		lblProdukt.setStyle("-fx-font-weight: bold");
 		comboProdukt.getItems().setAll(controller.getAllProdukter());
+		comboProdukt.getSelectionModel().selectFirst();
 		pane.add(comboProdukt, 0, 1);
 		pane.add(lblPrisliste, 0, 2);
+		lblPrisliste.setStyle("-fx-font-weight: bold");
 		comboPrisliste.getItems().setAll(controller.getAllPrisLister());
+		comboPrisliste.getSelectionModel().selectFirst();
 		pane.add(comboPrisliste, 0, 3);
 
 		pane.add(lblPris, 0, 4);
+		lblPris.setStyle("-fx-font-weight: bold");
 		pane.add(txtPris, 0, 5);
 
 		pane.add(btnCreate, 0, 6);

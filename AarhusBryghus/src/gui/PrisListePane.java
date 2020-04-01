@@ -20,6 +20,8 @@ public class PrisListePane extends GridPane {
 	private Button btnCreatePris = new Button("Opret ny pris");
 	private Button btnDeletePrisliste = new Button("Slet Prisliste");
 	private Button btnDeletePris = new Button("Slet pris");
+	private Label lblPrisLister = new Label("Prislister");
+	private Label lblPriser = new Label("Produkter og priser");
 
 	public PrisListePane() {
 		controller = Controller.getController();
@@ -29,16 +31,28 @@ public class PrisListePane extends GridPane {
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		this.add(new Label("Prislister"), 0, 0);
+		lblPrisLister.setStyle("-fx-font-weight: bold");
+		this.add(lblPrisLister, 0, 0);
 		this.add(plView, 0, 1);
 
-		this.add(new Label("Produkter og priser"), 1, 0);
+		lblPriser.setStyle("-fx-font-weight: bold");
+		this.add(lblPriser, 1, 0);
 		this.add(prisView, 1, 1);
 
-		this.add(btnCreatePrisListe, 0, 2);
-		this.add(btnCreatePris, 1, 2);
-		this.add(btnDeletePrisliste, 0, 3);
-		this.add(btnDeletePris, 1, 3);
+		GridPane leftPane = new GridPane();
+		leftPane.setHgap(65);
+		leftPane.add(btnCreatePrisListe, 0, 0);
+		leftPane.add(btnDeletePrisliste, 1, 0);
+		btnDeletePrisliste.setStyle("-fx-background-color: crimson");
+
+		GridPane rightPane = new GridPane();
+		rightPane.setHgap(105);
+		rightPane.add(btnCreatePris, 0, 0);
+		rightPane.add(btnDeletePris, 1, 0);
+		btnDeletePris.setStyle("-fx-background-color: crimson");
+
+		this.add(leftPane, 0, 2);
+		this.add(rightPane, 1, 2);
 
 		btnCreatePrisListe.setOnAction(event -> actionOpenCreatePrisliste());
 		btnCreatePris.setOnAction(event -> actionOpenCreatePris());
@@ -92,14 +106,16 @@ public class PrisListePane extends GridPane {
 	}
 
 	public void actionDeletePris() {
-		Alert conf = new Alert(AlertType.CONFIRMATION, "Slet " + plView.getSelectionModel().getSelectedItem() + "?",
-				ButtonType.YES, ButtonType.CANCEL);
-		conf.showAndWait().ifPresent(response -> {
-			if (response == ButtonType.YES) {
-				controller.deletePris(prisView.getSelectionModel().getSelectedItem());
-				this.updatePrisView();
-				controller.saveStorage();
-			}
-		});
+		if (prisView.getSelectionModel().getSelectedItem() != null) {
+			Alert conf = new Alert(AlertType.CONFIRMATION, "Slet " + plView.getSelectionModel().getSelectedItem() + "?",
+					ButtonType.YES, ButtonType.CANCEL);
+			conf.showAndWait().ifPresent(response -> {
+				if (response == ButtonType.YES) {
+					controller.deletePris(prisView.getSelectionModel().getSelectedItem());
+					this.updatePrisView();
+					controller.saveStorage();
+				}
+			});
+		}
 	}
 }

@@ -18,6 +18,7 @@ public class CreateProduktDialog extends Stage {
 	private Controller controller;
 	private TextField txtNavn = new TextField();
 	private Label lblNavn = new Label("Indtast produktnavn:");
+	private Label lblPg = new Label("Vælg produktgruppe:");
 	private ComboBox<ProduktGruppe> produktGruppeCombo = new ComboBox<>();
 	private Button btnCreate = new Button("Opret Produkt");
 
@@ -42,8 +43,10 @@ public class CreateProduktDialog extends Stage {
 		pane.setGridLinesVisible(false);
 
 		pane.add(lblNavn, 0, 0);
+		lblNavn.setStyle("-fx-font-weight: bold");
 		pane.add(txtNavn, 0, 1);
-		pane.add(new Label("Vælg produktgruppe:"), 0, 2);
+		pane.add(lblPg, 0, 2);
+		lblPg.setStyle("-fx-font-weight: bold");
 		pane.add(produktGruppeCombo, 0, 3);
 		pane.add(btnCreate, 0, 4);
 

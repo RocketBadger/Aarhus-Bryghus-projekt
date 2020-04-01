@@ -1,6 +1,9 @@
 package model;
 
-public class SalgsLinje {
+import java.io.Serializable;
+
+public class SalgsLinje implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int antal;
 	private Pris pris;
 
