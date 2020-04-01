@@ -52,10 +52,15 @@ public class SalgPane extends GridPane {
 		this.setGridLinesVisible(false);
 
 		rbKontant.setUserData(BetalingsFormer.KONTANT);
+		rbKontant.setTextFill(Color.WHITE);
 		rbDan.setUserData(BetalingsFormer.DANKORT);
+		rbDan.setTextFill(Color.WHITE);
 		rbRegning.setUserData(BetalingsFormer.REGNING);
+		rbRegning.setTextFill(Color.WHITE);
 		rbMobile.setUserData(BetalingsFormer.MOBILEPAY);
+		rbMobile.setTextFill(Color.WHITE);
 		rbKlip.setUserData(BetalingsFormer.KLIPPEKORT);
+
 		toggles.getToggles().addAll(rbKontant, rbDan, rbRegning, rbMobile, rbKlip);
 
 		salgsDato.setValue(LocalDate.now());

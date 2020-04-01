@@ -1,16 +1,18 @@
 package gui;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -27,19 +29,21 @@ public class MainApp extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) throws FileNotFoundException {
 		stage.setTitle("Aarhus Bryghus Kasseapparat");
 		BorderPane pane = new BorderPane();
+		pane.setId("pane");
 		this.initContent(pane);
 
 		Scene scene = new Scene(pane);
+		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setHeight(500);
 		stage.setWidth(600);
 		stage.show();
 	}
 
-	private void initContent(BorderPane pane) {
+	private void initContent(BorderPane pane)  throws FileNotFoundException{
 		File saveFile = new File("src/storage.ser");
 		if (saveFile.exists()) {
 			controller.loadStorage();
@@ -47,6 +51,7 @@ public class MainApp extends Application {
 		TabPane tabPane = new TabPane();
 		this.initTabPane(tabPane);
 		pane.setCenter(tabPane);
+		
 	}
 
 	private void initTabPane(TabPane tabPane) {
