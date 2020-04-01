@@ -203,7 +203,10 @@ public class SalgNyGui extends GridPane {
 		controller.storeSalg(s);
 		controller.saveStorage();
 		linjeView.getItems().clear();
+		btnCreateSalg.setDisable(true);
+		btnDeleteSL.setDisable(true);
 		s = null;
 		i = 0;
+		txtTilBetaling.setText(i + kr);
 	}
 }
