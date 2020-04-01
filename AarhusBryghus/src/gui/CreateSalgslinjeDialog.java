@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -82,10 +83,13 @@ public class CreateSalgslinjeDialog extends Stage {
 	}
 
 	private void actionCreateSalgsLinje() {
-		SalgsLinje sl = controller.createSalgsLinje(Integer.parseInt(txtAntal.getText()),
-				comboPris.getSelectionModel().getSelectedItem());
-		linjer.add(sl);
-		txtAntal.clear();
+		if (!txtAntal.getText().isEmpty()) {
+			SalgsLinje sl = controller.createSalgsLinje(Integer.parseInt(txtAntal.getText()),
+					comboPris.getSelectionModel().getSelectedItem());
+			linjer.add(sl);
+			txtAntal.clear();
+		} else
+			lblAntal.setTextFill(Color.RED);
 	}
 
 	private void updateComboPris() {

@@ -24,7 +24,7 @@ public class PrisNyGui extends GridPane {
 		controller = Controller.getController();
 
 		this.setPadding(new Insets(20));
-		this.setHgap(20);
+		this.setHgap(50);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 

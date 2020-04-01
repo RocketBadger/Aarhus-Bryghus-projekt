@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import controller.Controller;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -13,7 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
@@ -41,11 +47,17 @@ public class SalgNyGui extends GridPane {
 	private Label lblDato = new Label("Angiv dato");
 	private Label lblVarer = new Label("Varer i kurven");
 	private Label lblTilBetaling = new Label("Til betaling: ");
+	private Label lblRabat = new Label("Rabat? (per styk. Vælg et produkt)");
+	private ToggleGroup toggleRabat = new ToggleGroup();
+	private RadioButton rbFlad = new RadioButton("Flad");
+	private RadioButton rbProcent = new RadioButton("Procent");
+	private TextField txtRabat = new TextField();
 
 	private ArrayList<SalgsLinje> salgsLinjer = new ArrayList<>();
 	private Salg s = null;
 	String kr = " kr";
 	double i = 0;
+	double givetRabat = 0;
 
 	public SalgNyGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
@@ -59,6 +71,8 @@ public class SalgNyGui extends GridPane {
 		rbRegning.setUserData(BetalingsFormer.REGNING);
 		rbMobile.setUserData(BetalingsFormer.MOBILEPAY);
 		rbKlip.setUserData(BetalingsFormer.KLIPPEKORT);
+		rbFlad.setUserData("flad");
+		rbProcent.setUserData("procent");
 
 		lblBetalingsform.setId("text");
 		lblDato.setId("text");
@@ -69,8 +83,12 @@ public class SalgNyGui extends GridPane {
 		rbMobile.setId("text");
 		rbKlip.setId("text");
 		lblTilBetaling.setId("text");
+		lblRabat.setId("text");
+		rbFlad.setId("text");
+		rbProcent.setId("text");
 
 		toggles.getToggles().addAll(rbKontant, rbDan, rbRegning, rbMobile, rbKlip);
+		toggleRabat.getToggles().addAll(rbFlad, rbProcent);
 
 		salgsDato.setValue(LocalDate.now());
 
@@ -80,6 +98,12 @@ public class SalgNyGui extends GridPane {
 
 		txtTilBetaling.setEditable(false);
 		txtTilBetaling.setText(i + kr);
+
+		txtRabat.setDisable(true);
+		txtRabat.setVisible(false);
+		rbFlad.setVisible(false);
+		rbProcent.setVisible(false);
+		lblRabat.setVisible(false);
 
 		GridPane leftPane = new GridPane();
 		leftPane.setVgap(10);
@@ -93,36 +117,37 @@ public class SalgNyGui extends GridPane {
 		leftPane.add(rbKlip, 0, 5);
 		leftPane.add(lblDato, 0, 7);
 		leftPane.add(salgsDato, 0, 8);
-		leftPane.add(lblTilBetaling, 0, 11);
-		leftPane.add(txtTilBetaling, 0, 12);
-//		leftPane.setStyle("-fx-border-color: grey;");
+		leftPane.add(lblTilBetaling, 0, 10);
+		leftPane.add(txtTilBetaling, 0, 11);
 
 		GridPane rightPane = new GridPane();
 		rightPane.setVgap(10);
 		rightPane.setPadding(new Insets(5));
 		rightPane.add(lblVarer, 1, 0);
 		rightPane.add(linjeView, 1, 1);
-//		rightPane.setStyle("-fx-border-color: grey;");
 
 		GridPane btmLeftPane = new GridPane();
 		btmLeftPane.setVgap(10);
-		btmLeftPane.setHgap(10);
+		btmLeftPane.setHgap(20);
 		btmLeftPane.setPadding(new Insets(5));
-		btmLeftPane.add(btnAddSL, 0, 0);
-		btmLeftPane.add(btnDeleteSL, 1, 0);
-//		btmLeftPane.setStyle("-fx-border-color: grey;");
+		btmLeftPane.add(lblRabat, 0, 0, 2, 1);
+		btmLeftPane.add(rbFlad, 0, 1);
+		btmLeftPane.add(rbProcent, 1, 1);
+		btmLeftPane.add(txtRabat, 0, 2, 2, 1);
 
 		GridPane btmRightPane = new GridPane();
 		btmRightPane.setVgap(10);
+		btmRightPane.setHgap(30);
 		btmRightPane.setPadding(new Insets(5));
-		btmRightPane.add(btnCreateSalg, 0, 0);
-//		btmRightPane.setStyle("-fx-border-color: grey;");
+		btmRightPane.add(btnAddSL, 0, 0);
+		btmRightPane.add(btnDeleteSL, 1, 0);
+		btmRightPane.add(btnCreateSalg, 0, 1, 2, 1);
 
 		GridPane backPane = new GridPane();
 		backPane.setVgap(10);
 		backPane.setPadding(new Insets(5));
 		Button back = new Button("BACK");
-		backPane.add(back, 0, 0);
+		backPane.add(back, 0, 1);
 
 		back.setOnAction(e -> stage.setScene(scene));
 
@@ -130,11 +155,11 @@ public class SalgNyGui extends GridPane {
 		row1.setValignment(VPos.TOP);
 		getRowConstraints().add(row1);
 
-		this.add(leftPane, 0, 0);
-		this.add(rightPane, 1, 0);
-		this.add(btmLeftPane, 0, 1);
-		this.add(btmRightPane, 1, 1);
-		this.add(backPane, 0, 2);
+		this.add(leftPane, 1, 0);
+		this.add(rightPane, 6, 0);
+		this.add(btmLeftPane, 1, 1);
+		this.add(btmRightPane, 6, 1);
+		this.add(backPane, 1, 2);
 
 		btnAddSL.setId("secButton");
 		btnCreateSalg.setId("secButton");
@@ -149,6 +174,44 @@ public class SalgNyGui extends GridPane {
 
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
 		btnDeleteSL.setDisable(true);
+
+		txtRabat.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent k) {
+				if (k.getCode().equals(KeyCode.ENTER)) {
+					actionAddRabat();
+				}
+			}
+		});
+
+		toggleRabat.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+				txtRabat.setVisible(true);
+				txtRabat.setDisable(false);
+			}
+		});
+	}
+
+//	TODO
+	private void actionAddRabat() {
+		int selected = 0;
+		if (linjeView.getSelectionModel().getSelectedItem() != null) {
+			selected = linjeView.getSelectionModel().getSelectedIndex();
+		}
+		linjeView.getSelectionModel().select(selected);
+		if (!txtRabat.getText().isEmpty()) {
+			if (toggleRabat.getSelectedToggle().getUserData().equals("flad")) {
+
+			}
+			if (toggleRabat.getSelectedToggle().getUserData().equals("procent")) {
+
+			}
+			updateInfo();
+		} else {
+			txtRabat.setStyle("-fx-text-fill: red");
+			txtRabat.setText("Indtast et tal og tryk ENTER");
+		}
 	}
 
 	private void actionDeleteSL() {
@@ -157,6 +220,9 @@ public class SalgNyGui extends GridPane {
 		if (s.getSalgsLinjer().isEmpty()) {
 			btnCreateSalg.setDisable(true);
 			btnDeleteSL.setDisable(true);
+			rbFlad.setVisible(false);
+			rbProcent.setVisible(false);
+			lblRabat.setVisible(false);
 		}
 	}
 
@@ -183,8 +249,12 @@ public class SalgNyGui extends GridPane {
 			s.addSalgsLinje(sl);
 		}
 		if (!s.getSalgsLinjer().isEmpty()) {
+			linjeView.getSelectionModel().selectFirst();
 			btnCreateSalg.setDisable(false);
 			btnDeleteSL.setDisable(false);
+			rbFlad.setVisible(true);
+			rbProcent.setVisible(true);
+			lblRabat.setVisible(true);
 		}
 		this.updateInfo();
 	}
@@ -194,6 +264,11 @@ public class SalgNyGui extends GridPane {
 		if (s.getSalgsLinjer().isEmpty()) {
 			btnCreateSalg.setDisable(true);
 			btnDeleteSL.setDisable(true);
+			rbFlad.setVisible(false);
+			rbProcent.setVisible(false);
+			lblRabat.setVisible(false);
+			txtRabat.clear();
+			txtRabat.setVisible(false);
 		}
 		i = s.beregnSamletListePris();
 		txtTilBetaling.setText(i + kr);
@@ -205,6 +280,11 @@ public class SalgNyGui extends GridPane {
 		linjeView.getItems().clear();
 		btnCreateSalg.setDisable(true);
 		btnDeleteSL.setDisable(true);
+		rbFlad.setVisible(false);
+		rbProcent.setVisible(false);
+		lblRabat.setVisible(false);
+		txtRabat.clear();
+		txtRabat.setVisible(false);
 		s = null;
 		i = 0;
 		txtTilBetaling.setText(i + kr);
