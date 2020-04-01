@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.BetalingsFormer;
 import model.Salg;
 import model.SalgsLinje;
@@ -44,7 +46,7 @@ public class SalgNyGui extends GridPane {
 	String kr = " kr";
 	double i = 0;
 
-	public SalgNyGui() {
+	public SalgNyGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
 		this.setPadding(new Insets(20));
 		this.setHgap(20);
@@ -113,6 +115,9 @@ public class SalgNyGui extends GridPane {
 		this.add(rightPane, 1, 0);
 		this.add(btmLeftPane, 0, 1);
 		this.add(btmRightPane, 1, 1);
+		Button back = new Button("BACK");
+		back.setOnAction(e -> stage.setScene(scene));
+		this.add(back, 0, 2);
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 

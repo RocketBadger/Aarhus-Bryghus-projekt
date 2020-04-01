@@ -4,3 +4,11 @@
     	-fx-background-size: 600 500;
     	-fx-background-position: center;
 }
+
+#button {
+	-fx-background-color: white;
+	-fx-font-size: 1.75em;
+	-fx-pref-height: 75;
+	-fx-pref-width: 400;
+	-fx-font-family: "verdana"
+}
