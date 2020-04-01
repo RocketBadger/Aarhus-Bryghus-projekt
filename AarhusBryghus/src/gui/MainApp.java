@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import controller.Controller;
@@ -10,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -32,11 +29,9 @@ public class MainApp extends Application {
 	public void start(Stage stage) throws FileNotFoundException {
 		stage.setTitle("Aarhus Bryghus Kasseapparat");
 		BorderPane pane = new BorderPane();
-		pane.setId("pane");
 		this.initContent(pane);
 
 		Scene scene = new Scene(pane);
-		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setHeight(500);
 		stage.setWidth(600);

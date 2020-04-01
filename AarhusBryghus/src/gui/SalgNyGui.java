@@ -20,7 +20,7 @@ import model.BetalingsFormer;
 import model.Salg;
 import model.SalgsLinje;
 
-public class SalgPane extends GridPane {
+public class SalgNyGui extends GridPane {
 	private Controller controller;
 
 	private ListView<SalgsLinje> linjeView = new ListView<>();
@@ -44,7 +44,7 @@ public class SalgPane extends GridPane {
 	String kr = " kr";
 	double i = 0;
 
-	public SalgPane() {
+	public SalgNyGui() {
 		controller = Controller.getController();
 		this.setPadding(new Insets(20));
 		this.setHgap(20);

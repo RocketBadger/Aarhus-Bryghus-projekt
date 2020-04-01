@@ -18,7 +18,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	Stage window;
-	Scene scene1;
+	Scene scene;
+	Scene salgScene;
+	Scene produktScene;
+	Scene prisScene;
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -30,7 +33,7 @@ public class Main extends Application{
 		BorderPane pane = new BorderPane();
 		this.initContent(pane);
 		
-		Scene scene = new Scene(pane, 600, 500);
+		scene = new Scene(pane, 600, 500);
 		pane.setId("pane");
 		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		stage.setScene(scene);
@@ -45,12 +48,15 @@ public class Main extends Application{
 		
 		Image headerLogo = new Image(new FileInputStream("src/gui/ABLOGO1.png"));
 		ImageView imgView = new ImageView(headerLogo);
-		imgView.setFitHeight(100);
-		imgView.setFitWidth(215);
+		imgView.setFitHeight(150);
+		imgView.setFitWidth(300);
 		
 		Button btn1 = new Button("Udfør Salg");
 		Button btn2 = new Button("Produkter og produktgrupper");
 		Button btn3 = new Button("Prislister og priser");
+		btn1.setStyle("-fx-background-color: white");
+		btn2.setStyle("-fx-background-color: white");
+		btn3.setStyle("-fx-background-color: white");
 		btn1.setPrefSize(300, 50);
 		btn2.setPrefSize(300, 50);
 		btn3.setPrefSize(300, 50);
@@ -59,14 +65,42 @@ public class Main extends Application{
 		vbx.setAlignment(Pos.TOP_CENTER);
 		pane.setCenter(vbx);
 		
-		btn1.setOnAction(e -> produktgui());
+		btn1.setOnAction(e -> salgGui());
+		btn2.setOnAction(e -> produktGui());
+		btn3.setOnAction(e -> prisGui());
 		
 	}
 	
-	public void produktgui() {
+	public void salgGui() {
+		SalgNyGui salg = new SalgNyGui();
 		GridPane pane = new GridPane();
-		scene1 = new Scene(pane, 600, 500);
-		pane.add(new Label("Dette er en ny scene"), 0, 0);
-		window.setScene(scene1);
+		pane.add(salg, 0, 0);
+		salgScene = new Scene(pane, 600, 500);
+
+		window.setScene(salgScene);
 	}
+	
+	public void produktGui() {
+		GridPane pane = new GridPane();
+		produktScene = new Scene(pane, 600, 500);
+		pane.add(new Label("Dette er en ny produkt scene"), 0, 0);
+		Button back = new Button("Back");
+		back.setOnAction(e -> window.setScene(scene));
+		pane.add(back, 0, 1);
+		window.setScene(produktScene);
+		
+	}
+	
+	public void prisGui() {
+		GridPane pane = new GridPane();
+		prisScene = new Scene(pane, 600, 500);
+		pane.add(new Label("Dette er en ny pris scene"), 0, 0);
+		Button back = new Button("Back");
+		back.setOnAction(e -> window.setScene(scene));
+		pane.add(back, 0, 1);
+		window.setScene(prisScene);
+		
+	}
+	
+	
 }
