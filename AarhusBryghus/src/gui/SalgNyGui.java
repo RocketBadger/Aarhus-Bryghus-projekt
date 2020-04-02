@@ -192,6 +192,11 @@ public class SalgNyGui extends GridPane {
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
 		btnDeleteSL.setDisable(true);
 
+		btnGave.setOnAction(event -> actionCreateGaveæske());
+		btnKlippekort.setOnAction(event -> actionCreateKlippekort());
+		btnRundvisning.setOnAction(event -> actionCreateRundvisning());
+		btnUdlejning.setOnAction(event -> actionOpenUdlejning());
+
 		txtRabat.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent k) {
@@ -208,6 +213,22 @@ public class SalgNyGui extends GridPane {
 				txtRabat.setDisable(false);
 			}
 		});
+	}
+
+	private void actionOpenUdlejning() {
+		// TODO Auto-generated method stub
+	}
+
+	private void actionCreateRundvisning() {
+		// TODO Auto-generated method stub
+	}
+
+	private void actionCreateKlippekort() {
+		// TODO Auto-generated method stub
+	}
+
+	private void actionCreateGaveæske() {
+		// TODO Auto-generated method stub
 	}
 
 	private void actionAddRabat() {
