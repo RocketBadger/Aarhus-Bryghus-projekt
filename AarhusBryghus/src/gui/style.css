@@ -1,14 +1,14 @@
 #pane {
 	-fx-background-image: url("background.jpg");
     	-fx-background-repeat: stretch;   
-    	-fx-background-size: 600 500;
+    	-fx-background-size: 700 600;
     	-fx-background-position: center;
 }
 
 #salgGui {
 	-fx-background-image: url("background2.jpg");
     	-fx-background-repeat: stretch;   
-    	-fx-background-size: 625 500;
+    	-fx-background-size: 725 600;
     	-fx-background-position: center;
 }
 
@@ -23,6 +23,13 @@
 	-fx-background-image: url("bgDark.jpg");
 	-fx-background-repeat: stretch;  
     	-fx-background-size: 625 500;
+    	-fx-background-position: center;
+}
+
+#oversigtGui {
+	-fx-background-image: url("ABLOGO.png");
+	-fx-background-repeat: stretch;  
+    	-fx-background-size: 960 450;
     	-fx-background-position: center;
 }
 

@@ -39,8 +39,8 @@ public class SalgNyGui extends GridPane {
 	private RadioButton rbMobile = new RadioButton("MobilePay");
 	private RadioButton rbKlip = new RadioButton("Klippekort");
 	private DatePicker salgsDato = new DatePicker();
-	private Button btnAddSL = new Button("Tilføj vare til kurv");
-	private Button btnDeleteSL = new Button("Fjern vare fra kurv");
+	private Button btnAddSL = new Button("Tilføj vare");
+	private Button btnDeleteSL = new Button("Fjern vare");
 	private Button btnCreateSalg = new Button("Afslut salg");
 	private TextField txtTilBetaling = new TextField();
 	private Label lblBetalingsform = new Label("Angiv betalingsform");
@@ -53,11 +53,14 @@ public class SalgNyGui extends GridPane {
 	private RadioButton rbProcent = new RadioButton("Procent");
 	private TextField txtRabat = new TextField();
 
-	private ArrayList<SalgsLinje> salgsLinjer = new ArrayList<>();
+	private Button btnRundvisning = new Button("Book rundvisning");
+	private Button btnUdlejning = new Button("Udlejning fadølsanlæg");
+	private Button btnKlippekort = new Button("Opret klippekort");
+	private Button btnGave = new Button("Opret gaveæske");
+
 	private Salg s = null;
 	String kr = " kr";
 	double i = 0;
-	double givetRabat = 0;
 
 	public SalgNyGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
@@ -92,9 +95,9 @@ public class SalgNyGui extends GridPane {
 
 		salgsDato.setValue(LocalDate.now());
 
-		linjeView.setMaxSize(270, 290);
+		linjeView.setPrefSize(330, 330);
 
-		btnCreateSalg.setMinSize(250, 20);
+		btnCreateSalg.setMinSize(330, 20);
 
 		txtTilBetaling.setEditable(false);
 		txtTilBetaling.setText(i + kr);
@@ -115,10 +118,10 @@ public class SalgNyGui extends GridPane {
 		leftPane.add(rbRegning, 0, 3);
 		leftPane.add(rbMobile, 0, 4);
 		leftPane.add(rbKlip, 0, 5);
-		leftPane.add(lblDato, 0, 7);
-		leftPane.add(salgsDato, 0, 8);
-		leftPane.add(lblTilBetaling, 0, 10);
-		leftPane.add(txtTilBetaling, 0, 11);
+		leftPane.add(lblDato, 0, 8);
+		leftPane.add(salgsDato, 0, 9);
+		leftPane.add(lblTilBetaling, 0, 13);
+		leftPane.add(txtTilBetaling, 0, 14);
 
 		GridPane rightPane = new GridPane();
 		rightPane.setVgap(10);
@@ -134,14 +137,23 @@ public class SalgNyGui extends GridPane {
 		btmLeftPane.add(rbFlad, 0, 1);
 		btmLeftPane.add(rbProcent, 1, 1);
 		btmLeftPane.add(txtRabat, 0, 2, 2, 1);
+		btmLeftPane.add(btnAddSL, 0, 3);
+		btmLeftPane.add(btnDeleteSL, 1, 3);
 
 		GridPane btmRightPane = new GridPane();
 		btmRightPane.setVgap(10);
 		btmRightPane.setHgap(30);
 		btmRightPane.setPadding(new Insets(5));
-		btmRightPane.add(btnAddSL, 0, 0);
-		btmRightPane.add(btnDeleteSL, 1, 0);
 		btmRightPane.add(btnCreateSalg, 0, 1, 2, 1);
+
+		GridPane andreVarerPane = new GridPane();
+		andreVarerPane.setVgap(10);
+		andreVarerPane.setHgap(5);
+		andreVarerPane.setPadding(new Insets(5));
+		andreVarerPane.add(btnRundvisning, 0, 1);
+		andreVarerPane.add(btnUdlejning, 1, 1);
+		andreVarerPane.add(btnKlippekort, 0, 2);
+		andreVarerPane.add(btnGave, 1, 2);
 
 		GridPane backPane = new GridPane();
 		backPane.setVgap(10);
@@ -158,13 +170,18 @@ public class SalgNyGui extends GridPane {
 		this.add(leftPane, 1, 0);
 		this.add(rightPane, 6, 0);
 		this.add(btmLeftPane, 1, 1);
-		this.add(btmRightPane, 6, 1);
+		this.add(andreVarerPane, 6, 1);
+		this.add(btmRightPane, 6, 2);
 		this.add(backPane, 1, 2);
 
 		btnAddSL.setId("secButton");
 		btnCreateSalg.setId("secButton");
 		btnDeleteSL.setId("secButton");
 		back.setId("secButton");
+		btnKlippekort.setId("secButton");
+		btnRundvisning.setId("secButton");
+		btnUdlejning.setId("secButton");
+		btnGave.setId("secButton");
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 
@@ -174,6 +191,11 @@ public class SalgNyGui extends GridPane {
 
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
 		btnDeleteSL.setDisable(true);
+
+		btnGave.setOnAction(event -> actionCreateGaveæske());
+		btnKlippekort.setOnAction(event -> actionCreateKlippekort());
+		btnRundvisning.setOnAction(event -> actionCreateRundvisning());
+		btnUdlejning.setOnAction(event -> actionOpenUdlejning());
 
 		txtRabat.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -191,6 +213,22 @@ public class SalgNyGui extends GridPane {
 				txtRabat.setDisable(false);
 			}
 		});
+	}
+
+	private void actionOpenUdlejning() {
+		// TODO Auto-generated method stub
+	}
+
+	private void actionCreateRundvisning() {
+		// TODO Auto-generated method stub
+	}
+
+	private void actionCreateKlippekort() {
+		// TODO Auto-generated method stub
+	}
+
+	private void actionCreateGaveæske() {
+		// TODO Auto-generated method stub
 	}
 
 	private void actionAddRabat() {
@@ -246,8 +284,8 @@ public class SalgNyGui extends GridPane {
 
 	private void startSalg() {
 		if (this.s == null) {
-			this.s = controller.createSalg(salgsLinjer, (BetalingsFormer) toggles.getSelectedToggle().getUserData(),
-					salgsDato.getValue());
+			this.s = controller.createSalg(new ArrayList<SalgsLinje>(),
+					(BetalingsFormer) toggles.getSelectedToggle().getUserData(), salgsDato.getValue());
 		}
 	}
 
