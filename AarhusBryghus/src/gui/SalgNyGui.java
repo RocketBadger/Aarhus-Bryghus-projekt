@@ -39,8 +39,8 @@ public class SalgNyGui extends GridPane {
 	private RadioButton rbMobile = new RadioButton("MobilePay");
 	private RadioButton rbKlip = new RadioButton("Klippekort");
 	private DatePicker salgsDato = new DatePicker();
-	private Button btnAddSL = new Button("Tilføj vare til kurv");
-	private Button btnDeleteSL = new Button("Fjern vare fra kurv");
+	private Button btnAddSL = new Button("Tilføj vare");
+	private Button btnDeleteSL = new Button("Fjern vare");
 	private Button btnCreateSalg = new Button("Afslut salg");
 	private TextField txtTilBetaling = new TextField();
 	private Label lblBetalingsform = new Label("Angiv betalingsform");
@@ -56,6 +56,7 @@ public class SalgNyGui extends GridPane {
 	private Button btnRundvisning = new Button("Book rundvisning");
 	private Button btnUdlejning = new Button("Udlejning fadølsanlæg");
 	private Button btnKlippekort = new Button("Opret klippekort");
+	private Button btnGave = new Button("Opret gaveæske");
 
 	private Salg s = null;
 	String kr = " kr";
@@ -94,11 +95,9 @@ public class SalgNyGui extends GridPane {
 
 		salgsDato.setValue(LocalDate.now());
 
-		linjeView.setMinSize(270, 250);
-		linjeView.setPrefSize(300, 330);
+		linjeView.setPrefSize(330, 330);
 
-		btnCreateSalg.setMinSize(300, 20);
-		btnUdlejning.setMinSize(300, 20);
+		btnCreateSalg.setMinSize(330, 20);
 
 		txtTilBetaling.setEditable(false);
 		txtTilBetaling.setText(i + kr);
@@ -138,6 +137,8 @@ public class SalgNyGui extends GridPane {
 		btmLeftPane.add(rbFlad, 0, 1);
 		btmLeftPane.add(rbProcent, 1, 1);
 		btmLeftPane.add(txtRabat, 0, 2, 2, 1);
+		btmLeftPane.add(btnAddSL, 0, 3);
+		btmLeftPane.add(btnDeleteSL, 1, 3);
 
 		GridPane btmRightPane = new GridPane();
 		btmRightPane.setVgap(10);
@@ -147,13 +148,12 @@ public class SalgNyGui extends GridPane {
 
 		GridPane andreVarerPane = new GridPane();
 		andreVarerPane.setVgap(10);
-		andreVarerPane.setHgap(85);
+		andreVarerPane.setHgap(5);
 		andreVarerPane.setPadding(new Insets(5));
-		andreVarerPane.add(btnAddSL, 0, 0);
-		andreVarerPane.add(btnDeleteSL, 1, 0);
-		andreVarerPane.add(btnKlippekort, 0, 1);
-		andreVarerPane.add(btnRundvisning, 1, 1);
-		andreVarerPane.add(btnUdlejning, 0, 2, 2, 1);
+		andreVarerPane.add(btnRundvisning, 0, 1);
+		andreVarerPane.add(btnUdlejning, 1, 1);
+		andreVarerPane.add(btnKlippekort, 0, 2);
+		andreVarerPane.add(btnGave, 1, 2);
 
 		GridPane backPane = new GridPane();
 		backPane.setVgap(10);
@@ -181,6 +181,7 @@ public class SalgNyGui extends GridPane {
 		btnKlippekort.setId("secButton");
 		btnRundvisning.setId("secButton");
 		btnUdlejning.setId("secButton");
+		btnGave.setId("secButton");
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 
