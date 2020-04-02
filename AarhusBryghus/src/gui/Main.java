@@ -24,6 +24,7 @@ public class Main extends Application {
 	Scene salgScene;
 	Scene produktScene;
 	Scene prisScene;
+	Scene oversigtScene;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -69,9 +70,11 @@ public class Main extends Application {
 		btn1.setId("button");
 		Button btn2 = new Button("Produkter og produktgrupper");
 		Button btn3 = new Button("Prislister og priser");
+		Button btn4 = new Button("Oversigter");
 		btn2.setId("button");
 		btn3.setId("button");
-		vbx.getChildren().addAll(imgView, btn1, btn2, btn3);
+		btn4.setId("button");
+		vbx.getChildren().addAll(imgView, btn1, btn2, btn3, btn4);
 
 		vbx.setAlignment(Pos.TOP_CENTER);
 		pane.setCenter(vbx);
@@ -79,6 +82,7 @@ public class Main extends Application {
 		btn1.setOnAction(e -> salgGui());
 		btn2.setOnAction(e -> produktGui());
 		btn3.setOnAction(e -> prisGui());
+		btn4.setOnAction(e -> oversigtGui());
 
 	}
 
@@ -88,7 +92,7 @@ public class Main extends Application {
 		GridPane pane = new GridPane();
 		pane.add(salg, 0, 0);
 
-		salgScene = new Scene(pane, 625, 500);
+		salgScene = new Scene(pane, 725, 600);
 		pane.setId("salgGui");
 		salgScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		window.setScene(salgScene);
@@ -104,7 +108,6 @@ public class Main extends Application {
 		pane.setId("produktGui");
 		produktScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		window.setScene(produktScene);
-
 	}
 
 	public void prisGui() {
@@ -117,7 +120,16 @@ public class Main extends Application {
 		pane.setId("prisGui");
 		prisScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		window.setScene(prisScene);
+	}
 
+	public void oversigtGui() {
+		OversigtPane oversigter = new OversigtPane(window, scene);
+		GridPane pane = new GridPane();
+		pane.add(oversigter, 0, 0);
+		oversigtScene = new Scene(pane, 960, 450);
+		pane.setId("oversigtGui");
+		oversigtScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+		window.setScene(oversigtScene);
 	}
 
 }

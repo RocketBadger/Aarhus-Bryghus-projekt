@@ -53,11 +53,13 @@ public class SalgNyGui extends GridPane {
 	private RadioButton rbProcent = new RadioButton("Procent");
 	private TextField txtRabat = new TextField();
 
-	private ArrayList<SalgsLinje> salgsLinjer = new ArrayList<>();
+	private Button btnRundvisning = new Button("Book rundvisning");
+	private Button btnUdlejning = new Button("Udlejning fadølsanlæg");
+	private Button btnKlippekort = new Button("Opret klippekort");
+
 	private Salg s = null;
 	String kr = " kr";
 	double i = 0;
-	double givetRabat = 0;
 
 	public SalgNyGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
@@ -92,9 +94,11 @@ public class SalgNyGui extends GridPane {
 
 		salgsDato.setValue(LocalDate.now());
 
-		linjeView.setMaxSize(270, 290);
+		linjeView.setMinSize(270, 250);
+		linjeView.setPrefSize(300, 330);
 
-		btnCreateSalg.setMinSize(250, 20);
+		btnCreateSalg.setMinSize(300, 20);
+		btnUdlejning.setMinSize(300, 20);
 
 		txtTilBetaling.setEditable(false);
 		txtTilBetaling.setText(i + kr);
@@ -115,10 +119,10 @@ public class SalgNyGui extends GridPane {
 		leftPane.add(rbRegning, 0, 3);
 		leftPane.add(rbMobile, 0, 4);
 		leftPane.add(rbKlip, 0, 5);
-		leftPane.add(lblDato, 0, 7);
-		leftPane.add(salgsDato, 0, 8);
-		leftPane.add(lblTilBetaling, 0, 10);
-		leftPane.add(txtTilBetaling, 0, 11);
+		leftPane.add(lblDato, 0, 8);
+		leftPane.add(salgsDato, 0, 9);
+		leftPane.add(lblTilBetaling, 0, 13);
+		leftPane.add(txtTilBetaling, 0, 14);
 
 		GridPane rightPane = new GridPane();
 		rightPane.setVgap(10);
@@ -139,9 +143,17 @@ public class SalgNyGui extends GridPane {
 		btmRightPane.setVgap(10);
 		btmRightPane.setHgap(30);
 		btmRightPane.setPadding(new Insets(5));
-		btmRightPane.add(btnAddSL, 0, 0);
-		btmRightPane.add(btnDeleteSL, 1, 0);
 		btmRightPane.add(btnCreateSalg, 0, 1, 2, 1);
+
+		GridPane andreVarerPane = new GridPane();
+		andreVarerPane.setVgap(10);
+		andreVarerPane.setHgap(85);
+		andreVarerPane.setPadding(new Insets(5));
+		andreVarerPane.add(btnAddSL, 0, 0);
+		andreVarerPane.add(btnDeleteSL, 1, 0);
+		andreVarerPane.add(btnKlippekort, 0, 1);
+		andreVarerPane.add(btnRundvisning, 1, 1);
+		andreVarerPane.add(btnUdlejning, 0, 2, 2, 1);
 
 		GridPane backPane = new GridPane();
 		backPane.setVgap(10);
@@ -158,13 +170,17 @@ public class SalgNyGui extends GridPane {
 		this.add(leftPane, 1, 0);
 		this.add(rightPane, 6, 0);
 		this.add(btmLeftPane, 1, 1);
-		this.add(btmRightPane, 6, 1);
+		this.add(andreVarerPane, 6, 1);
+		this.add(btmRightPane, 6, 2);
 		this.add(backPane, 1, 2);
 
 		btnAddSL.setId("secButton");
 		btnCreateSalg.setId("secButton");
 		btnDeleteSL.setId("secButton");
 		back.setId("secButton");
+		btnKlippekort.setId("secButton");
+		btnRundvisning.setId("secButton");
+		btnUdlejning.setId("secButton");
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 
@@ -246,8 +262,8 @@ public class SalgNyGui extends GridPane {
 
 	private void startSalg() {
 		if (this.s == null) {
-			this.s = controller.createSalg(salgsLinjer, (BetalingsFormer) toggles.getSelectedToggle().getUserData(),
-					salgsDato.getValue());
+			this.s = controller.createSalg(new ArrayList<SalgsLinje>(),
+					(BetalingsFormer) toggles.getSelectedToggle().getUserData(), salgsDato.getValue());
 		}
 	}
 
