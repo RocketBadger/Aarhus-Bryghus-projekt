@@ -193,7 +193,6 @@ public class SalgNyGui extends GridPane {
 		});
 	}
 
-//	TODO
 	private void actionAddRabat() {
 		int selected = 0;
 		if (linjeView.getSelectionModel().getSelectedItem() != null) {
