@@ -42,7 +42,7 @@ public class Main extends Application {
 		BorderPane pane = new BorderPane();
 		this.initContent(pane);
 
-		scene = new Scene(pane, 600, 500);
+		scene = new Scene(pane, 700, 600);
 		pane.setId("pane");
 		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		stage.setScene(scene);

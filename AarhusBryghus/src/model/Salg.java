@@ -32,6 +32,14 @@ public class Salg implements Serializable {
 		return i;
 	}
 
+	public double beregnSamletRabat() {
+		double i = 0;
+		for (SalgsLinje s : salgsLinjer) {
+			i += s.getRabatGivet();
+		}
+		return i;
+	}
+
 	/**
 	 * Tilføjer salgslinje s1 til ArrayListen salgslinjer.
 	 * 

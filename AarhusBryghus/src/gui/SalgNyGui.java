@@ -202,12 +202,20 @@ public class SalgNyGui extends GridPane {
 		linjeView.getSelectionModel().select(selected);
 		if (!txtRabat.getText().isEmpty()) {
 			if (toggleRabat.getSelectedToggle().getUserData().equals("flad")) {
+				linjeView.getSelectionModel().getSelectedItem().givRabat(Integer.parseInt(txtRabat.getText())
+						* linjeView.getSelectionModel().getSelectedItem().getAntal());
 
 			}
 			if (toggleRabat.getSelectedToggle().getUserData().equals("procent")) {
+				double proc = Double.parseDouble(txtRabat.getText()) / 100;
+				double pris = linjeView.getSelectionModel().getSelectedItem().getPris().getPris()
+						* linjeView.getSelectionModel().getSelectedItem().getAntal();
+				double procentRabat = proc * pris;
+				linjeView.getSelectionModel().getSelectedItem().givRabat(procentRabat);
 
 			}
 			updateInfo();
+			txtRabat.clear();
 		} else {
 			txtRabat.setStyle("-fx-text-fill: red");
 			txtRabat.setText("Indtast et tal og tryk ENTER");
@@ -270,7 +278,7 @@ public class SalgNyGui extends GridPane {
 			txtRabat.clear();
 			txtRabat.setVisible(false);
 		}
-		i = s.beregnSamletListePris();
+		i = s.beregnSamletListePris() - s.beregnSamletRabat();
 		txtTilBetaling.setText(i + kr);
 	}
 
