@@ -26,7 +26,10 @@ public class Salg implements Serializable {
 	public double beregnSamletListePris() {
 		double i = 0;
 		for (SalgsLinje s : salgsLinjer) {
-			i += (s.getPris().getPris() * s.getAntal());
+			if (s.getRundvisning() != null) {
+				i += s.getRundVPris();
+			} else
+				i += (s.getPris().getPris() * s.getAntal());
 		}
 		this.reelPris = i;
 		return i;

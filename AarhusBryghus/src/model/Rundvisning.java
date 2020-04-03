@@ -1,19 +1,29 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Rundvisning implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private LocalDateTime dagTid;
+	private LocalDate dag;
+	private LocalTime tid;
 
-	public Rundvisning(LocalDateTime tidspunkt) {
-		this.dagTid = tidspunkt;
-
+	public Rundvisning(LocalDate dato, LocalTime tidspunkt) {
+		this.dag = dato;
+		this.tid = tidspunkt;
 	}
 
-	public LocalDateTime getDagTid() {
-		return dagTid;
+	public LocalDate getDag() {
+		return dag;
 	}
 
+	public LocalTime getTid() {
+		return tid;
+	}
+
+	@Override
+	public String toString() {
+		return "Rundvisning, " + dag.toString() + ", klk " + tid.toString();
+	}
 }

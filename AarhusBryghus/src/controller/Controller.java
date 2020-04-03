@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import model.Pris;
 import model.PrisListe;
 import model.Produkt;
 import model.ProduktGruppe;
+import model.Rundvisning;
 import model.Salg;
 import model.SalgsLinje;
 import model.Udlejning;
@@ -105,7 +107,18 @@ public class Controller {
 			System.out.println("Message: " + i);
 			return null;
 		}
+	}
 
+//	Rundvisning metoder ----------------------------------------------
+	public Rundvisning createRundvisning(LocalDate dato, LocalTime tid) {
+		try {
+			Rundvisning r = new Rundvisning(dato, tid);
+			storage.storeRundvisning(r);
+			return r;
+		} catch (IllegalArgumentException i) {
+			System.out.println("message: " + i);
+			return null;
+		}
 	}
 
 //	PrisListe metoder ----------------------------------------------
@@ -147,6 +160,16 @@ public class Controller {
 	public SalgsLinje createSalgsLinje(int antal, Pris pris) {
 		try {
 			SalgsLinje sl = new SalgsLinje(antal, pris);
+			return sl;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
+
+	public SalgsLinje createSalgsLinje(double pris, Rundvisning r) {
+		try {
+			SalgsLinje sl = new SalgsLinje(pris, r);
 			return sl;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);

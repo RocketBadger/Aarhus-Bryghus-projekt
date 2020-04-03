@@ -233,7 +233,10 @@ public class SalgGui extends GridPane {
 	}
 
 	private void actionOpenCreateRundvisning() {
-		// TODO Auto-generated method stub
+		CreateRundvisningDialog di = new CreateRundvisningDialog();
+		di.setOnHidden(event -> this.updateSalg(di.passLinjer()));
+		di.setOnShowing(event -> this.startSalg());
+		di.showAndWait();
 	}
 
 	private void actionOpenCreateKlippekort() {
