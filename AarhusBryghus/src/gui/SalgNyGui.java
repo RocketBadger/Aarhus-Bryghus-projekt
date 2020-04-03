@@ -192,10 +192,10 @@ public class SalgNyGui extends GridPane {
 		btnDeleteSL.setOnAction(event -> actionDeleteSL());
 		btnDeleteSL.setDisable(true);
 
-		btnGave.setOnAction(event -> actionCreateGaveæske());
-		btnKlippekort.setOnAction(event -> actionCreateKlippekort());
-		btnRundvisning.setOnAction(event -> actionCreateRundvisning());
-		btnUdlejning.setOnAction(event -> actionOpenUdlejning());
+		btnGave.setOnAction(event -> actionOpenCreateGaveæske());
+		btnKlippekort.setOnAction(event -> actionOpenCreateKlippekort());
+		btnRundvisning.setOnAction(event -> actionOpenCreateRundvisning());
+		btnUdlejning.setOnAction(event -> actionOpenCreateUdlejning());
 
 		txtRabat.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -215,19 +215,21 @@ public class SalgNyGui extends GridPane {
 		});
 	}
 
-	private void actionOpenUdlejning() {
+	private void actionOpenCreateUdlejning() {
+		CreateFadølsanlægUdlejningDialog di = new CreateFadølsanlægUdlejningDialog();
+//		di.setOnHidden(event -> this.updateInfo());
+		di.showAndWait();
+	}
+
+	private void actionOpenCreateRundvisning() {
 		// TODO Auto-generated method stub
 	}
 
-	private void actionCreateRundvisning() {
+	private void actionOpenCreateKlippekort() {
 		// TODO Auto-generated method stub
 	}
 
-	private void actionCreateKlippekort() {
-		// TODO Auto-generated method stub
-	}
-
-	private void actionCreateGaveæske() {
+	private void actionOpenCreateGaveæske() {
 		// TODO Auto-generated method stub
 	}
 
