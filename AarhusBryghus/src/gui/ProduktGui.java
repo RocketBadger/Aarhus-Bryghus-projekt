@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import model.Produkt;
 import model.ProduktGruppe;
 
-public class ProduktNyGui extends GridPane {
+public class ProduktGui extends GridPane {
 	private Controller controller;
 	private ListView<ProduktGruppe> produktGruppeList = new ListView<>();
 	private ListView<Produkt> produktList = new ListView<>();
@@ -20,7 +20,7 @@ public class ProduktNyGui extends GridPane {
 	private Button btnDeleteGruppe = new Button("Slet Produktgruppe");
 	private Button btnDeleteProdukt = new Button("Slet Produkt");
 
-	public ProduktNyGui(Stage stage, Scene scene) {
+	public ProduktGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
 
 		this.setPadding(new Insets(20));

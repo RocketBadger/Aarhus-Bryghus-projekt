@@ -32,8 +32,15 @@ public class SalgsLinje implements Serializable {
 	@Override
 	public String toString() {
 		if (rabatGivet > 0) {
-			return pris.toString() + ", " + antal + " styk, " + rabatGivet + " kr i rabat";
-		} else
-			return pris.toString() + ", " + antal + " styk";
+			if (pris.getProdukt().getProduktGruppe().getNavn().equals("Øl på fustage")) {
+				return pris.toString() + ", " + antal + " dage" + rabatGivet + " kr i rabat";
+			} else
+				return pris.toString() + ", " + antal + " styk, " + rabatGivet + " kr i rabat";
+		} else {
+			if (pris.getProdukt().getProduktGruppe().getNavn().equals("Øl på fustage")) {
+				return pris.toString() + ", " + antal + " dage";
+			} else
+				return pris.toString() + ", " + antal + " styk";
+		}
 	}
 }

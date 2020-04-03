@@ -28,7 +28,7 @@ import model.BetalingsFormer;
 import model.Salg;
 import model.SalgsLinje;
 
-public class SalgNyGui extends GridPane {
+public class SalgGui extends GridPane {
 	private Controller controller;
 
 	private ListView<SalgsLinje> linjeView = new ListView<>();
@@ -63,7 +63,7 @@ public class SalgNyGui extends GridPane {
 	String kr = " kr";
 	double i = 0;
 
-	public SalgNyGui(Stage stage, Scene scene) {
+	public SalgGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
 		this.setPadding(new Insets(20));
 		this.setHgap(20);
@@ -222,7 +222,6 @@ public class SalgNyGui extends GridPane {
 
 	private void actionOpenCreateUdlejning() {
 		CreateFadølsanlægUdlejningDialog di = new CreateFadølsanlægUdlejningDialog();
-//		di.setOnHidden(event -> this.updateInfo());
 		di.showAndWait();
 	}
 
@@ -304,10 +303,10 @@ public class SalgNyGui extends GridPane {
 	}
 
 	private void updateSalg(ArrayList<SalgsLinje> linjer) {
+		for (SalgsLinje sl : linjer) {
+			s.addSalgsLinje(sl);
+		}
 		if (!s.getSalgsLinjer().isEmpty()) {
-			for (SalgsLinje sl : linjer) {
-				s.addSalgsLinje(sl);
-			}
 			linjeView.getSelectionModel().selectFirst();
 			btnCreateSalg.setDisable(false);
 			btnDeleteSL.setDisable(false);
