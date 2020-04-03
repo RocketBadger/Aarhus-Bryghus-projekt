@@ -55,6 +55,10 @@ public class Controller {
 		return storage.getAllSalg();
 	}
 
+	public List<Udlejning> getAllUdlejning() {
+		return storage.getAllUdlejning();
+	}
+
 //	Produkt metoder ----------------------------------------------
 	public Produkt createProdukt(String navn, ProduktGruppe produktGruppe) {
 		try {

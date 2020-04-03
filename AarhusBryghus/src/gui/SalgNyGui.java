@@ -54,9 +54,10 @@ public class SalgNyGui extends GridPane {
 	private TextField txtRabat = new TextField();
 
 	private Button btnRundvisning = new Button("Book rundvisning");
-	private Button btnUdlejning = new Button("Udlejning fadølsanlæg");
+	private Button btnUdlejning = new Button("Opret udlejning");
 	private Button btnKlippekort = new Button("Opret klippekort");
 	private Button btnGave = new Button("Opret gaveæske");
+	private Button btnRetur = new Button("Udlejning retur");
 
 	private Salg s = null;
 	String kr = " kr";
@@ -91,6 +92,7 @@ public class SalgNyGui extends GridPane {
 		rbProcent.setId("text");
 
 		toggles.getToggles().addAll(rbKontant, rbDan, rbRegning, rbMobile, rbKlip);
+		toggles.selectToggle(rbKontant);
 		toggleRabat.getToggles().addAll(rbFlad, rbProcent);
 
 		salgsDato.setValue(LocalDate.now());
@@ -152,6 +154,7 @@ public class SalgNyGui extends GridPane {
 		andreVarerPane.setPadding(new Insets(5));
 		andreVarerPane.add(btnRundvisning, 0, 1);
 		andreVarerPane.add(btnUdlejning, 1, 1);
+		andreVarerPane.add(btnRetur, 2, 1);
 		andreVarerPane.add(btnKlippekort, 0, 2);
 		andreVarerPane.add(btnGave, 1, 2);
 
@@ -182,6 +185,7 @@ public class SalgNyGui extends GridPane {
 		btnRundvisning.setId("secButton");
 		btnUdlejning.setId("secButton");
 		btnGave.setId("secButton");
+		btnRetur.setId("secButton");
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 
@@ -196,6 +200,7 @@ public class SalgNyGui extends GridPane {
 		btnKlippekort.setOnAction(event -> actionOpenCreateKlippekort());
 		btnRundvisning.setOnAction(event -> actionOpenCreateRundvisning());
 		btnUdlejning.setOnAction(event -> actionOpenCreateUdlejning());
+		btnRetur.setOnAction(event -> actionOpenReturnUdlejning());
 
 		txtRabat.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -218,6 +223,13 @@ public class SalgNyGui extends GridPane {
 	private void actionOpenCreateUdlejning() {
 		CreateFadølsanlægUdlejningDialog di = new CreateFadølsanlægUdlejningDialog();
 //		di.setOnHidden(event -> this.updateInfo());
+		di.showAndWait();
+	}
+
+	private void actionOpenReturnUdlejning() {
+		CreateFadølsanlægReturnDialog di = new CreateFadølsanlægReturnDialog();
+		di.setOnHidden(event -> this.updateSalg(di.passLinjer()));
+		di.setOnShowing(event -> this.startSalg());
 		di.showAndWait();
 	}
 
@@ -292,10 +304,10 @@ public class SalgNyGui extends GridPane {
 	}
 
 	private void updateSalg(ArrayList<SalgsLinje> linjer) {
-		for (SalgsLinje sl : linjer) {
-			s.addSalgsLinje(sl);
-		}
 		if (!s.getSalgsLinjer().isEmpty()) {
+			for (SalgsLinje sl : linjer) {
+				s.addSalgsLinje(sl);
+			}
 			linjeView.getSelectionModel().selectFirst();
 			btnCreateSalg.setDisable(false);
 			btnDeleteSL.setDisable(false);

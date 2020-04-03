@@ -34,7 +34,7 @@ public class CreateFadølsanlægUdlejningDialog extends Stage {
 		this.initStyle(StageStyle.DECORATED);
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setResizable(false);
-		this.setTitle("Opret Produkt");
+		this.setTitle("Udlejning");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
