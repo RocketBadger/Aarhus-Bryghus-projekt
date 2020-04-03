@@ -114,6 +114,10 @@ public class Storage implements Serializable {
 		}
 	}
 
+	public List<Udlejning> getAllUdlejning() {
+		return udlejninger;
+	}
+
 //	Salg metoder ---------------------------------------------------------------
 	public void storeSalg(Salg salg) {
 		if (!solgt.contains(salg)) {

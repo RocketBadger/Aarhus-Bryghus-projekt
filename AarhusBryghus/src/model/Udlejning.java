@@ -14,6 +14,7 @@ public class Udlejning implements Serializable {
 		this.produkt = produkt;
 		this.datoUd = udlejningsDato;
 		this.indhold = ltr;
+		this.datoRetur = null;
 	}
 
 	public LocalDate getUdlejningsDato() {
@@ -36,8 +37,12 @@ public class Udlejning implements Serializable {
 		return indhold;
 	}
 
+	public double calcRemainder(double rem) {
+		return this.indhold = rem;
+	}
+
 	@Override
 	public String toString() {
-		return super.toString() + " udlejet " + datoUd;
+		return this.getProdukt().toString() + " udlejet " + datoUd;
 	}
 }
