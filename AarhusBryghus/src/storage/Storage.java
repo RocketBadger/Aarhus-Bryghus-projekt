@@ -9,6 +9,7 @@ import model.PrisListe;
 import model.Produkt;
 import model.ProduktGruppe;
 import model.Salg;
+import model.Udlejning;
 
 public class Storage implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +19,7 @@ public class Storage implements Serializable {
 	private List<PrisListe> prislister;
 	private List<Pris> priser;
 	private List<Salg> solgt;
+	private List<Udlejning> udlejninger;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -32,6 +34,7 @@ public class Storage implements Serializable {
 		prislister = new ArrayList<PrisListe>();
 		priser = new ArrayList<Pris>();
 		solgt = new ArrayList<Salg>();
+		udlejninger = new ArrayList<Udlejning>();
 	}
 
 // Produkt metoder ----------------------------------------------
@@ -86,7 +89,6 @@ public class Storage implements Serializable {
 	}
 
 // Pris metoder ---------------------------------------------------------------
-
 	public void storePris(Pris pris) {
 		if (!priser.contains(pris)) {
 			priser.add(pris);
@@ -99,8 +101,20 @@ public class Storage implements Serializable {
 		}
 	}
 
-//	Salg metoder ---------------------------------------------------------------
+//	Udlejning metoder ---------------------------------------------------------------
+	public void storeUdlejning(Udlejning ud) {
+		if (!udlejninger.contains(ud)) {
+			udlejninger.add(ud);
+		}
+	}
 
+	public void removeUdlejning(Udlejning ud) {
+		if (udlejninger.contains(ud)) {
+			udlejninger.remove(ud);
+		}
+	}
+
+//	Salg metoder ---------------------------------------------------------------
 	public void storeSalg(Salg salg) {
 		if (!solgt.contains(salg)) {
 			solgt.add(salg);

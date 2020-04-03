@@ -17,6 +17,7 @@ import model.Produkt;
 import model.ProduktGruppe;
 import model.Salg;
 import model.SalgsLinje;
+import model.Udlejning;
 import storage.Storage;
 
 public class Controller {
@@ -88,6 +89,19 @@ public class Controller {
 
 	public void deleteProduktGruppe(ProduktGruppe pg) {
 		storage.removeProduktGruppe(pg);
+	}
+
+//	Fadølsanlæg metoder ----------------------------------------------
+	public Udlejning createUdlejning(Produkt pr, LocalDate dato, Double ltr) {
+		try {
+			Udlejning f = new Udlejning(pr, dato, ltr);
+			storage.storeUdlejning(f);
+			return f;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+
 	}
 
 //	PrisListe metoder ----------------------------------------------
