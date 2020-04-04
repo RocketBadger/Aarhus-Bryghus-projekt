@@ -13,7 +13,7 @@ public class SalgsLinje implements Serializable {
 	private double RPris;
 	private Rundvisning rv;
 	private double KlipPris;
-	private Klippekort kk;
+	private Klippekort klippekort;
 
 	private List<Pris> gavePriser;
 	private Gaveæske gaveæske;
@@ -30,7 +30,7 @@ public class SalgsLinje implements Serializable {
 	
 	public SalgsLinje(double pris, Klippekort klip) {
 		this.KlipPris = pris;
-		this.kk = klip;
+		this.klippekort = klip;
 	}
 
 	public SalgsLinje(List<Pris> gavePriser, Gaveæske g) {
@@ -63,13 +63,25 @@ public class SalgsLinje implements Serializable {
 	}
 
 	public ArrayList<Pris> getGavePriser() {
-		return new ArrayList<>(gavePriser);
+		if (gavePriser != null) {
+			return new ArrayList<>(gavePriser);
+		} 
+		return null;
+
 	}
 
 	public Gaveæske getGaveæske() {
 		return gaveæske;
 	}
-
+	
+	public double getKlipPris() {
+		return KlipPris;
+	}
+	
+	public Klippekort getKlippekort() {
+		return klippekort;
+	}
+	
 	@Override
 	public String toString() {
 		if (rabatGivet > 0) {
@@ -90,6 +102,8 @@ public class SalgsLinje implements Serializable {
 				return pris.toString() + ", " + antal + " dage";
 			} else if (rv != null) {
 				return rv.toString() + ", " + this.getRundVisPris() + " kr";
+			} else if (klippekort != null) {
+				return klippekort.toString() + ", " + this.getKlipPris() + " kr";
 			} else if (gaveæske != null) {
 				String i = gaveæske.toString();
 				for (Pris p : gaveæske.getIndhold()) {

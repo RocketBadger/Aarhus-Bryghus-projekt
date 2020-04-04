@@ -227,7 +227,10 @@ public class SalgsPane extends GridPane {
 
 	private void actionOpenCreateKlippekort() {
 		KlippekortDialog kd = new KlippekortDialog();
-		kd.Display();
+		kd.setOnHidden(e -> this.updateSalg(kd.passLinjer()));
+		kd.setOnShowing(e -> this.startSalg());
+		kd.showAndWait();
+		
 	}
 
 	private void actionOpenCreateGaveæske() {

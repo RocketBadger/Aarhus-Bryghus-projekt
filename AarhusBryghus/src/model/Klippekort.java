@@ -47,5 +47,10 @@ public class Klippekort implements Serializable {
 	public int getKlipId() {
 		return klipId;
 	}
+	
+	@Override
+	public String toString() {
+		return "Klippekort ID: , " + this.klipId;
+	}
 
 }

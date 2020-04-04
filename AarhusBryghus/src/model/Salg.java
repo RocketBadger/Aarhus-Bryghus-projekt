@@ -28,10 +28,12 @@ public class Salg implements Serializable {
 		for (SalgsLinje s : salgsLinjer) {
 			if (s.getRundvisning() != null) {
 				i += s.getRundVisPris();
-			} else if (!s.getGavePriser().isEmpty()) {
+			} else if (s.getGavePriser() != null) {
 				for (Pris p : s.getGavePriser()) {
 					i += p.getPris();
-				}
+				} 
+			} else if (s.getKlippekort() != null) {
+				i +=s.getKlipPris();
 			} else
 				i += (s.getPris().getPris() * s.getAntal());
 		}
