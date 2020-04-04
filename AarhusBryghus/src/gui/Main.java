@@ -40,7 +40,7 @@ public class Main extends Application {
 		stage.setResizable(true);
 		stage.show();
 		stage.setTitle("Sidebar test");
-		
+
 		stage.setScene(scene);
 		stage.show();
 
@@ -51,13 +51,13 @@ public class Main extends Application {
 		if (saveFile.exists()) {
 			controller.loadStorage();
 		}
-		
+
 		SalgsPane salgspane = new SalgsPane();
 		ProduktPane produktpane = new ProduktPane();
 		PrisPane prispane = new PrisPane();
 		OversigtPane oversigtspane = new OversigtPane();
 		pane.setCenter(salgspane);
-		
+
 		// ---------- Side menu start ----------
 		DropShadow dropshadow = new DropShadow(BlurType.GAUSSIAN, Color.color(0.25, 0.25, 0.25, 0.15), 2, 5, 5, 0);
 		VBox vbxButtons = new VBox();
@@ -65,23 +65,23 @@ public class Main extends Application {
 		vbxButtons.setPadding(new Insets(50, 20, 50, 20));
 		vbxButtons.setSpacing(50);
 		vbxButtons.setStyle("-fx-background-color: #a7adb4");
-		
+
 		Button btnSalg = new Button("Udfør salg");
 		btnSalg.setId("MainButton");
 		btnSalg.setOnAction(e -> pane.setCenter(salgspane));
-		
+
 		Button btnProdukt = new Button("Produkter og produktgrupper");
 		btnProdukt.setId("MainButton");
-		btnProdukt.setOnAction(e -> pane.setCenter(produktpane));		
-		
+		btnProdukt.setOnAction(e -> pane.setCenter(produktpane));
+
 		Button btnPris = new Button("Prislister og priser");
 		btnPris.setId("MainButton");
 		btnPris.setOnAction(e -> pane.setCenter(prispane));
-		
+
 		Button btnOversigt = new Button("Oversigter");
 		btnOversigt.setId("MainButton");
 		btnOversigt.setOnAction(e -> pane.setCenter(oversigtspane));
-		
+
 		vbxButtons.getChildren().addAll(btnSalg, btnProdukt, btnPris, btnOversigt);
 		pane.setLeft(vbxButtons);
 		// ---------- Side menu slut ----------

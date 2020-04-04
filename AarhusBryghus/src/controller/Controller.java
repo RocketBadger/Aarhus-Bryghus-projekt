@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.BetalingsFormer;
+import model.Gaveæske;
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
@@ -116,7 +117,19 @@ public class Controller {
 			storage.storeRundvisning(r);
 			return r;
 		} catch (IllegalArgumentException i) {
-			System.out.println("message: " + i);
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
+
+//	Gaveæske metoder ----------------------------------------------
+	public Gaveæske createGaveæske(List<Pris> indhold) {
+		try {
+			Gaveæske g = new Gaveæske(indhold);
+			storage.storeGaveæske(g);
+			return g;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
 			return null;
 		}
 	}
@@ -170,6 +183,16 @@ public class Controller {
 	public SalgsLinje createSalgsLinje(double pris, Rundvisning r) {
 		try {
 			SalgsLinje sl = new SalgsLinje(pris, r);
+			return sl;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
+
+	public SalgsLinje createSalgsLinje(List<Pris> indhold, Gaveæske g) {
+		try {
+			SalgsLinje sl = new SalgsLinje(indhold, g);
 			return sl;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);
