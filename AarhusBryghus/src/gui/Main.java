@@ -37,7 +37,7 @@ public class Main extends Application {
 		pane.setId("pane");
 		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		stage.setScene(scene);
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.show();
 		stage.setTitle("Sidebar test");
 		

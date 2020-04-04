@@ -40,13 +40,11 @@ public class PrisPane extends GridPane {
 		leftPane.setHgap(65);
 		leftPane.add(btnCreatePrisListe, 0, 0);
 		leftPane.add(btnDeletePrisliste, 1, 0);
-		btnDeletePrisliste.setStyle("-fx-background-color: crimson");
 
 		GridPane rightPane = new GridPane();
 		rightPane.setHgap(105);
 		rightPane.add(btnCreatePris, 0, 0);
 		rightPane.add(btnDeletePris, 1, 0);
-		btnDeletePris.setStyle("-fx-background-color: crimson");
 
 		this.add(leftPane, 0, 2);
 		this.add(rightPane, 1, 2);
@@ -95,16 +93,22 @@ public class PrisPane extends GridPane {
 	}
 
 	public void actionDeletePrisliste() {
-		controller.deletePrisListe(plView.getSelectionModel().getSelectedItem());
-		this.updatePlView();
-		controller.saveStorage();
+		ConfirmDialog cd = new ConfirmDialog();
+		if (cd.Display()) {
+			controller.deletePrisListe(plView.getSelectionModel().getSelectedItem());
+			this.updatePlView();
+			controller.saveStorage();
+		}
 	}
 
 	public void actionDeletePris() {
-		if (prisView.getSelectionModel().getSelectedItem() != null) {
-			controller.deletePris(prisView.getSelectionModel().getSelectedItem());
-			this.updatePrisView();
-			controller.saveStorage();
+		ConfirmDialog cd = new ConfirmDialog();
+		if (cd.Display()) {
+			if (prisView.getSelectionModel().getSelectedItem() != null) {
+				controller.deletePris(prisView.getSelectionModel().getSelectedItem());
+				this.updatePrisView();
+				controller.saveStorage();
+			}
 		}
 	}
 }
