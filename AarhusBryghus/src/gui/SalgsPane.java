@@ -225,7 +225,8 @@ public class SalgsPane extends GridPane {
 	}
 
 	private void actionOpenCreateKlippekort() {
-		// TODO Auto-generated method stub
+		KlippekortDialog kd = new KlippekortDialog();
+		kd.Display();
 	}
 
 	private void actionOpenCreateGaveæske() {

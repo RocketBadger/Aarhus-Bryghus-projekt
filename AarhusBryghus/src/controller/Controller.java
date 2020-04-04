@@ -20,6 +20,7 @@ import model.Rundvisning;
 import model.Salg;
 import model.SalgsLinje;
 import model.Udlejning;
+import model.Klippekort;
 import storage.Storage;
 
 public class Controller {
@@ -59,6 +60,10 @@ public class Controller {
 
 	public List<Udlejning> getAllUdlejning() {
 		return storage.getAllUdlejning();
+	}
+	
+	public List<Klippekort> getAllKlippekort() {
+		return storage.getAllKlippekort();
 	}
 
 //	Produkt metoder ----------------------------------------------
@@ -176,6 +181,16 @@ public class Controller {
 			return null;
 		}
 	}
+	
+	public SalgsLinje createSalgsLinje(double pris, Klippekort klip) {
+		try {
+			SalgsLinje sl = new SalgsLinje(pris, klip);
+			return sl;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
 
 //	Salg metoder ----------------------------------------------
 	public Salg createSalg(ArrayList<SalgsLinje> salgslinjer, BetalingsFormer betalingsform, LocalDate dato) {
@@ -195,6 +210,23 @@ public class Controller {
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);
 		}
+	}
+	
+//	Salg metoder ----------------------------------------------
+	public Klippekort createKlippekort() {
+		try {
+			Klippekort k = new Klippekort();
+			storage.storeKlippekort(k);
+			return k;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+			
+	}
+	
+	public void removeKlippekort(Klippekort klip) {
+		storage.removeKlippekort(klip);
 	}
 
 	public void createSomeObjects() {

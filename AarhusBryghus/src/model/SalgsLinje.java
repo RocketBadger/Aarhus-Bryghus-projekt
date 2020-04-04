@@ -9,6 +9,8 @@ public class SalgsLinje implements Serializable {
 	private double rabatGivet;
 	private double RPris;
 	private Rundvisning rv;
+	private double KlipPris;
+	private Klippekort kk;
 
 	public SalgsLinje(int antal, Pris pris) {
 		this.antal = antal;
@@ -18,6 +20,11 @@ public class SalgsLinje implements Serializable {
 	public SalgsLinje(double pris, Rundvisning rv) {
 		this.RPris = pris;
 		this.rv = rv;
+	}
+	
+	public SalgsLinje(double pris, Klippekort klip) {
+		this.KlipPris = pris;
+		this.kk = klip;
 	}
 
 	public int getAntal() {

@@ -11,6 +11,7 @@ import model.ProduktGruppe;
 import model.Rundvisning;
 import model.Salg;
 import model.Udlejning;
+import model.Klippekort;
 
 public class Storage implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,7 @@ public class Storage implements Serializable {
 	private List<Salg> solgt;
 	private List<Udlejning> udlejninger;
 	private List<Rundvisning> rundvisninger;
+	private List<Klippekort> klippekort;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -38,6 +40,8 @@ public class Storage implements Serializable {
 		solgt = new ArrayList<Salg>();
 		udlejninger = new ArrayList<Udlejning>();
 		rundvisninger = new ArrayList<Rundvisning>();
+		klippekort = new ArrayList<Klippekort>();
+		
 	}
 
 // Produkt metoder ----------------------------------------------
@@ -148,7 +152,27 @@ public class Storage implements Serializable {
 	public List<Salg> getAllSalg() {
 		return new ArrayList<>(solgt);
 	}
+	
+// Klippekort metoder ---------------------------------------------------------------
 
+	public void storeKlippekort(Klippekort klip) {
+		if (!klippekort.contains(klip)) {
+			klippekort.add(klip);
+		}
+	}
+	
+	public void removeKlippekort(Klippekort klip) {
+		if (klippekort.contains(klip)) {
+			klippekort.remove(klip);
+		}
+	}
+	
+	public List<Klippekort> getAllKlippekort() {
+		return new ArrayList<>(klippekort);
+	}
+	
+	
+	
 //	public ArrayList<Pris> getAllPriser() {
 //		ArrayList<Pris> priser = new ArrayList<>();
 //		for (PrisListe pl : storage.prislister) {

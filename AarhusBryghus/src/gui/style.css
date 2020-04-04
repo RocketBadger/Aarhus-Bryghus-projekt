@@ -32,12 +32,6 @@
 	-fx-text-fill: #313131;
 }
 
-
-#slet {
-	-fx-background-color: blue;
-	-fx-text-fill: red;
-}
-
 #text {
 	-fx-font-weight: bold;
 }
