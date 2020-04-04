@@ -58,7 +58,6 @@ public class Main extends Application {
 		OversigtPane oversigtspane = new OversigtPane();
 		pane.setCenter(salgspane);
 		
-		
 		// ---------- Side menu start ----------
 		DropShadow dropshadow = new DropShadow(BlurType.GAUSSIAN, Color.color(0.25, 0.25, 0.25, 0.15), 2, 5, 5, 0);
 		VBox vbxButtons = new VBox();
