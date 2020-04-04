@@ -150,11 +150,17 @@ public class SalgsPane extends GridPane {
 		andreVarerPane.setVgap(10);
 		andreVarerPane.setHgap(5);
 		andreVarerPane.setPadding(new Insets(5));
-		andreVarerPane.add(btnRundvisning, 0, 1);
-		andreVarerPane.add(btnUdlejning, 1, 1);
-		andreVarerPane.add(btnRetur, 2, 1);
-		andreVarerPane.add(btnKlippekort, 0, 2);
-		andreVarerPane.add(btnGave, 1, 2);
+		andreVarerPane.add(btnRundvisning, 0, 0);
+		andreVarerPane.add(btnUdlejning, 1, 0);
+		andreVarerPane.add(btnRetur, 0, 1);
+		andreVarerPane.add(btnKlippekort, 1, 1);
+		andreVarerPane.add(btnGave, 0, 2);
+		
+		btnRundvisning.setPrefWidth(150);
+		btnUdlejning.setPrefWidth(150);
+		btnRetur.setPrefWidth(150);
+		btnKlippekort.setPrefWidth(150);
+		btnGave.setPrefWidth(150);
 
 		RowConstraints row1 = new RowConstraints();
 		row1.setValignment(VPos.TOP);
@@ -165,15 +171,6 @@ public class SalgsPane extends GridPane {
 		this.add(btmLeftPane, 1, 1);
 		this.add(andreVarerPane, 6, 1);
 		this.add(btmRightPane, 6, 2);
-
-		btnAddSL.setId("secButton");
-		btnCreateSalg.setId("secButton");
-		btnDeleteSL.setId("secButton");
-		btnKlippekort.setId("secButton");
-		btnRundvisning.setId("secButton");
-		btnUdlejning.setId("secButton");
-		btnGave.setId("secButton");
-		btnRetur.setId("secButton");
 
 		btnAddSL.setOnAction(event -> actionOpenCreateSalgslinjeDialog());
 
