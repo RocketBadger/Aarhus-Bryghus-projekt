@@ -8,6 +8,7 @@ import model.Pris;
 import model.PrisListe;
 import model.Produkt;
 import model.ProduktGruppe;
+import model.Rundvisning;
 import model.Salg;
 import model.Udlejning;
 
@@ -20,6 +21,7 @@ public class Storage implements Serializable {
 	private List<Pris> priser;
 	private List<Salg> solgt;
 	private List<Udlejning> udlejninger;
+	private List<Rundvisning> rundvisninger;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -35,6 +37,7 @@ public class Storage implements Serializable {
 		priser = new ArrayList<Pris>();
 		solgt = new ArrayList<Salg>();
 		udlejninger = new ArrayList<Udlejning>();
+		rundvisninger = new ArrayList<Rundvisning>();
 	}
 
 // Produkt metoder ----------------------------------------------
@@ -115,7 +118,18 @@ public class Storage implements Serializable {
 	}
 
 	public List<Udlejning> getAllUdlejning() {
-		return udlejninger;
+		return new ArrayList<>(udlejninger);
+	}
+
+//	Rundvisning metoder ---------------------------------------------------------------
+	public void storeRundvisning(Rundvisning r) {
+		if (!rundvisninger.contains(r)) {
+			rundvisninger.add(r);
+		}
+	}
+
+	public List<Rundvisning> getAllRundvisning() {
+		return new ArrayList<>(rundvisninger);
 	}
 
 //	Salg metoder ---------------------------------------------------------------

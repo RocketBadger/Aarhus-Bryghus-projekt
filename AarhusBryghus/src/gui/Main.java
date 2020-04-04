@@ -87,7 +87,7 @@ public class Main extends Application {
 	}
 
 	public void salgGui() {
-		SalgNyGui salg = new SalgNyGui(window, scene);
+		SalgGui salg = new SalgGui(window, scene);
 
 		GridPane pane = new GridPane();
 		pane.add(salg, 0, 0);
@@ -99,7 +99,7 @@ public class Main extends Application {
 	}
 
 	public void produktGui() {
-		ProduktNyGui produkt = new ProduktNyGui(window, scene);
+		ProduktGui produkt = new ProduktGui(window, scene);
 
 		GridPane pane = new GridPane();
 		pane.add(produkt, 0, 0);
@@ -111,7 +111,7 @@ public class Main extends Application {
 	}
 
 	public void prisGui() {
-		PrisNyGui pris = new PrisNyGui(window, scene);
+		PrisGui pris = new PrisGui(window, scene);
 
 		GridPane pane = new GridPane();
 		pane.add(pris, 0, 0);

@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import model.Pris;
 import model.PrisListe;
 
-public class PrisNyGui extends GridPane {
+public class PrisGui extends GridPane {
 	private Controller controller;
 	private ListView<PrisListe> plView = new ListView<>();
 	private ListView<Pris> prisView = new ListView<>();
@@ -20,7 +20,7 @@ public class PrisNyGui extends GridPane {
 	private Button btnDeletePrisliste = new Button("Slet Prisliste");
 	private Button btnDeletePris = new Button("Slet pris");
 
-	public PrisNyGui(Stage stage, Scene scene) {
+	public PrisGui(Stage stage, Scene scene) {
 		controller = Controller.getController();
 
 		this.setPadding(new Insets(20));

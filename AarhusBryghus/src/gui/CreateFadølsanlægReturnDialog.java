@@ -90,10 +90,8 @@ public class CreateFadølsanlægReturnDialog extends Stage {
 			udlejninger.getSelectionModel().getSelectedItem().setReturDato(endDate.getValue());
 			udlejninger.getSelectionModel().getSelectedItem().calcRemainder(Double.parseDouble(txtRest.getText()));
 			SalgsLinje sl = controller
-					.createSalgsLinje(
-							udlejninger.getSelectionModel().getSelectedItem().getUdlejningsDato()
-									.until(udlejninger.getSelectionModel().getSelectedItem().getReturDato()).getDays(),
-							p);
+					.createSalgsLinje(udlejninger.getSelectionModel().getSelectedItem().getUdlejningsDato()
+							.until(udlejninger.getSelectionModel().getSelectedItem().getReturDato()).getDays() + 1, p);
 			linjer.add(sl);
 			controller.saveStorage();
 			this.hide();
