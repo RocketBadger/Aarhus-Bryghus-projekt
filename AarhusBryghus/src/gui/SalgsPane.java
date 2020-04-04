@@ -23,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import model.BetalingsFormer;
+import model.Pris;
 import model.Salg;
 import model.SalgsLinje;
 
@@ -155,7 +156,7 @@ public class SalgsPane extends GridPane {
 		andreVarerPane.add(btnRetur, 0, 1);
 		andreVarerPane.add(btnKlippekort, 1, 1);
 		andreVarerPane.add(btnGave, 0, 2);
-		
+
 		btnRundvisning.setPrefWidth(150);
 		btnUdlejning.setPrefWidth(150);
 		btnRetur.setPrefWidth(150);
@@ -230,7 +231,10 @@ public class SalgsPane extends GridPane {
 	}
 
 	private void actionOpenCreateGaveæske() {
-		// TODO Auto-generated method stub
+		CreateGaveæskeDialog di = new CreateGaveæskeDialog();
+		di.setOnHidden(event -> this.updateSalg(di.passLinjer()));
+		di.setOnShowing(event -> this.startSalg());
+		di.showAndWait();
 	}
 
 	private void actionAddRabat() {
@@ -246,9 +250,14 @@ public class SalgsPane extends GridPane {
 
 			}
 			if (toggleRabat.getSelectedToggle().getUserData().equals("procent")) {
+				double pris = 0;
 				double proc = Double.parseDouble(txtRabat.getText()) / 100;
-				double pris = linjeView.getSelectionModel().getSelectedItem().getPris().getPris()
-						* linjeView.getSelectionModel().getSelectedItem().getAntal();
+				if (linjeView.getSelectionModel().getSelectedItem().getGaveæske() != null) {
+					for (Pris p : linjeView.getSelectionModel().getSelectedItem().getGaveæske().getIndhold())
+						pris += p.getPris();
+				} else
+					pris = linjeView.getSelectionModel().getSelectedItem().getPris().getPris()
+							* linjeView.getSelectionModel().getSelectedItem().getAntal();
 				double procentRabat = proc * pris;
 				linjeView.getSelectionModel().getSelectedItem().givRabat(procentRabat);
 

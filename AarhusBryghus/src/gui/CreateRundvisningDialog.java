@@ -23,7 +23,7 @@ import model.SalgsLinje;
 public class CreateRundvisningDialog extends Stage {
 	private Controller controller;
 	private Label lblDato = new Label("Vælg Dato");
-	private Label lblTid = new Label("Indtast tid i form af fire tal fks. 1530");
+	private Label lblTid = new Label("Indtast tid i form af fire tal, eks. 1530");
 	private TextField txtTid = new TextField();
 	private DatePicker dp = new DatePicker();
 	private Button btnCreate = new Button("Opret rundvisning");

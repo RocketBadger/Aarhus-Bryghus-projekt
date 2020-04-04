@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Gaveæske;
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
@@ -24,6 +25,7 @@ public class Storage implements Serializable {
 	private List<Udlejning> udlejninger;
 	private List<Rundvisning> rundvisninger;
 	private List<Klippekort> klippekort;
+	private List<Gaveæske> gaveæsker;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -41,7 +43,7 @@ public class Storage implements Serializable {
 		udlejninger = new ArrayList<Udlejning>();
 		rundvisninger = new ArrayList<Rundvisning>();
 		klippekort = new ArrayList<Klippekort>();
-		
+		gaveæsker = new ArrayList<Gaveæske>();
 	}
 
 // Produkt metoder ----------------------------------------------
@@ -134,6 +136,17 @@ public class Storage implements Serializable {
 
 	public List<Rundvisning> getAllRundvisning() {
 		return new ArrayList<>(rundvisninger);
+	}
+
+//	Gaveæske metoder ---------------------------------------------------------------
+	public void storeGaveæske(Gaveæske g) {
+		if (!gaveæsker.contains(g)) {
+			gaveæsker.add(g);
+		}
+	}
+
+	public List<Gaveæske> getAllGaveæske() {
+		return new ArrayList<>(gaveæsker);
 	}
 
 //	Salg metoder ---------------------------------------------------------------
