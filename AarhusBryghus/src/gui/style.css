@@ -1,65 +1,43 @@
-#pane {
-	-fx-background-image: url("background.jpg");
-    	-fx-background-repeat: stretch;   
-    	-fx-background-size: 700 600;
-    	-fx-background-position: center;
-}
-
-#salgGui {
-	-fx-background-image: url("background2.jpg");
-    	-fx-background-repeat: stretch;   
-    	-fx-background-size: 725 600;
-    	-fx-background-position: center;
-}
-
-#produktGui {
-	-fx-background-image: url("background1.jpg");
-	-fx-background-repeat: stretch;  
-    	-fx-background-size: 625 500;
-    	-fx-background-position: center;
-}
-
-#prisGui {
-	-fx-background-image: url("bgDark.jpg");
-	-fx-background-repeat: stretch;  
-    	-fx-background-size: 625 500;
-    	-fx-background-position: center;
-}
-
-#oversigtGui {
-	-fx-background-image: url("ABLOGO.png");
-	-fx-background-repeat: stretch;  
-    	-fx-background-size: 960 450;
-    	-fx-background-position: center;
-}
-
-#button {
-	-fx-font-size: 1.75em;
-	-fx-pref-height: 75;
-	-fx-pref-width: 400;
-	-fx-background-color: 
-        #c3c4c4,
+.button {
+	-fx-background-color: #c3c4c4,
         linear-gradient(#d6d6d6 50%, white 100%),
         radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
-    	-fx-background-radius: 30;
-    	-fx-background-insets: 0,1,1;
-    	-fx-text-fill: black;
+    	-fx-background-insets: 0,1,1;    	
+	-fx-background-radius: 5;
+    	-fx-text-fill: #373737;
+	-fx-font-weight: bold;
     	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
 
-#secButton {
-	-fx-background-color: 
-        #c3c4c4,
+.button:armed {
+	-fx-background-insets: 0,3,3;
+	-fx-text-fill: #313131;
+}
+
+#MainButton {
+	-fx-pref-height: 50;
+	-fx-pref-width: 235;
+	-fx-background-color: #ababab,
         linear-gradient(#d6d6d6 50%, white 100%),
         radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
-    	-fx-background-radius: 30;
-    	-fx-background-insets: 0,1,1;
-    	-fx-text-fill: black;
+    	-fx-background-insets: 0,1,1;    	
+	-fx-background-radius: 5;
+    	-fx-text-fill: #373737;
+	-fx-font-weight: bold;
     	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+#MainButton:armed {
+	-fx-background-insets: 0,3,3;
+	-fx-text-fill: #313131;
+}
+
+
+#slet {
+	-fx-background-color: blue;
+	-fx-text-fill: red;
 }
 
 #text {
-	-fx-text-fill: white;
 	-fx-font-weight: bold;
 }
-
