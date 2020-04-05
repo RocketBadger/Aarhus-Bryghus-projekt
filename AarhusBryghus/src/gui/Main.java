@@ -33,11 +33,11 @@ public class Main extends Application {
 		BorderPane pane = new BorderPane();
 		this.initContent(pane);
 
-		Scene scene = new Scene(pane, 1000, 600);
+		Scene scene = new Scene(pane, 1000, 650);
 		pane.setId("pane");
 		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		stage.setScene(scene);
-		stage.setResizable(true);
+		stage.setResizable(false);
 		stage.show();
 
 	}
