@@ -39,10 +39,6 @@ public class Main extends Application {
 		stage.setScene(scene);
 		stage.setResizable(true);
 		stage.show();
-		stage.setTitle("Sidebar test");
-
-		stage.setScene(scene);
-		stage.show();
 
 	}
 
