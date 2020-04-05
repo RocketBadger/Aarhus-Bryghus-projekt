@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Gaveæske;
+import model.Klippekort;
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
@@ -12,7 +13,6 @@ import model.ProduktGruppe;
 import model.Rundvisning;
 import model.Salg;
 import model.Udlejning;
-import model.Klippekort;
 
 public class Storage implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -165,7 +165,7 @@ public class Storage implements Serializable {
 	public List<Salg> getAllSalg() {
 		return new ArrayList<>(solgt);
 	}
-	
+
 // Klippekort metoder ---------------------------------------------------------------
 
 	public void storeKlippekort(Klippekort klip) {
@@ -173,34 +173,14 @@ public class Storage implements Serializable {
 			klippekort.add(klip);
 		}
 	}
-	
+
 	public void removeKlippekort(Klippekort klip) {
 		if (klippekort.contains(klip)) {
 			klippekort.remove(klip);
 		}
 	}
-	
+
 	public List<Klippekort> getAllKlippekort() {
 		return new ArrayList<>(klippekort);
 	}
-	
-	
-	
-//	public ArrayList<Pris> getAllPriser() {
-//		ArrayList<Pris> priser = new ArrayList<>();
-//		for (PrisListe pl : storage.prislister) {
-//			for (Pris p : pl.getAllPriser()) {
-//				priser.add(p);
-//			}
-//		}
-//		return priser;
-//	}
-
-//	public void removePris(Pris p) {
-//		for (PrisListe pl : storage.getAllPrisLister()) {
-//			if (p.getPrisListe() == pl) {
-//				pl.removePris(p);
-//			}
-//		}
-//	}
 }
