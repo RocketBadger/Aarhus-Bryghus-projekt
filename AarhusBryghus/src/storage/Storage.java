@@ -26,6 +26,7 @@ public class Storage implements Serializable {
 	private List<Rundvisning> rundvisninger;
 	private List<Klippekort> klippekort;
 	private List<Gaveæske> gaveæsker;
+	private List<Integer> klipId;
 
 	public static Storage getStorage() {
 		if (storage == null) {
@@ -44,6 +45,8 @@ public class Storage implements Serializable {
 		rundvisninger = new ArrayList<Rundvisning>();
 		klippekort = new ArrayList<Klippekort>();
 		gaveæsker = new ArrayList<Gaveæske>();
+		klipId = new ArrayList<Integer>();
+		
 	}
 
 // Produkt metoder ----------------------------------------------
@@ -174,6 +177,10 @@ public class Storage implements Serializable {
 		}
 	}
 	
+	public void storeKlipId(Klippekort klip) {
+		klipId.add(klip.getKlipId());
+	}
+	
 	public void removeKlippekort(Klippekort klip) {
 		if (klippekort.contains(klip)) {
 			klippekort.remove(klip);
@@ -183,6 +190,8 @@ public class Storage implements Serializable {
 	public List<Klippekort> getAllKlippekort() {
 		return new ArrayList<>(klippekort);
 	}
+	
+	
 	
 	
 	

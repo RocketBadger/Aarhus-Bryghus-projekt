@@ -27,12 +27,12 @@ public class OversigtPane extends GridPane {
 			int antal = 0;
 			if (controller.getAllKlippekort() != null) {
 				for (Klippekort k : controller.getAllKlippekort()) {
+					k.getAntalKlip();
 					antal++;
-					System.out.println(k.getKlipId());
 				}	
 			}
 			lblAntal.setText(antal+"");
-			this.add(lblAntal, 0, 1);
 		});
+		this.add(lblAntal, 0, 1);
 	}
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Klippekort;
 import model.SalgsLinje;
 
 
@@ -54,10 +55,12 @@ public class KlippekortDialog  extends Stage {
 		if (!txfAntal.getText().trim().isEmpty()) {
 			antal = Integer.parseInt(txfAntal.getText().trim());
 			for (int i = 1; i <= antal; i++) {
-				SalgsLinje sl = controller.createSalgsLinje(100, controller.createKlippekort());
+				Klippekort k = new Klippekort();
+				SalgsLinje sl = controller.createSalgsLinje(100, k);
 				linjer.add(sl);
 				controller.saveStorage();
 			}
+			this.hide();
 		}
 	}
 	
