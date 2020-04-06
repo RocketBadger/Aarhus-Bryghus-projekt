@@ -11,6 +11,10 @@ public class Produkt implements Serializable {
 		this.navn = navn;
 		this.produktGruppe = produktGruppe;
 	}
+	
+	public Produkt(String navn) {
+		this.navn = navn;
+	}
 
 	public String getNavn() {
 		return navn;

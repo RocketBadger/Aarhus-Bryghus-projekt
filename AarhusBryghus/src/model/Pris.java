@@ -13,6 +13,11 @@ public class Pris implements Serializable {
 		this.prisliste = prisliste;
 		this.pris = pris;
 	}
+	
+	public Pris(Produkt produkt, int pris) {
+		this.produkt = produkt;
+		this.pris = pris;
+	}
 
 	public Produkt getProdukt() {
 		return produkt;
