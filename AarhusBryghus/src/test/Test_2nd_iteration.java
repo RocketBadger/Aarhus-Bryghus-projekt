@@ -29,7 +29,7 @@ public class Test_2nd_iteration {
 	}
 
 	@Test
-	public void textCreatePrisliste() {
+	public void testCreatePrisliste() {
 		assertEquals("Butik", prisliste.getNavn());
 		assertTrue(prisliste.getAllPriser().contains(pris));
 	}

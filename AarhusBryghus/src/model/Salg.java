@@ -10,7 +10,6 @@ public class Salg implements Serializable {
 	private List<SalgsLinje> salgsLinjer;
 	private BetalingsFormer betalingsform;
 	private LocalDate dato;
-	private double reelPris;
 
 	public Salg(ArrayList<SalgsLinje> salgslinjer, BetalingsFormer betalingsform, LocalDate dato) {
 		this.salgsLinjer = salgslinjer;
@@ -21,7 +20,9 @@ public class Salg implements Serializable {
 	/**
 	 * Pre: salgslinjer != null
 	 * 
-	 * @return Returnerer samlet pris for en salgslinje.
+	 * Beregner den samlede pris for alle salgslinjer tilhørende salget
+	 * 
+	 * @return Returnerer samlet pris.
 	 */
 	public double beregnSamletListePris() {
 		double i = 0;
@@ -31,13 +32,12 @@ public class Salg implements Serializable {
 			} else if (s.getGavePriser() != null) {
 				for (Pris p : s.getGavePriser()) {
 					i += p.getPris();
-				} 
+				}
 			} else if (s.getKlippekort() != null) {
-				i +=s.getKlipPris();
+				i += s.getKlipPris();
 			} else
 				i += (s.getPris().getPris() * s.getAntal());
 		}
-		this.reelPris = i;
 		return i;
 	}
 
@@ -83,6 +83,6 @@ public class Salg implements Serializable {
 	}
 
 	public double getReelPris() {
-		return reelPris;
+		return beregnSamletListePris() - beregnSamletRabat();
 	}
 }

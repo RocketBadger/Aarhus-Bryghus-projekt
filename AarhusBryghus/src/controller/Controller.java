@@ -13,6 +13,7 @@ import java.util.List;
 
 import model.BetalingsFormer;
 import model.Gaveæske;
+import model.Klippekort;
 import model.Pris;
 import model.PrisListe;
 import model.Produkt;
@@ -21,7 +22,6 @@ import model.Rundvisning;
 import model.Salg;
 import model.SalgsLinje;
 import model.Udlejning;
-import model.Klippekort;
 import storage.Storage;
 
 public class Controller {
@@ -62,7 +62,7 @@ public class Controller {
 	public List<Udlejning> getAllUdlejning() {
 		return storage.getAllUdlejning();
 	}
-	
+
 	public List<Klippekort> getAllKlippekort() {
 		return storage.getAllKlippekort();
 	}
@@ -103,7 +103,7 @@ public class Controller {
 		storage.removeProduktGruppe(pg);
 	}
 
-//	Fadølsanlæg metoder ----------------------------------------------
+//	Udlejning metoder ----------------------------------------------
 	public Udlejning createUdlejning(Produkt pr, LocalDate dato, Double ltr) {
 		try {
 			Udlejning f = new Udlejning(pr, dato, ltr);
@@ -194,7 +194,7 @@ public class Controller {
 			return null;
 		}
 	}
-	
+
 	public SalgsLinje createSalgsLinje(double pris, Klippekort klip) {
 		try {
 			SalgsLinje sl = new SalgsLinje(pris, klip);
@@ -234,7 +234,7 @@ public class Controller {
 			System.out.println("Message: " + i);
 		}
 	}
-	
+
 //	Salg metoder ----------------------------------------------
 	public Klippekort createKlippekort() {
 		try {
@@ -245,9 +245,9 @@ public class Controller {
 			System.out.println("Message: " + i);
 			return null;
 		}
-			
+
 	}
-	
+
 	public void removeKlippekort(Klippekort klip) {
 		storage.removeKlippekort(klip);
 	}
