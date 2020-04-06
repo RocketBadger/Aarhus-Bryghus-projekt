@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.BetalingsFormer;
+import model.Klippekort;
 import model.Salg;
 
 public class OversigtPane extends GridPane {
@@ -36,19 +37,19 @@ public class OversigtPane extends GridPane {
 		this.setGridLinesVisible(false);
 		
 		TableColumn<TableColumns, String> navnColumn = new TableColumn<>("Produkt:");
-		navnColumn.setMinWidth(120);
+		navnColumn.setMinWidth(135);
 		navnColumn.setCellValueFactory(new PropertyValueFactory<>("produktNavn"));
 		
 		TableColumn<TableColumns, Integer> antalColumn = new TableColumn<>("Antal:");
-		antalColumn.setMinWidth(125);
+		antalColumn.setMinWidth(135);
 		antalColumn.setCellValueFactory(new PropertyValueFactory<>("produktAntal"));
 		
 		TableColumn<TableColumns, Double> prisColumn = new TableColumn<>("Stk. Pris:");
-		prisColumn.setMinWidth(125);
+		prisColumn.setMinWidth(135);
 		prisColumn.setCellValueFactory(new PropertyValueFactory<>("produktPris"));
 		
 		TableColumn<TableColumns, Double> samletPrisColumn = new TableColumn<>("Samlet Pris:");
-		samletPrisColumn.setMinWidth(125);
+		samletPrisColumn.setMinWidth(135);
 		samletPrisColumn.setCellValueFactory(new PropertyValueFactory<>("samletPris"));
 		
 		TableColumn<TableColumns, String> betalingsformColumn = new TableColumn<>("Betalingsform:");
@@ -78,16 +79,19 @@ public class OversigtPane extends GridPane {
 		
 		popupContent.setOnMouseClicked(e -> tableView.setItems(getColumns()));
 
-//		btnUbrugteKlippekort.setOnAction(e -> {
-//			int antal = 0;
-//			if (controller.getAllKlippekort() != null) {
-//				for (Klippekort k : controller.getAllKlippekort()) {
-//					k.getAntalKlip();
-//					antal++;
-//				}
-//			}
-//			lblAntal.setText(antal + "");
-//		});
+		visKlippekort.setOnAction(e -> {
+			int antal = 0;
+			double klip = 0;
+			ObservableList<TableColumns> t = FXCollections.observableArrayList();
+			if (controller.getAllKlippekort() != null) {
+				for (Klippekort k : controller.getAllKlippekort()) {
+					klip = k.getAntalKlip();
+					antal++;
+					t.add(new TableColumns(antal, klip));
+				}
+			}
+			tableView.setItems(t);
+		});
 	}
 	
 	public ObservableList<TableColumns> getColumns() {
