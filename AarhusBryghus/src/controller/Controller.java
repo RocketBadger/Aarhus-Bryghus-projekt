@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.BetalingsFormer;
 import model.Gaveæske;
@@ -196,6 +197,7 @@ public class Controller {
 	}
 
 	public SalgsLinje createSalgsLinje(double pris, Klippekort klip) {
+
 		try {
 			SalgsLinje sl = new SalgsLinje(pris, klip);
 			return sl;
@@ -239,6 +241,7 @@ public class Controller {
 	public Klippekort createKlippekort() {
 		try {
 			Klippekort k = new Klippekort();
+			
 			storage.storeKlippekort(k);
 			return k;
 		} catch (IllegalArgumentException i) {
@@ -259,6 +262,7 @@ public class Controller {
 		this.createProduktGruppe("Øl på fustage");
 		this.createProduktGruppe("Spiritus");
 		this.createProduktGruppe("Merchandise");
+		this.createProduktGruppe("Klippekort");
 
 		// Produkter oprettes
 		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(0));
@@ -273,11 +277,12 @@ public class Controller {
 		this.createPrisListe("Julefrokost");
 
 		// Priser oprettes
+		this.createPris(storage.getAllProdukter().get(2), storage.getAllPrisLister().get(0), 150);
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(0), 15);
 		this.createPris(storage.getAllProdukter().get(1), storage.getAllPrisLister().get(0), 40);
 		this.createPris(storage.getAllProdukter().get(3), storage.getAllPrisLister().get(0), 300);
 		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 10);
-		this.createPris(storage.getAllProdukter().get(2), storage.getAllPrisLister().get(1), 150);
+		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 150);
 
 		File saveFile = new File("src/storage.ser");
 		if (!saveFile.exists()) {
