@@ -259,28 +259,122 @@ public class Controller {
 		this.createProduktGruppe("Øl på fustage");
 		this.createProduktGruppe("Spiritus");
 		this.createProduktGruppe("Merchandise");
-		this.createProduktGruppe("Klippekort");
+		this.createProduktGruppe("Ikke alkoholisk");
+		this.createProduktGruppe("Malt");
 
 		// Produkter oprettes
 		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Sweet Georgia Brown", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Extra Pilsner", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Celebration", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Blondie", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Forårsbryg", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("India Pale Ale", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Julebryg", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Juletønden", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Old Strong Ale", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Fregatten Jylland", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Imperial Stout", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Tribute", storage.getAllProduktGrupper().get(0));
+		this.createProdukt("Black Monster", storage.getAllProduktGrupper().get(0));
+
 		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(1));
-		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Jazz Classic", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Extra Pilsner", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Celebration", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Blondie", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Forårsbryg", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("India Pale Ale", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Julebryg", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Imperial Stout", storage.getAllProduktGrupper().get(1));
+		this.createProdukt("Special", storage.getAllProduktGrupper().get(1));
+
+		this.createProdukt("Æblebrus", storage.getAllProduktGrupper().get(5));
+		this.createProdukt("Chips", storage.getAllProduktGrupper().get(5));
+		this.createProdukt("Peanuts", storage.getAllProduktGrupper().get(5));
+		this.createProdukt("Cola", storage.getAllProduktGrupper().get(5));
+		this.createProdukt("Nikoline", storage.getAllProduktGrupper().get(5));
+		this.createProdukt("7-Up", storage.getAllProduktGrupper().get(5));
+		this.createProdukt("Vand", storage.getAllProduktGrupper().get(5));
+
+		this.createProdukt("Spirit of Aarhus", storage.getAllProduktGrupper().get(3));
+		this.createProdukt("SOA med pind", storage.getAllProduktGrupper().get(3));
 		this.createProdukt("Whisky", storage.getAllProduktGrupper().get(3));
-		this.createProdukt("Hat med logo", storage.getAllProduktGrupper().get(4));
+		this.createProdukt("Liquor of Aarhus", storage.getAllProduktGrupper().get(3));
+
+		this.createProdukt("Klosterbryg", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Jazz Classic", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Extra Pilsner", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Celebration", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Blondie", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Forårsbryg", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("India Pale Ale", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Julebryg", storage.getAllProduktGrupper().get(2));
+		this.createProdukt("Imperial Stout", storage.getAllProduktGrupper().get(2));
+
+		this.createProdukt("25kg sæk", storage.getAllProduktGrupper().get(6));
+
+		this.createProdukt("T-shirt", storage.getAllProduktGrupper().get(4));
+		this.createProdukt("Polo", storage.getAllProduktGrupper().get(4));
+		this.createProdukt("Cap", storage.getAllProduktGrupper().get(4));
+		this.createProdukt("Glas", storage.getAllProduktGrupper().get(4));
 
 		// Prislister oprettes
 		this.createPrisListe("Fredagsbar");
 		this.createPrisListe("Butikssalg");
-		this.createPrisListe("Julefrokost");
 
 		// Priser oprettes
-		this.createPris(storage.getAllProdukter().get(2), storage.getAllPrisLister().get(0), 150);
-		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(0), 15);
-		this.createPris(storage.getAllProdukter().get(1), storage.getAllPrisLister().get(0), 40);
-		this.createPris(storage.getAllProdukter().get(3), storage.getAllPrisLister().get(0), 300);
-		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 10);
-		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(1), 150);
+		this.createPris(storage.getAllProdukter().get(0), storage.getAllPrisLister().get(0), 70);
+		for (int i = 0; i < 13; i++) {
+			this.createPris(storage.getAllProdukter().get(i), storage.getAllPrisLister().get(0), 70);
+			this.createPris(storage.getAllProdukter().get(i), storage.getAllPrisLister().get(1), 36);
+		}
 
+		this.createPris(storage.getAllProdukter().get(13), storage.getAllPrisLister().get(0), 100);
+		this.createPris(storage.getAllProdukter().get(13), storage.getAllPrisLister().get(1), 60);
+
+		for (int i = 14; i < 24; i++) {
+			this.createPris(storage.getAllProdukter().get(i), storage.getAllPrisLister().get(0), 38);
+		}
+
+		this.createPris(storage.getAllProdukter().get(24), storage.getAllPrisLister().get(0), 15);
+		this.createPris(storage.getAllProdukter().get(25), storage.getAllPrisLister().get(0), 10);
+		this.createPris(storage.getAllProdukter().get(26), storage.getAllPrisLister().get(0), 15);
+		this.createPris(storage.getAllProdukter().get(27), storage.getAllPrisLister().get(0), 15);
+		this.createPris(storage.getAllProdukter().get(28), storage.getAllPrisLister().get(0), 15);
+		this.createPris(storage.getAllProdukter().get(29), storage.getAllPrisLister().get(0), 15);
+		this.createPris(storage.getAllProdukter().get(30), storage.getAllPrisLister().get(0), 10);
+
+		this.createPris(storage.getAllProdukter().get(31), storage.getAllPrisLister().get(0), 300);
+		this.createPris(storage.getAllProdukter().get(31), storage.getAllPrisLister().get(1), 300);
+		this.createPris(storage.getAllProdukter().get(32), storage.getAllPrisLister().get(0), 350);
+		this.createPris(storage.getAllProdukter().get(32), storage.getAllPrisLister().get(1), 350);
+		this.createPris(storage.getAllProdukter().get(33), storage.getAllPrisLister().get(0), 500);
+		this.createPris(storage.getAllProdukter().get(33), storage.getAllPrisLister().get(1), 500);
+		this.createPris(storage.getAllProdukter().get(34), storage.getAllPrisLister().get(0), 175);
+		this.createPris(storage.getAllProdukter().get(34), storage.getAllPrisLister().get(1), 175);
+
+		this.createPris(storage.getAllProdukter().get(35), storage.getAllPrisLister().get(1), 775);
+		this.createPris(storage.getAllProdukter().get(36), storage.getAllPrisLister().get(1), 625);
+		this.createPris(storage.getAllProdukter().get(37), storage.getAllPrisLister().get(1), 575);
+		this.createPris(storage.getAllProdukter().get(38), storage.getAllPrisLister().get(1), 775);
+		this.createPris(storage.getAllProdukter().get(39), storage.getAllPrisLister().get(1), 700);
+		this.createPris(storage.getAllProdukter().get(40), storage.getAllPrisLister().get(1), 775);
+		this.createPris(storage.getAllProdukter().get(41), storage.getAllPrisLister().get(1), 775);
+		this.createPris(storage.getAllProdukter().get(42), storage.getAllPrisLister().get(1), 775);
+		this.createPris(storage.getAllProdukter().get(43), storage.getAllPrisLister().get(1), 775);
+
+		this.createPris(storage.getAllProdukter().get(44), storage.getAllPrisLister().get(1), 300);
+
+		this.createPris(storage.getAllProdukter().get(45), storage.getAllPrisLister().get(0), 70);
+		this.createPris(storage.getAllProdukter().get(45), storage.getAllPrisLister().get(1), 70);
+		this.createPris(storage.getAllProdukter().get(46), storage.getAllPrisLister().get(0), 100);
+		this.createPris(storage.getAllProdukter().get(46), storage.getAllPrisLister().get(1), 100);
+		this.createPris(storage.getAllProdukter().get(47), storage.getAllPrisLister().get(0), 30);
+		this.createPris(storage.getAllProdukter().get(47), storage.getAllPrisLister().get(1), 30);
+		this.createPris(storage.getAllProdukter().get(48), storage.getAllPrisLister().get(1), 15);
+
+//		Serializable metoder
 		File saveFile = new File("src/storage.ser");
 		if (!saveFile.exists()) {
 			this.saveStorage();

@@ -230,7 +230,7 @@ public class SalgsPane extends GridPane {
 		kd.setOnHidden(e -> this.updateSalg(kd.passLinjer()));
 		kd.setOnShowing(e -> this.startSalg());
 		kd.showAndWait();
-		
+
 	}
 
 	private void actionOpenCreateGaveæske() {
@@ -318,6 +318,9 @@ public class SalgsPane extends GridPane {
 		this.updateInfo();
 	}
 
+	/**
+	 * Opdaterer prisen og diverse knapper rundt omkring i salgsGUI
+	 */
 	private void updateInfo() {
 		linjeView.getItems().setAll(s.getSalgsLinjer());
 		if (s.getSalgsLinjer().isEmpty()) {
