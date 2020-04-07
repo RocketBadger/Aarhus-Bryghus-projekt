@@ -29,7 +29,7 @@ public class Controller {
 	private static Controller controller;
 
 	private Controller() {
-		storage = new Storage();
+		Controller.storage = Storage.getStorage();
 	}
 
 	public static Controller getController() {
