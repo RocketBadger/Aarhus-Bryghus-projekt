@@ -78,7 +78,7 @@ public class CreateFadølsanlægReturnDialog extends Stage {
 	}
 
 	private void actionReturnUdlejning() {
-		if (Double.parseDouble(txtRest.getText()) > 0) {
+		if (Double.parseDouble(txtRest.getText()) > -1) {
 			Pris p = null;
 			for (PrisListe pl : controller.getAllPrisLister()) {
 				for (Pris pr : pl.getAllPriser()) {
@@ -88,10 +88,12 @@ public class CreateFadølsanlægReturnDialog extends Stage {
 				}
 			}
 			udlejninger.getSelectionModel().getSelectedItem().setReturDato(endDate.getValue());
-			udlejninger.getSelectionModel().getSelectedItem().calcRemainder(Double.parseDouble(txtRest.getText()));
+			double rest = udlejninger.getSelectionModel().getSelectedItem()
+					.calcRemainder(Double.parseDouble(txtRest.getText()));
 			SalgsLinje sl = controller
 					.createSalgsLinje(udlejninger.getSelectionModel().getSelectedItem().getUdlejningsDato()
 							.until(udlejninger.getSelectionModel().getSelectedItem().getReturDato()).getDays() + 1, p);
+			sl.givRabat((rest * udlejninger.getSelectionModel().getSelectedItem().getStørrelse()) * 100);
 			linjer.add(sl);
 			controller.saveStorage();
 			this.hide();
