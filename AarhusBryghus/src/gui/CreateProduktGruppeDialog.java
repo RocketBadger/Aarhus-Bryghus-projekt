@@ -16,7 +16,6 @@ public class CreateProduktGruppeDialog extends Stage {
 	private Controller controller;
 	private TextField txtNavn = new TextField();
 	private Button btnCreate = new Button("Opret produktgruppe");
-//	private Button btnNvm = new Button("Fortryd");
 	private Label lblNavn = new Label("Indtast navn på produktgruppe:");
 
 	public CreateProduktGruppeDialog() {

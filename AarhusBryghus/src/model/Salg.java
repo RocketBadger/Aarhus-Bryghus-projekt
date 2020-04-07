@@ -79,6 +79,14 @@ public class Salg implements Serializable {
 		return dato;
 	}
 
+	/**
+	 * Pre: Salget har mindst een tilknyttet salgslinje
+	 * 
+	 * Beregner den pris som egentlig skal betales. Dvs prisen på alle varene
+	 * fratrukket alle rabatter
+	 * 
+	 * @return Den reele pris, til betaling
+	 */
 	public double getReelPris() {
 		return beregnSamletListePris() - beregnSamletRabat();
 	}

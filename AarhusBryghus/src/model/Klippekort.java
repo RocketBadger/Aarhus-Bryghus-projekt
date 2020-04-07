@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Klippekort implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private int antalKlip;
 
 	public Klippekort() {

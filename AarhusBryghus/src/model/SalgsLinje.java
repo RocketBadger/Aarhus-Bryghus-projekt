@@ -10,9 +10,9 @@ public class SalgsLinje implements Serializable {
 	private Pris pris;
 	private double rabatGivet;
 
-	private double RPris;
+	private double rPris;
 	private Rundvisning rv;
-	private double KlipPris;
+	private double klipPris;
 	private Klippekort klippekort;
 
 	private List<Pris> gavePriser;
@@ -24,12 +24,12 @@ public class SalgsLinje implements Serializable {
 	}
 
 	public SalgsLinje(double pris, Rundvisning rv) {
-		this.RPris = pris;
+		this.rPris = pris;
 		this.rv = rv;
 	}
-	
+
 	public SalgsLinje(double pris, Klippekort klip) {
-		this.KlipPris = pris;
+		this.klipPris = pris;
 		this.klippekort = klip;
 	}
 
@@ -55,7 +55,7 @@ public class SalgsLinje implements Serializable {
 	}
 
 	public double getRundVisPris() {
-		return RPris;
+		return rPris;
 	}
 
 	public Rundvisning getRundvisning() {
@@ -65,7 +65,7 @@ public class SalgsLinje implements Serializable {
 	public ArrayList<Pris> getGavePriser() {
 		if (gavePriser != null) {
 			return new ArrayList<>(gavePriser);
-		} 
+		}
 		return null;
 
 	}
@@ -73,15 +73,15 @@ public class SalgsLinje implements Serializable {
 	public Gaveæske getGaveæske() {
 		return gaveæske;
 	}
-	
+
 	public double getKlipPris() {
-		return KlipPris;
+		return klipPris;
 	}
-	
+
 	public Klippekort getKlippekort() {
 		return klippekort;
 	}
-	
+
 	@Override
 	public String toString() {
 		if (rabatGivet > 0) {
@@ -98,7 +98,7 @@ public class SalgsLinje implements Serializable {
 			} else
 				return pris.toString() + ", " + antal + " styk, \n" + rabatGivet + " kr i rabat";
 		} else {
-			if (pris.getProdukt() != null ) {
+			if (pris.getProdukt() != null) {
 				if (pris != null && pris.getProdukt().getProduktGruppe().getNavn().equals("Øl på fustage")) {
 					return pris.toString() + ", " + antal + " dage";
 				}

@@ -240,6 +240,12 @@ public class SalgsPane extends GridPane {
 		di.showAndWait();
 	}
 
+	/**
+	 * Pre: Der er salgslinjer tilknyttet salget
+	 * 
+	 * Tilføjer rabat tilsvarende valgt type og tal indtastet til den valgte
+	 * salgslinje
+	 */
 	private void actionAddRabat() {
 		int selected = 0;
 		if (linjeView.getSelectionModel().getSelectedItem() != null) {

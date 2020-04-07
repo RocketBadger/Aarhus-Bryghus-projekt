@@ -24,7 +24,7 @@ public class CreateFadølsanlægUdlejningDialog extends Stage {
 	private Label lblProd = new Label("Vælg Produkt:");
 	private ComboBox<Produkt> produktCombo = new ComboBox<>();
 	private Button btnCreate = new Button("Opret Udlejning");
-	private DatePicker Dp = new DatePicker();
+	private DatePicker dp = new DatePicker();
 	private TextField txtSt = new TextField();
 	private Label lblSt = new Label("Indtast størrelse i ltr:");
 
@@ -48,7 +48,7 @@ public class CreateFadølsanlægUdlejningDialog extends Stage {
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
 
-		pane.add(Dp, 0, 0);
+		pane.add(dp, 0, 0);
 		pane.add(lblProd, 0, 1);
 		lblProd.setStyle("-fx-font-weight: bold");
 		pane.add(produktCombo, 0, 2);
@@ -59,7 +59,7 @@ public class CreateFadølsanlægUdlejningDialog extends Stage {
 
 		btnCreate.setOnAction(event -> actionCreateFadølsUdlejning());
 
-		Dp.setValue(LocalDate.now());
+		dp.setValue(LocalDate.now());
 
 		for (PrisListe pl : controller.getAllPrisLister()) {
 			for (Pris p : pl.getAllPriser()) {
@@ -73,7 +73,7 @@ public class CreateFadølsanlægUdlejningDialog extends Stage {
 
 	private void actionCreateFadølsUdlejning() {
 		if (Double.parseDouble(txtSt.getText()) > 0) {
-			controller.createUdlejning(produktCombo.getSelectionModel().getSelectedItem(), Dp.getValue(),
+			controller.createUdlejning(produktCombo.getSelectionModel().getSelectedItem(), dp.getValue(),
 					Double.parseDouble(txtSt.getText()));
 			controller.saveStorage();
 			this.hide();

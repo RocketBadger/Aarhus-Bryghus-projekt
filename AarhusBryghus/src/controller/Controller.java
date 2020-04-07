@@ -63,10 +63,6 @@ public class Controller {
 		return storage.getAllUdlejning();
 	}
 
-	public List<Klippekort> getAllKlippekort() {
-		return storage.getAllKlippekort();
-	}
-
 //	Produkt metoder ----------------------------------------------
 	public Produkt createProdukt(String navn, ProduktGruppe produktGruppe) {
 		try {

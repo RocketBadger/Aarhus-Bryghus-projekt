@@ -22,14 +22,11 @@ import model.SalgsLinje;
 public class CreateGaveæskeDialog extends Stage {
 	private Controller controller;
 	private Label lblPrisListe = new Label("Vælg prislisten:");
-	private Label lblProd = new Label("Vælg produkter at tilføje (tryk CTRL imens for multiple selection)");
-
+	private Label lblProd = new Label("Vælg produkter at tilføje (hold CTRL for multiple selection)");
 	private ComboBox<PrisListe> lister = new ComboBox<>();
 	private ListView<Pris> produkter = new ListView<>();
-
 	private Button btnCreate = new Button("Tilføj highlightede varer");
 	private Button btnDone = new Button("Afslut");
-
 	private ArrayList<Pris> GÆindhold = new ArrayList<>();
 	private ArrayList<SalgsLinje> gaveæskeSL = new ArrayList<>();
 
