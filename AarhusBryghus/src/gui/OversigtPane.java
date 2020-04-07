@@ -79,19 +79,6 @@ public class OversigtPane extends GridPane {
 		
 		popupContent.setOnMouseClicked(e -> tableView.setItems(getColumns()));
 
-		visKlippekort.setOnAction(e -> {
-			int antal = 0;
-			double klip = 0;
-			ObservableList<TableColumns> t = FXCollections.observableArrayList();
-			if (controller.getAllKlippekort() != null) {
-				for (Klippekort k : controller.getAllKlippekort()) {
-					klip = k.getAntalKlip();
-					antal++;
-					t.add(new TableColumns(antal, klip));
-				}
-			}
-			tableView.setItems(t);
-		});
 	}
 	
 	public ObservableList<TableColumns> getColumns() {
@@ -99,13 +86,17 @@ public class OversigtPane extends GridPane {
 		for (Salg s : controller.getAllSalg()) {
 			if (datepicker.getValue().equals(s.getDato())) {
 				for (int i = 0; i < s.getSalgsLinjer().size(); i++) {
-					if (s.getSalgsLinjer().get(i).getPris() != null) {
+					if (s.getSalgsLinjer().get(i).getPris() != null && s.getSalgsLinjer().get(i).getPris().getProdukt() != null) {
 						String navn = s.getSalgsLinjer().get(i).getPris().getProdukt().getNavn();
 						int antal = s.getSalgsLinjer().get(i).getAntal();
 						double enkelPris = s.getSalgsLinjer().get(i).getPris().getPris();
 						double samletPris = s.getReelPris();
 						BetalingsFormer betalingsform = s.getBetalingsform();
 						tableColumns.add(new TableColumns(navn, antal, enkelPris, samletPris, betalingsform));
+					} else if (s.getSalgsLinjer().get(i).getPris() != null && s.getSalgsLinjer().get(i).getPris().getKlippekort() != null) {
+						String navn = s.getSalgsLinjer().get(i).getPris().getKlippekort().toString();
+						BetalingsFormer betalingsform = s.getBetalingsform();
+						tableColumns.add(new TableColumns(navn, betalingsform));
 					}
 				}
 			}

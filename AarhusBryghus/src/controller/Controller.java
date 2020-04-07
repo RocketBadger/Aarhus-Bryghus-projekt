@@ -168,6 +168,17 @@ public class Controller {
 			return null;
 		}
 	}
+	
+	public Pris createPris(Klippekort klip, int pris) {
+		try {
+			Pris samletpris = new Pris(klip, pris);
+			storage.storePris(samletpris);
+			return samletpris;
+		} catch (IllegalArgumentException i) {
+			System.out.println("Message: " + i);
+			return null;
+		}
+	}
 
 	public void deletePris(Pris p) {
 		storage.removePris(p);
@@ -189,17 +200,6 @@ public class Controller {
 	public SalgsLinje createSalgsLinje(double pris, Rundvisning r) {
 		try {
 			SalgsLinje sl = new SalgsLinje(pris, r);
-			return sl;
-		} catch (IllegalArgumentException i) {
-			System.out.println("Message: " + i);
-			return null;
-		}
-	}
-
-	public SalgsLinje createSalgsLinje(double pris, Klippekort klip) {
-
-		try {
-			SalgsLinje sl = new SalgsLinje(pris, klip);
 			return sl;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);

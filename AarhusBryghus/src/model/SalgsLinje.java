@@ -98,9 +98,12 @@ public class SalgsLinje implements Serializable {
 			} else
 				return pris.toString() + ", " + antal + " styk, \n" + rabatGivet + " kr i rabat";
 		} else {
-			if (pris != null && pris.getProdukt().getProduktGruppe().getNavn().equals("Øl på fustage")) {
-				return pris.toString() + ", " + antal + " dage";
-			} else if (rv != null) {
+			if (pris.getProdukt() != null ) {
+				if (pris != null && pris.getProdukt().getProduktGruppe().getNavn().equals("Øl på fustage")) {
+					return pris.toString() + ", " + antal + " dage";
+				}
+			}
+			if (rv != null) {
 				return rv.toString() + ", " + this.getRundVisPris() + " kr";
 			} else if (klippekort != null) {
 				return klippekort.toString() + ", " + this.getKlipPris() + " kr";

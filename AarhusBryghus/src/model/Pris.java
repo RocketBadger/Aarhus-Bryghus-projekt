@@ -7,6 +7,7 @@ public class Pris implements Serializable {
 	private Produkt produkt;
 	private PrisListe prisliste;
 	private double pris;
+	private Klippekort klippekort;
 
 	public Pris(Produkt produkt, PrisListe prisliste, int pris) {
 		this.produkt = produkt;
@@ -14,8 +15,8 @@ public class Pris implements Serializable {
 		this.pris = pris;
 	}
 	
-	public Pris(Produkt produkt, int pris) {
-		this.produkt = produkt;
+	public Pris(Klippekort klippekort, int pris) {
+		this.klippekort = klippekort;
 		this.pris = pris;
 	}
 
@@ -34,6 +35,10 @@ public class Pris implements Serializable {
 	public void setPrisListe(PrisListe pl) {
 		this.prisliste = pl;
 	}
+	
+	public Klippekort getKlippekort() {
+		return klippekort;
+	}
 
 	public void removePrisListe() {
 		if (this.prisliste != null) {
@@ -45,6 +50,12 @@ public class Pris implements Serializable {
 
 	@Override
 	public String toString() {
-		return produkt.toString() + ". Pris: " + pris + " kr";
+		if (produkt != null) {
+			return produkt.toString() + ". Pris: " + pris + " kr";
+		} else if (klippekort != null) {
+			return klippekort.toString() + ". Pris: " + pris + " kr";
+		} else {
+			return "noget gik galt i Pris klassen";
+		}
 	}
 }

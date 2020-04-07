@@ -61,7 +61,7 @@ public class Klippekort implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Klippekort";
+		return "Klippekort, ID: " + klipId;
 	}
 
 }

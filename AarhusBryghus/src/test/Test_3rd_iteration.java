@@ -80,13 +80,15 @@ public class Test_3rd_iteration {
 	}
 
 //	Tests af specielle createSalgslinje metoder fks for udlejning og gaveæske --------------------------------------------
-	@Test
-	public void testCreateSalgsLinjeKlippekort() {
-		Klippekort k = controller.createKlippekort();
-		SalgsLinje slKlippekort = controller.createSalgsLinje(10, k);
-		assertEquals(10, slKlippekort.getKlipPris(), 0.01);
-		assertEquals(k, slKlippekort.getKlippekort());
-	}
+	
+	//Slettet indtil videre....
+//	@Test
+//	public void testCreateSalgsLinjeKlippekort() {
+//		Klippekort k = controller.createKlippekort();
+//		SalgsLinje slKlippekort = controller.createSalgsLinje(10, k);
+//		assertEquals(10, slKlippekort.getKlipPris(), 0.01);
+//		assertEquals(k, slKlippekort.getKlippekort());
+//	}
 
 	@Test
 	public void testKlippekort() {

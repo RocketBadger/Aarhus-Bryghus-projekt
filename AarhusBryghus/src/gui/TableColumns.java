@@ -17,10 +17,9 @@ public class TableColumns {
 		this.betalingsform = betalingsform;
 	}
 	
-	public TableColumns(int produktAntal, double produktPris) {
-		this.produktNavn = "klippekort";
-		this.produktAntal = produktAntal;
-		this.produktPris = produktPris;
+	public TableColumns(String produktNavn, BetalingsFormer betalingsform) {
+		this.produktNavn = produktNavn;
+		this.betalingsform = betalingsform;
 	}
 	
 	public String getProduktNavn() {

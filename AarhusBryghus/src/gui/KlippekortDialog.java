@@ -13,8 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Klippekort;
-import model.Produkt;
-import model.ProduktGruppe;
+import model.Pris;
 import model.SalgsLinje;
 
 public class KlippekortDialog extends Stage {
@@ -55,12 +54,13 @@ public class KlippekortDialog extends Stage {
 		int antal = 0;
 		if (!txfAntal.getText().trim().isEmpty()) {
 			antal = Integer.parseInt(txfAntal.getText().trim());
-			for (int i = 1; i <= antal; i++) {
-				SalgsLinje sl = controller.createSalgsLinje(100, controller.createKlippekort());
+				Klippekort k = controller.createKlippekort();
+				Pris p = controller.createPris(k, 100);
+				SalgsLinje sl = controller.createSalgsLinje(antal, p);
 				linjer.add(sl);
 				controller.saveStorage();
-				}
-			}
+			this.hide();
+		}
 			this.hide();
 	}
 
