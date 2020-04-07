@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.BetalingsFormer;
-import model.Klippekort;
 import model.Salg;
 
 public class OversigtPane extends GridPane {
@@ -33,49 +32,49 @@ public class OversigtPane extends GridPane {
 
 		this.setPadding(new Insets(20));
 		this.setHgap(20);
-		this.setVgap(10);
 		this.setGridLinesVisible(false);
 		
 		TableColumn<TableColumns, String> navnColumn = new TableColumn<>("Produkt:");
-		navnColumn.setMinWidth(135);
+		navnColumn.setMinWidth(140);
 		navnColumn.setCellValueFactory(new PropertyValueFactory<>("produktNavn"));
 		
 		TableColumn<TableColumns, Integer> antalColumn = new TableColumn<>("Antal:");
-		antalColumn.setMinWidth(135);
+		antalColumn.setMinWidth(140);
 		antalColumn.setCellValueFactory(new PropertyValueFactory<>("produktAntal"));
 		
 		TableColumn<TableColumns, Double> prisColumn = new TableColumn<>("Stk. Pris:");
-		prisColumn.setMinWidth(135);
+		prisColumn.setMinWidth(140);
 		prisColumn.setCellValueFactory(new PropertyValueFactory<>("produktPris"));
 		
 		TableColumn<TableColumns, Double> samletPrisColumn = new TableColumn<>("Samlet Pris:");
-		samletPrisColumn.setMinWidth(135);
+		samletPrisColumn.setMinWidth(140);
 		samletPrisColumn.setCellValueFactory(new PropertyValueFactory<>("samletPris"));
 		
 		TableColumn<TableColumns, String> betalingsformColumn = new TableColumn<>("Betalingsform:");
-		betalingsformColumn.setMinWidth(135);
+		betalingsformColumn.setMinWidth(140);
 		betalingsformColumn.setCellValueFactory(new PropertyValueFactory<>("betalingsform"));
 		
 		tableView = new TableView<>();
+		tableView.setPrefWidth(710);
 		tableView.getColumns().addAll(navnColumn, antalColumn, prisColumn, samletPrisColumn, betalingsformColumn);
 		
-		HBox btns = new HBox(10);
-		Button visSalg = new Button("Vis Salg");
-		Button visKlippekort = new Button("Vis Klippekort");
-		Button visGaveæsker = new Button("Vis Gaveæsker");
-		Button visRundvisninger = new Button("Vis Rundvisninger");
-		Button visUdlejninger = new Button("Vis udlejninger");
+//		HBox btns = new HBox(10);
+//		Button visSalg = new Button("Vis Salg");
+//		Button visKlippekort = new Button("Vis Klippekort");
+//		Button visGaveæsker = new Button("Vis Gaveæsker");
+//		Button visRundvisninger = new Button("Vis Rundvisninger");
+//		Button visUdlejninger = new Button("Vis udlejninger");
+//		
+//		btns.getChildren().addAll(visSalg,visKlippekort,visGaveæsker,visRundvisninger,visUdlejninger);	
+//		btns.setAlignment(Pos.CENTER);
+//		
+//		
+//		
+//		this.add(btns, 0, 0);
 		
-		btns.getChildren().addAll(visSalg,visKlippekort,visGaveæsker,visRundvisninger,visUdlejninger);	
-		btns.setAlignment(Pos.CENTER);
 		
-		
-		
-		this.add(btns, 0, 0);
-		
-		
-		this.add(tableView, 0, 1);
-		this.add(popupContent, 0, 2);
+		this.add(tableView, 0, 0);
+		this.add(popupContent, 0, 1);
 		
 		popupContent.setOnMouseClicked(e -> tableView.setItems(getColumns()));
 
@@ -95,8 +94,11 @@ public class OversigtPane extends GridPane {
 						tableColumns.add(new TableColumns(navn, antal, enkelPris, samletPris, betalingsform));
 					} else if (s.getSalgsLinjer().get(i).getPris() != null && s.getSalgsLinjer().get(i).getPris().getKlippekort() != null) {
 						String navn = s.getSalgsLinjer().get(i).getPris().getKlippekort().toString();
+						int antal = s.getSalgsLinjer().get(i).getAntal();
+						double enkelPris = s.getSalgsLinjer().get(i).getPris().getPris();
+						double samletPris = s.getReelPris();
 						BetalingsFormer betalingsform = s.getBetalingsform();
-						tableColumns.add(new TableColumns(navn, betalingsform));
+						tableColumns.add(new TableColumns(navn, antal, enkelPris, samletPris, betalingsform));
 					}
 				}
 			}

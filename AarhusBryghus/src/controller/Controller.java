@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import model.BetalingsFormer;
 import model.Gaveæske;
@@ -241,7 +240,6 @@ public class Controller {
 	public Klippekort createKlippekort() {
 		try {
 			Klippekort k = new Klippekort();
-			
 			storage.storeKlippekort(k);
 			return k;
 		} catch (IllegalArgumentException i) {
