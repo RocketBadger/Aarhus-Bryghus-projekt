@@ -54,20 +54,6 @@ public class OversigtPane extends GridPane {
 		tableView.setPrefWidth(710);
 		tableView.getColumns().addAll(navnColumn, antalColumn, prisColumn, samletPrisColumn, betalingsformColumn);
 
-//		HBox btns = new HBox(10);
-//		Button visSalg = new Button("Vis Salg");
-//		Button visKlippekort = new Button("Vis Klippekort");
-//		Button visGaveæsker = new Button("Vis Gaveæsker");
-//		Button visRundvisninger = new Button("Vis Rundvisninger");
-//		Button visUdlejninger = new Button("Vis udlejninger");
-//		
-//		btns.getChildren().addAll(visSalg,visKlippekort,visGaveæsker,visRundvisninger,visUdlejninger);	
-//		btns.setAlignment(Pos.CENTER);
-//		
-//		
-//		
-//		this.add(btns, 0, 0);
-
 		this.add(tableView, 0, 0);
 		this.add(popupContent, 0, 1);
 
