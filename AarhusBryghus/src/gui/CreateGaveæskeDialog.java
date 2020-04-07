@@ -27,7 +27,7 @@ public class CreateGaveæskeDialog extends Stage {
 	private ComboBox<PrisListe> lister = new ComboBox<>();
 	private ListView<Pris> produkter = new ListView<>();
 
-	private Button btnCreate = new Button("Tilføj highligtede varer");
+	private Button btnCreate = new Button("Tilføj highlightede varer");
 	private Button btnDone = new Button("Afslut");
 
 	private ArrayList<Pris> GÆindhold = new ArrayList<>();

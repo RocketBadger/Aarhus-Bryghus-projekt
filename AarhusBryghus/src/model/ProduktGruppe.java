@@ -17,11 +17,6 @@ public class ProduktGruppe implements Serializable {
 		return navn;
 	}
 
-	/**
-	 * Tilføjer et produkt til en produktgruppe
-	 * 
-	 * @param produkt - Produkt som skal tilføjes til den respektive produktgruppe.
-	 */
 	public void addProdukt(Produkt produkt) {
 		if (!produkter.contains(produkt)) {
 			produkter.add(produkt);

@@ -43,8 +43,6 @@ public class CreateProduktGruppeDialog extends Stage {
 		lblNavn.setStyle("-fx-font-weight: bold");
 		pane.add(txtNavn, 0, 1);
 
-//		pane.add(btnNvm, 0, 2);
-//		btnNvm.setOnAction(event -> this.hide());
 		pane.add(btnCreate, 0, 2);
 		btnCreate.setOnAction(event -> opretAction());
 	}

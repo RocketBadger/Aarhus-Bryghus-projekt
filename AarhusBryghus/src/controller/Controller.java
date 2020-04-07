@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import model.BetalingsFormer;
 import model.Gaveæske;
@@ -168,7 +167,7 @@ public class Controller {
 			return null;
 		}
 	}
-	
+
 	public Pris createPris(Klippekort klip, int pris) {
 		try {
 			Pris samletpris = new Pris(klip, pris);
@@ -221,7 +220,6 @@ public class Controller {
 	public Salg createSalg(ArrayList<SalgsLinje> salgslinjer, BetalingsFormer betalingsform, LocalDate dato) {
 		try {
 			Salg s = new Salg(salgslinjer, betalingsform, dato);
-//			storage.storeSalg(s);
 			return s;
 		} catch (IllegalArgumentException i) {
 			System.out.println("Message: " + i);
@@ -241,7 +239,6 @@ public class Controller {
 	public Klippekort createKlippekort() {
 		try {
 			Klippekort k = new Klippekort();
-			
 			storage.storeKlippekort(k);
 			return k;
 		} catch (IllegalArgumentException i) {
