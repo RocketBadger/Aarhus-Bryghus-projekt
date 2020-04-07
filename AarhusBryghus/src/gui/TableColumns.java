@@ -15,12 +15,7 @@ public class TableColumns {
 		this.produktPris = produktPris;
 		this.samletPris = samletPris;
 		this.betalingsform = betalingsform;
-	}
-	
-	public TableColumns(String produktNavn, BetalingsFormer betalingsform) {
-		this.produktNavn = produktNavn;
-		this.betalingsform = betalingsform;
-	}
+	}	
 	
 	public String getProduktNavn() {
 		return produktNavn;

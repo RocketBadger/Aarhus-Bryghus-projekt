@@ -54,12 +54,16 @@ public class KlippekortDialog extends Stage {
 		int antal = 0;
 		if (!txfAntal.getText().trim().isEmpty()) {
 			antal = Integer.parseInt(txfAntal.getText().trim());
+			Pris p = null;
+			for (int i = 0; i < antal; i++) {
 				Klippekort k = controller.createKlippekort();
-				Pris p = controller.createPris(k, 100);
+				p = controller.createPris(k, 100);
+			}
+			if (p != null) {
 				SalgsLinje sl = controller.createSalgsLinje(antal, p);
 				linjer.add(sl);
 				controller.saveStorage();
-			this.hide();
+			}
 		}
 			this.hide();
 	}

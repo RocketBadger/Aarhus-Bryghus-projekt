@@ -90,12 +90,13 @@ public class Test_3rd_iteration {
 //		assertEquals(k, slKlippekort.getKlippekort());
 //	}
 
-	@Test
-	public void testKlippekort() {
-		Klippekort k = controller.createKlippekort();
-		assertEquals(4, k.getAntalKlip());
-		assertTrue(k.getKlipId() >= 1000);
-	}
+	//Slettet indtil videre....
+//	@Test
+//	public void testKlippekort() {
+//		Klippekort k = controller.createKlippekort();
+//		assertEquals(4, k.getAntalKlip());
+//		assertTrue(k.getKlipId() >= 1000);
+//	}
 
 	@Test
 	public void testBrugKlip() {

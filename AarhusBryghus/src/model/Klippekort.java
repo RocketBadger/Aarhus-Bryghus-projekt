@@ -6,13 +6,9 @@ import java.util.ArrayList;
 public class Klippekort implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private int startId = 1000;
-	
-	private int klipId;
 	private int antalKlip;
 
 	public Klippekort() {
-		this.klipId = ++startId;
 		this.antalKlip = 4;
 	}
 
@@ -55,13 +51,9 @@ public class Klippekort implements Serializable {
 		return antalKlip;
 	}
 
-	public int getKlipId() {
-		return klipId;
-	}
-
 	@Override
 	public String toString() {
-		return "Klippekort, ID: " + klipId;
+		return "Klippekort";
 	}
 
 }
